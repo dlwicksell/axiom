@@ -1,0 +1,293 @@
+#! /bin/bash -
+#
+# Package:       m-tools
+# File:          mktags
+# Summary:       Builds a tag file for MUMPS/GT.M routines
+# Version:       0.9.0
+# Maintainer:    David Wicksell
+# Last Modified: Nov 25, 2011
+# Licence:       AGPL Ver 3 (or later)
+#
+# Written by David Wicksell <dlw@linux.com>
+# Copyright © 2010,2011 Fourth Watch Software, LC
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License (AGPL)
+# as published by the Free Software Foundation, either version 3 of
+# the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see http://www.gnu.org/licenses/.
+#
+# $Source: endor:/home/dlw/axiom/mktags $
+# $Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
+#
+# This script was created to be run in a Red Hat or Ubuntu environment.
+#
+# This program creates a file called tags, or .tags
+# which it will place in the directory in which you
+# called it, or the home directory. When you use vim,
+# it will allow you to jump between the caller and
+# the called portions of MUMPS code, regardless of
+# which routine you are in.
+#
+# Call it either with the -g option, which searchs
+# through the gmtroutines environment variable, and
+# will build the tags file in ${HOME}/.mtags, or with
+# a list of files, and it will build the tags file in
+# ${HOME}/mtags. You should therefore add ~/.mtags and
+# ~/mtags to your vim configuration.
+#
+# E.g. set tags+=~/.mtags,~/mtags
+#
+# If you installed m-tools via the install script
+# provided in the tar ball, it will set the tags option
+# for you.
+#
+# If you also include the -e option, it will build the
+# tags file in emacs mode, and also call it either
+# ${HOME}/.MTAGS or ${HOME}/MTAGS. This will allow you
+# to run mktags twice and create a tags file for both
+# vim and emacs.
+#
+# If you also include the -p option, it will build the
+# tags file unsorted, and then call the sort program
+# to sort it after it is finished, which can cut the
+# time it takes to build a very large tags file by up
+# to a factor of 3 or 4.
+
+
+# Usage message
+function usage {
+  echo "Usage: `basename $0` -[ep] -g"                   | tee -a ${LOG} 2>&1
+  echo "    or `basename $0` -[ep] files ..."            | tee -a ${LOG} 2>&1
+} # End of usage
+
+# Error message and exit status
+function error {
+  case "$1" in
+  ctags)
+    echo "Install ctags in order to continue"            | tee -a ${LOG} 2>&1
+
+    RET=1
+    ;;
+  env)
+    echo -n "Define the gtmroutines environment"         | tee -a ${LOG} 2>&1
+    echo " variable in order to use the -$2 argument"    | tee -a ${LOG} 2>&1
+
+    RET=2
+    ;;
+  option)
+    echo "-$2 is not a valid option"                     | tee -a ${LOG} 2>&1
+
+    usage
+
+    RET=3
+    ;;
+  args)
+    echo "Supply either -g or a list of MUMPS routines"  | tee -a ${LOG} 2>&1
+
+    usage
+
+    RET=4
+    ;;
+  running)
+    echo "`basename $0` is already running"              | tee -a ${LOG} 2>&1
+
+    RET=5
+    ;;
+  '*')
+    echo "Bad error code ($1) in `basename $0`"          | tee -a ${LOG} 2>&1
+
+    RET=6
+  esac
+
+  echo "Finished `basename $0` ; User: ${USER} ; `date`"         >> ${LOG} 2>&1
+  echo -e "\t\t------------------------------------------------" >> ${LOG} 2>&1
+
+  exit ${RET}
+} # End of usage
+
+# Build the tags file
+function mtags {
+  for ROUTINE
+  do
+    TMP=`basename ${ROUTINE} .m`
+    if [ "${TMP}" == "*" ]; then #No MUMPS routines present
+      break
+    fi
+
+    if [ "${ROUTINE: -2}" == ".m" ]; then
+      FILE=`basename ${ROUTINE} .m | tr _ %`
+
+      ctags ${ARGS} -a --langdef=MUMPS --langmap=MUMPS:.m \
+        --regex-MUMPS="/^([%[:alnum:]]+)/\1\^${FILE}/l,label/i" \
+        ${ROUTINE}                                               >> ${LOG} 2>&1
+    fi
+  done
+} # End of mtags
+
+# Build a tags file by parsing the gtmroutines search path
+function mtags_default {
+  for DIRS in ${gtmroutines}
+  do
+      #regex syntax (~) for the following test does not work on Red Hat systems
+    if [[ ${DIRS} != ${DIRS/"("/} ]]; then #gtmroutines with "()" source syntax
+      DIRS=`echo ${DIRS} | cut -d "(" -f 2 | cut -d ")" -f 1`
+    else
+      if [ "${DIRS: -3}" == ".so" ]; then
+        DIRS=`dirname ${DIRS}`
+      fi
+    fi
+
+    for DIR in ${DIRS} #call mtags for each directory in gtmroutines
+      do
+        ls ${DIR}/*.m > /dev/null 2>&1
+        LS=$?
+
+        if [ ${LS} == 0 ]; then
+          mtags ${DIR}/*.m
+        else
+          mtags `dirname ${DIRS}`/*.m #might be in the parent directory
+        fi
+      done
+  done
+} # End of mtags_default
+
+
+TMPDIR=${HOME}/.tags
+
+trap 'rm -rf ${TMPDIR};echo -e "\e[2DCaught SIGINT; Cleaning up.";exit 7' SIGINT
+
+if [ ! -d ${HOME}/log ]; then
+  mkdir ${HOME}/log
+fi
+
+LOG=${HOME}/log/`basename $0 .sh`.log
+
+echo -e "\t\t------------------------------------------------"   >> ${LOG} 2>&1
+echo "Started `basename $0` ; User: ${USER} ; `date`"            >> ${LOG} 2>&1
+
+which ctags > /dev/null 2>&1
+CTAGS=$?
+
+if [ ${CTAGS} != 0 ]; then
+  error ctags
+fi
+
+GTM=off POSTSORT=off EMACS=off 
+LOCK=mtags.lock
+
+while getopts :epg opt
+do
+  case ${opt} in
+  g) #gtmroutines mode
+    if [ "${gtmroutines}" == "" ]; then
+      error env ${opt}
+    fi
+
+    GTM=on
+    ;;
+  p) #postsort mode
+    POSTSORT=on
+    ;;
+  e) #emacs mode
+    EMACS=on
+    LOCK=MTAGS.lock
+    ;;
+  '?') #invalid option
+    error option ${OPTARG}
+    ;;
+  esac
+done
+
+shift $((OPTIND -1))
+
+if [ "${GTM}" == "off" ]; then
+  if [ $# -lt 1 ]; then
+    error args
+  else
+    DOT=
+    PROGRAM="mtags $@"
+  fi
+else
+  DOT=.
+  PROGRAM=mtags_default
+
+  if [ $# -gt 0 ]; then
+    error args
+  fi
+fi
+
+if [ -f ${TMPDIR}/${DOT}${LOCK} ]; then
+  PID=`cat ${TMPDIR}/${DOT}${LOCK}`
+
+  ps -p ${PID} > /dev/null
+  PS=$?
+
+  if [ ${PS} == 0 ]; then
+    error running
+  else
+    rm -rf ${TMPDIR}
+  fi
+fi
+
+if [ ! -d ${TMPDIR} ]; then
+  mkdir ${TMPDIR}
+fi
+
+if [ "${POSTSORT}" == "off" ]; then
+  TAGFILE=${TMPDIR}/${DOT}mtags
+  ARGS="-f ${TAGFILE}.$$"
+
+  if [ "${EMACS}" == "on" ]; then
+    TAGFILE=${TMPDIR}/${DOT}MTAGS
+    ARGS="-f ${TAGFILE}.$$ -e"
+  fi
+
+  echo "$$" > ${TMPDIR}/${DOT}${LOCK}
+  echo "Stored the PID: $$ in ${TMPDIR}/${DOT}${LOCK}"           >> ${LOG} 2>&1
+  
+  ${PROGRAM}
+else
+  TAGFILE=${TMPDIR}/${DOT}mtags
+  TMPFILE=${TMPDIR}/${DOT}mtags.tmp
+  ARGS="-f ${TMPFILE}.$$ -u"
+
+  if [ "${EMACS}" == "on" ]; then
+    TAGFILE=${TMPDIR}/${DOT}MTAGS
+    TMPFILE=${TMPDIR}/${DOT}MTAGS.TMP
+    ARGS="-f ${TMPFILE}.$$ -u -e"
+  fi
+
+  echo "$$" > ${TMPDIR}/${DOT}${LOCK}
+  echo "Stored the PID: $$ in ${TMPDIR}/${DOT}${LOCK}"           >> ${LOG} 2>&1
+
+  ${PROGRAM}
+
+  export LC_ALL=C #force ascii sorting, will override locale temporarily
+
+  #sorting the temp tag file, and then changing the header to reflect that
+  sort -u ${TMPFILE}.$$ |
+    sed '2s/\(!_TAG_FILE_SORTED\t\)0\(.*\)/\11\2/' > ${TAGFILE}.$$
+
+  rm ${TMPFILE}.$$
+fi
+
+if [ -s ${TAGFILE}.$$ ]; then
+  mv ${TAGFILE}.$$ ${HOME}/`basename ${TAGFILE}`                 >> ${LOG} 2>&1
+fi
+
+rm -rf ${TMPDIR}                                                 >> ${LOG} 2>&1
+
+echo "Finished `basename $0` ; User: ${USER} ; `date`"           >> ${LOG} 2>&1
+
+exit 0
+
+
+# $RCSfile: mktags $

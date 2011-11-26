@@ -1,0 +1,69 @@
+.\" Package:       m-tools
+.\" File:          mktags.1
+.\" Summary:       manpage for the mktags shell script
+.\" Version:       0.9.0
+.\" Maintainer:    David Wicksell <dlw@linux.com>
+.\" Last Modified: Nov 25, 2011
+.\" License:       AGPL Ver 3 (or later)
+.\"
+.\" Written by David Wicksell <dlw@linux.com>
+.\" Copyright © 2011 Fourth Watch Software, LC
+.\"
+.\" This program is free software: you can redistribute it and/or modify
+.\" it under the terms of the GNU Affero General Public License (AGPL)
+.\" as published by the Free Software Foundation, either version 3 of
+.\" the License, or (at your option) any later version.
+.\"
+.\" This program is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+.\" GNU Affero General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU Affero General Public License
+.\" along with this program. If not, see http://www.gnu.org/licenses/.
+.\"
+.\" $Source: endor:/home/dlw/axiom/mktags.1 $
+.\" $Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
+
+
+.TH MKTAGS 1 "25 November 2011" "Version 0.9.0" "M-TOOLS Utilities"
+
+.SH NAME
+\fBmktags\fP - A script to build a tags file for use with the m-tools package
+
+.SH SYNOPSIS
+.B mktags
+.BI "[-ep] -g"
+
+.B mktags
+.BI "[-ep] \fIfile(s)\fP"
+
+
+.SH DESCRIPTION
+.B mktags
+is a shell script that will create a tags file containing MUMPS labels for use
+with the m-tools package.
+.PP
+Normally you would call it via cron once or more daily to keep your tags file
+up to date.
+
+.SH OPTIONS
+The following command line flags are optional. At least -g or a list of
+files is required.
+.IP -g
+Parse the $gtmroutines environment variable, recursing through the specified
+directories, building a tags file called ~/.mtags or ~/.MTAGS.
+.IP -e
+Run in emacs mode, building a tags file called ~/.MTAGS or ~/MTAGS in emacs
+format.
+
+.SH BUGS
+There are no known bugs.
+
+.SH AUTHOR
+Written by David Wicksell <dlw@linux.com>
+
+.SH SEE ALSO
+ctags(1), ctags-exuberant(1)
+
+.\" $RCSfile: mktags.1 $

@@ -1,0 +1,98 @@
+.\" Package:       m-tools
+.\" File:          KBAWDUMP.1
+.\" Summary:       manpage for the KBAWDUMP MUMPS/GT.M routine
+.\" Version:       0.9.0
+.\" Maintainer:    David Wicksell <dlw@linux.com>
+.\" Last Modified: Nov 25, 2011
+.\" License:       AGPL Ver 3 (or later)
+.\"
+.\" Written by David Wicksell <dlw@linux.com>
+.\" Copyright © 2011 Fourth Watch Software, LC
+.\"
+.\" This program is free software: you can redistribute it and/or modify
+.\" it under the terms of the GNU Affero General Public License (AGPL)
+.\" as published by the Free Software Foundation, either version 3 of
+.\" the License, or (at your option) any later version.
+.\"
+.\" This program is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+.\" GNU Affero General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU Affero General Public License
+.\" along with this program. If not, see http://www.gnu.org/licenses/.
+.\"
+.\" $Source: endor:/home/dlw/axiom/KBAWDUMP.1 $
+.\" $Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
+
+
+.TH KBAWDUMP 1 "25 November 2011" "Version 0.9.0" "M-TOOLS Utilities"
+
+.SH NAME
+\fBKBAWDUMP\fP - A MUMPS/GT.M routine for use with the m-tools package
+
+.SH SYNOPSIS
+.B mumps -r KBAWDUMP \fPglobal
+
+.B mumps -r KBAWDUMP \fP'global(subscript[,subscript]...)'
+
+.B mumps -r GLOBALS^KBAWDUMP
+
+.B mumps -r GLOBALS^KBAWDUMP "\fP<first-global>:<last-global>"
+
+
+.SH DESCRIPTION
+.B KBAWDUMP
+is a MUMPS/GT.M routine that will display the contents of a MUMPS global, with
+or without subscripts.
+.PP
+.B
+Note
+that if you specify a subscript(s), you must enclose the
+global reference in tics, or single-quotes ('). This is to ensure that your
+shell doesn't try to start a subshell when it sees the parens.
+.PP
+It does not require that you supply the initial ^ of a global reference.
+
+.PP
+.B GLOBALS^KBAWDUMP
+is a MUMPS/GT.M routine calling point that will display all of the globals in
+a GT.M database. You may also specify a range in this form:
+.IP
+<first-global>:<last-global>
+.PP
+It will then display every global in a GT.M database starting with
+<first-global> and ending with <last-global>, inclusive.
+.PP
+If you do not supply a global before the colon, it will start at the first
+global in the database. And if you do not supply a global after the colon, it
+will end with the last global in the database.
+.PP
+.B
+Note
+that you must not have any space between the globals and the colon.
+.PP
+Again, it does not require that you supply the initial ^ of a global reference.
+
+.SH EXAMPLES
+.IP
+$ mumps -r KBAWDUMP DD
+.IP
+$ mumps -r KBAWDUMP 'DD(0,1)'
+.IP
+$ mumps -r GLOBALS^KBAWDUMP
+.IP
+$ mumps -r GLOBALS^KBAWDUMP DI:TMP
+.IP
+$ mumps -r GLOBALS^KBAWDUMP DI:
+.IP
+$ mumps -r GLOBALS^KBAWDUMP :TMP
+
+.SH BUGS
+There are no known bugs, but KBAWDUMP has to deal with MUMPS syntax,
+so there are more than likely always going to be around 3 bugs.
+
+.SH AUTHOR
+Written by David Wicksell <dlw@linux.com>
+
+.\" $RCSfile: KBAWDUMP.1 $

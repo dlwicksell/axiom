@@ -1,0 +1,214 @@
+*m-tools.txt*      For Vim version 7.2.  Last change: 2011 Nov 25
+
+
+          VIM TOOLS FOR MUMPS    by David Wicksell
+
+
+Package: m-tools
+Author:  David Wicksell
+Email:   dlw@linux.com
+Version: 0.9.0
+
+$Source: endor:/home/dlw/axiom/vim/doc/m-tools.txt $
+$Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
+
+
+Utility package for the GT.M programming language       *m-tools*
+
+1. Syntax file for GT.M              |m-tools-syntax|
+2. Datetime stamp                    |m-tools-datetime|
+3. Dump the contents of a global     |m-tools-globaldump|
+4. Jump to labels in routines        |m-tools-mtags|
+
+==============================================================================
+1. Syntax file for GT.M                                 *m-tools-syntax*
+
+Summary ~
+
+The m-tools utility package for MUMPS/GT.M contains a syntax highlighting
+file. It should work in VIM version 5.0 and above.
+
+It contains the ability to define a dotted do-block in MUMPS as a syntax
+region, and then transparently fold it, to give you a better view of the
+larger context of the routine. There is a key mapping, bound to CTRL-N,
+which will toggle syntax folding on or off. It is off by default.
+
+In order to use syntax folding effectively, you should learn the folding
+commands that are built in to vim. For more info, see |fold-commands|.
+
+Installation ~
+
+It is called {mumps.vim} and in order to funtion properly, it should be
+installed in: >
+
+    ~/.vim/syntax
+<
+The m-tools package comes with an script, called 'install', that does
+this automatically for you. But you've most likely already run this script
+or you probably wouldn't have this documentation included in your VIM help
+system.
+
+Additonal scripts ~
+
+The syntax file requires a script called {syntax.vim} which should be
+installed in: >
+
+    ~/.vim/ftplugin/mumps
+<
+It will be sourced automatically whenever you open up a file of type
+mumps. Again, the installation script provided with m-tools does this
+automatically. This script sets a few options needed by the syntax file in
+order to function properly. The options are set either locally to the
+buffer, or are reset when changing buffers to one that is not file of type
+mumps.
+
+Disclaimer ~
+
+Keep in mind that syntax highlighting relies upon regular expressions, and
+if you think regular expressions are the answer to your problem, you now
+have two problems. MUMPS is a difficult language to map with only regular
+expressions, so there are instances where you will be able to write
+invalid MUMPS code, and the syntax highlighting will not alert you to that
+fact. I will try to continue improving the syntax file, but for now, it is
+what it is.
+
+Known Issues ~
+
+At the present, I know of only one bug in the syntax highlighting. If an
+under-score character '_' comes immediately before or immediately after
+an intrinsic function, then it will not color the intrinsic function,
+but will instead color it like it was a variable. This only happens with
+the underscore '_' character, and I have no idea why it is happening.
+
+==============================================================================
+2. Datetime stamp                                       *m-tools-datetime*
+
+Summary ~
+
+The m-tools package comes with an automatic datetime stamp function, which
+will imprint a new datetime stamp in a VistA SAC compliant way. There is a
+key mapping, bound to CTRL-H, that will toggle the stamp on or off. It is
+on by default, since you should be SAC compliant.
+
+Installation ~
+
+The script is called {datetime.vim} and should be installed in: >
+
+    ~/.vim/ftplugin/mumps
+<
+It will be installed in the right place automatically by the install script.
+
+==============================================================================
+3. Dump the contents of a global                        *m-tools-globaldump*
+
+Summary ~
+
+The m-tools package comes with functionality to display, either in the current
+buffer, or in a vertical split screen, the contents of a MUMPS global. It can
+display either an entire global, or just a particular subscript in a global.
+
+When opening a buffer containing a MUMPS/GT.M routine, a key mapping will be
+created, bound to CTRL-K, which will allow you to dump the contents of the
+global reference underneath the cursor. You should have your cursor on the
+'^' that begins the global reference, to ensure that you are getting the
+right reference.
+
+Installation ~
+
+The script is called {globaldump.vim} and should be installed in: >
+
+    ~/.vim/ftplugin/mumps
+<
+It will be installed in the right place automatically by the install script.
+
+                                                        *:ZWR*
+
+In addition to the key mapping for CTRL-K, the m-tools package provides a user
+defined ex command, called 'ZWR', which is used as follows.
+
+:ZWR {value}
+              {value} represents a MUMPS global reference
+              with or without subscripts. It is not
+              necessary to type the initial '^', nor to
+              quote or escape {value}.
+
+                                                        *b:globalsplit*
+
+There is a buffer variable, called {b:globalsplit}, which controls whether
+a global dump is shown in a vertical split screen, or in the current buffer.
+It defaults to a vertical split screen. When in this mode, while in a split
+screen, the key mapping for CTRL-K will now close the split screen, and
+clean up after itself. If {b:globalsplit is set to 1, a global dump will
+write to a vertical split screen, and you can navigate between the split
+screens via CTRL-W CTRL-W. For more information about split screens, see
+|new-vertsplit|.
+
+There are two more key mappings that make it more convenient to resize the
+split screen containg the contents of the global reference. While in the
+right screen, containing the global data, the comma key ',' will increase the
+size of the screen, and the period key '.' will decrease it.
+
+Disclaimer ~
+
+There may be bugs in the handling of global references. It is a tricky
+endeavor.
+
+==============================================================================
+4. Jump to labels in routines                           *m-tools-mtags*
+
+Summary ~
+
+When opening a buffer containing a MUMPS/GT.M routine, a key mapping will
+be created, bound to CTRL-], which will jump you to a label in a MUMPS
+routine. Though a new key mapping is created, it is actually used to
+enable the use of the automatic 'ctags' functionality, built in to vim. The
+built-in functionality is created for C and C-like languages, not MUMPS.
+
+The behavior, however, is the same as if you were navigating C code using
+'ctags' and a tag stack is created, allowing you to push new tags onto the
+stack with CTRL-], and pop tags off of the stack, going back to where you
+were previously, with CTRL-T. See |ctags| and the documentation and man page
+for the 'ctags' program.
+
+Note: You must create a tags file, called .mtags or mtags, in your home
+directory, in order to use the mtags functionality. In order to make this
+simple, there is an included script that will build the proper tag file for
+the mtags functionality, either manually, or preferrably it can be run daily
+as a cron job. See the man page for 'crontab', via: >
+
+    $ man crontab
+<
+Installation ~
+
+The script is called {mtags.vim} and should be installed in: >
+
+    ~/.vim/ftplugin/mumps
+<
+                                                        *m-tools-mtags-script*
+
+Supplied with the m-tools package is a shell script called 'mktags', which can
+be executed to create a proper tags file for the mtags functionality. Here are
+a few examples of how to run the 'mktags' command: >
+
+    $ mktags example.m
+    $ mktags directory/*.m
+    $ mktags -ep directory/*.m
+    $ mktags -gp
+<
+For more information about the 'mktags' shell script, please read the man page
+supplied with the m-tools package, via: >
+
+    $ man mktags
+<
+Disclaimer ~
+
+There may be bugs in the handling of label references. It is a tricky
+endeavor.
+
+I hope you enjoy the m-tools utility package for editing MUMPS/GT.M routines
+using the wonderful vim editor. If you have any questions, concerns, feature
+requests, or bugs to report, please contact:
+
+    David Wicksell at <dlw@linux.com> ~
+
+$RCSfile: m-tools.txt $
