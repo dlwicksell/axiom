@@ -5,7 +5,7 @@
 # Summary:       install script for the m-tools package
 # Version:       0.9.0
 # Maintainer:    David Wicksell <dlw@linux.com>
-# Last Modified: Nov 25, 2011
+# Last Modified: Nov 26, 2011
 # License:       AGPL Ver 3 (or later)
 #
 # Written by David Wicksell <dlw@linux.com>
@@ -25,7 +25,7 @@
 # along with this program. If not, see http://www.gnu.org/licenses/.
 #
 # $Source: endor:/home/dlw/axiom/install $
-# $Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
+# $Revision: [3:7b1f38ce6574] 2011-11-26 13:31 -0700 $
 #
 # This script is written to be run in a Red Hat or Ubuntu environment.
 # Tweaks maybe needed for other distributions.
@@ -44,50 +44,50 @@ function question {
   select answer in backup append overwrite quit
   do
     case ${answer} in 
-      backup)
-        cp -d ~/$1 ~/$1.orig
+    backup)
+      cp -p ~/$1 ~/$1.orig
 
-        echo "Your old $1 is now $HOME/$1.orig"
+      echo "Your old $1 is now $HOME/$1.orig"
 
-        cp -d ${1/"."/} ~/$1
+      cp -p ${1/"."/} ~/$1
+
+      echo "Installed new $1 file"
+      echo
+
+      break
+      ;;
+    append)
+      cat ${1/"."/} | sed "s/^set/\"set/" >> ~/$1
+
+      echo "Appended the relevant configuration options to the end of $1"
+      echo
+
+      break
+      ;;
+    overwrite)
+      #be extra careful with the overwrite option
+      echo -n "You have chosen to ${answer} ~/$1, is this correct? [Y]/N "
+      read ANS
+
+      ANS=`echo ${ANS} | tr [:lower:] [:upper:]`
+
+      if [ "${ANS}" == "Y" -o "${ANS}" == "YES" ]; then
+        cp -p ${1/"."/} ~/$1
 
         echo "Installed new $1 file"
         echo
 
         break
-        ;;
-      append)
-        cat ${1/"."/} | sed "s/^set/\"set/" >> ~/$1
-
-        echo "Appended the relevant configuration options to the end of $1"
-        echo
-
-        break
-        ;;
-      overwrite)
-        #be extra careful with the overwrite option
-        echo -n "You have chosen to ${answer} ~/$1, is this correct? [Y]/N "
-        read ANS
-
-        ANS=`echo ${ANS} | tr [:lower:] [:upper:]`
-
-        if [ "${ANS}" == "Y" -o "${ANS}" == "YES" ]; then
-          cp -d ${1/"."/} ~/$1
-
-          echo "Installed new $1 file"
-          echo
-
-          break
-        else
-          continue
-        fi
-        ;;
-      quit)
-        exit 1
-        ;;
-      *)
-       echo -n "Please choose the number of the option you want. "
-       echo
+      else
+        continue
+      fi
+      ;;
+    quit)
+      exit 1
+      ;;
+    *)
+      echo -n "Please choose the number of the option you want. "
+      echo
     esac
   done
 } # End of question
@@ -110,7 +110,7 @@ else
     DIR=`echo ${DIR} | cut -d "(" -f 2 | cut -d ")" -f 1`
   fi
 
-  cp -d KBAWDUMP.m ${DIR}
+  cp -p KBAWDUMP.m ${DIR}
 
   echo "Copied the KBAWDUMP.m global dumping routine to ${DIR}"
   echo "See the man page for details on how to use it. E.g. $ man KBAWDUMP"
@@ -121,7 +121,7 @@ if [ ! -d ~/bin ]; then
   mkdir ~/bin
 fi
 
-cp -d mktags ~/bin
+cp -p mktags ~/bin
 
 echo "Copied the mktags shell script to $HOME/bin"
 echo
@@ -148,7 +148,7 @@ fi
 #these could be pre-compressed
 gzip -9 mktags.1 KBAWDUMP.1
 
-cp -d mktags.1.gz KBAWDUMP.1.gz ~/man/man1
+cp -p mktags.1.gz KBAWDUMP.1.gz ~/man/man1
 
 #keep the man pages uncompressed so that keyword expansion happens with builds
 gunzip mktags.1.gz KBAWDUMP.1.gz
@@ -167,11 +167,19 @@ if [ "${OS}" == "Ubuntu" ]; then
   echo "Added the $HOME/man directory to manpath, and rebuilt the database"
   echo
 else
-  echo "export MANPATH=~/man:`manpath`" >> ~/.bash_profile
-  echo "Appended a command to add $HOME/man to MANPATH in $HOME/.bash_profile"
-  echo
+  grep -q MANPATH ~/.bash_profile
 
-  source ~/.bash_profile
+  if [ $? -eq 0 ]; then
+    echo "Make sure ~/man is in the MANPATH search variable in ~/.bash_profile"
+  else
+    echo >> ~/.bash_profile
+    echo "export MANPATH=~/man:`manpath`" >> ~/.bash_profile
+
+    echo "Appended a command to add $HOME/man to MANPATH in $HOME/.bash_profile"
+  fi
+
+    echo "To access your man pages now, type: $ source $HOME/.bash_profile"
+    echo
 fi
 
 if [ -f ~/.vimrc ]; then
@@ -181,7 +189,7 @@ if [ -f ~/.vimrc ]; then
 
   question .vimrc
 else
-  cp -d vimrc ~/.vimrc
+  cp -p vimrc ~/.vimrc
 
   echo "Installed new .vimrc file"
   echo
@@ -200,7 +208,7 @@ else
 
     question .vim/filetype.vim
   else
-    cp -d vim/filetype.vim ~/.vim
+    cp -p vim/filetype.vim ~/.vim
 
     echo "Installed new filetype.vim file"
     echo
@@ -213,7 +221,7 @@ else
 
     question .vim/scripts.vim
   else
-    cp -d vim/scripts.vim ~/.vim
+    cp -p vim/scripts.vim ~/.vim
 
     echo "Installed new scripts.vim file"
     echo
@@ -223,7 +231,7 @@ else
     mkdir ~/.vim/doc
   fi
   
-  cp -d vim/doc/m-tools.txt ~/.vim/doc/
+  cp -p vim/doc/m-tools.txt ~/.vim/doc/
 
   echo Copied vim/doc/m-tools.txt to ~/.vim/doc
 
@@ -252,7 +260,7 @@ else
 
     question .vim/plugin/templates.vim
   else
-    cp -d vim/plugin/templates.vim ~/.vim/plugin
+    cp -p vim/plugin/templates.vim ~/.vim/plugin
 
     echo "Installed new templates.vim file"
     echo
@@ -262,7 +270,7 @@ else
     mkdir ~/.vim/syntax
   fi
   
-  cp -d vim/syntax/mumps.vim ~/.vim/syntax/
+  cp -p vim/syntax/mumps.vim ~/.vim/syntax/
 
   echo Copied vim/syntax/mumps.vim to ~/.vim/syntax
   echo
@@ -271,7 +279,7 @@ else
     mkdir ~/.vim/templates
   fi
   
-  cp -d vim/templates/*.{tpl,pat} ~/.vim/templates/
+  cp -p vim/templates/*.{tpl,pat} ~/.vim/templates/
 
   echo Copied vim/templates/*.{tpl,pat} to ~/.vim/templates
   echo
