@@ -25,7 +25,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see http://www.gnu.org/licenses/.
 
 $Source: endor:/home/dlw/axiom/README $
-$Revision: [7:9bced5d0701f] 2011-11-26 16:46 -0700 $
+$Revision: [8:a2a0bf5573db] 2011-11-26 16:54 -0700 $
 
 ATTENTION: This package is written to be run in a Red Hat or Ubuntu
            environment. Tweaks maybe needed for other distributions.
@@ -55,7 +55,7 @@ Then you move to the resulting m-tools-0.9.0/ directory..
 Or, you can clone the repository with the instructions on the bitbucket
 page. https://bitbucket.org/dlw/m-tools
 
-Keep in mind that if you clone it, it will create a directory name
+Keep in mind that if you clone it, it will create a directory named
 m-tools, rather than one with a version number. If you download the
 tarball from the bitbucket site, the directory will be a different name
 still. But everything else should be the same.
