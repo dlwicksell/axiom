@@ -25,7 +25,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see http://www.gnu.org/licenses/.
 
 $Source: endor:/home/dlw/axiom/README $
-$Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
+$Revision: [7:9bced5d0701f] 2011-11-26 16:46 -0700 $
 
 ATTENTION: This package is written to be run in a Red Hat or Ubuntu
            environment. Tweaks maybe needed for other distributions.
@@ -39,11 +39,26 @@ NOTE: In order to use the mtags functionality, you must build a tags
       must install GT.M and set the environment variables that GT.M
       requires. http://www.fisglobal.com/products-technologyplatforms-gtm
 
+A colleague of mine, John Willis <chocolatejollis38@gmail.com>, has created
+a similar package of tools for use with the emacs editor. It is called
+LorikeeM and you can download it from: http://code.google.com/p/lorikeem/
+LorikeeM also includes my KBAWDUMP.m routine for support of global dumps
+inside of vim or emacs, and my mktags/mtags.sh script for building a tags
+file for either vim or emacs.
+
 To install this, you untar the tarball, as you've already done..
       $ tar xfz m-tools-0.9.0.tgz
 
-Then you move to the resulting m-tools.0.9.0/ directory..
+Then you move to the resulting m-tools-0.9.0/ directory..
       $ cd m-tools-0.9.0/
+
+Or, you can clone the repository with the instructions on the bitbucket
+page. https://bitbucket.org/dlw/m-tools
+
+Keep in mind that if you clone it, it will create a directory name
+m-tools, rather than one with a version number. If you download the
+tarball from the bitbucket site, the directory will be a different name
+still. But everything else should be the same.
 
 Then you run the install script to install the m-tools utility
 scripts, in the appropriate places, as well as create a .vimrc run
