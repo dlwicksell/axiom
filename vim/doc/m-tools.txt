@@ -10,7 +10,7 @@ Email:   dlw@linux.com
 Version: 0.9.0
 
 $Source: endor:/home/dlw/axiom/vim/doc/m-tools.txt $
-$Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
+$Revision: [4:a138276a3354] 2011-11-26 14:01 -0700 $
 
 
 Utility package for the GT.M programming language       *m-tools*
@@ -167,7 +167,8 @@ built-in functionality is created for C and C-like languages, not MUMPS.
 The behavior, however, is the same as if you were navigating C code using
 'ctags' and a tag stack is created, allowing you to push new tags onto the
 stack with CTRL-], and pop tags off of the stack, going back to where you
-were previously, with CTRL-T. See |ctags| and the documentation and man page
+were previously, with CTRL-T. See |tags| for more information on how to use
+the tags functionality in vim. See |ctags| and the documentation and man page
 for the 'ctags' program.
 
 Note: You must create a tags file, called .mtags or mtags, in your home
