@@ -1,10 +1,8 @@
 " Package:       m-tools
 " File:          scripts.vim
 " Summary:       Scripts syntax file
-" Version:       0.9.0
 " Maintainer:    David Wicksell
 " Last Modified: Nov 25, 2011
-" Licence:       AGPL Ver 3 (or later)
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011 Fourth Watch Software, LC
@@ -22,9 +20,6 @@
 " You should have received a copy of the GNU Affero General Public License
 " along with this program. If not, see http://www.gnu.org/licenses/.
 "
-" $Source: endor:/home/dlw/axiom/vim/scripts.vim $
-" $Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
-"
 " This vim file was created to deal with a GT.M/EWD environment.
 " It was inspired by earlier work by Jim Self <jaself@ucdavis.edu>.
 "
@@ -40,6 +35,3 @@ endif
 if getline(1) =~ '^%\?[A-Za-z0-9]\+\s\+;\|^;'
   setfiletype mumps
 endif
-
-
-" $RCSfile: scripts.vim $

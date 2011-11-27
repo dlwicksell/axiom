@@ -1,10 +1,8 @@
 " Package:       m-tools
 " File:          globaldump.vim
 " Summary:       Dumps a global reference while editing
-" Version:       0.9.0
 " Maintainer:    David Wicksell <dlw@linux.com>
 " Last Modified: Nov 25, 2011
-" License:       AGPL Ver 3 (or later)
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010,2011 Fourth Watch Software, LC
@@ -21,9 +19,6 @@
 "
 " You should have received a copy of the GNU Affero General Public License
 " along with this program. If not, see http://www.gnu.org/licenses/.
-"
-" $Source: endor:/home/dlw/axiom/vim/ftplugin/mumps/globaldump.vim $
-" $Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
 "
 " Binds Ctl-K to jump to a MUMPS global in the current buffer.
 " If you define b:globalsplit and set it to 1, then it will
@@ -231,6 +226,3 @@ autocmd BufEnter *.m nmap <silent> <buffer> <C-K> "by$:call MGlobal(@b)<CR>
 autocmd BufEnter *.m command! -nargs=1 -buffer ZWR call ZWRArgument(<q-args>)
 
 let s:did_gd_ftplugin = 1
-
-
-" $RCSfile: globaldump.vim $

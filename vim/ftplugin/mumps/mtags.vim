@@ -1,10 +1,8 @@
 " Package:       m-tools
 " File:          mtags.vim
 " Summary:       Jumps to different labels in a MUMPS routine
-" Version:       0.9.0
 " Maintainer:    David Wicksell <dlw@linux.com>
 " Last Modified: Nov 25, 2011
-" License:       AGPL Ver 3 (or later)
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010,2011 Fourth Watch Software, LC
@@ -21,9 +19,6 @@
 "
 " You should have received a copy of the GNU Affero General Public License
 " along with this program. If not, see http://www.gnu.org/licenses/.
-"
-" $Source: endor:/home/dlw/axiom/vim/ftplugin/mumps/mtags.vim $
-" $Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
 "
 " Binds Ctl-] to jump to a MUMPS label and Ctl-T to jump back. It uses a
 " stack, so really Ctl-] pushes a label on the stack, and Ctl-T pops it off.
@@ -213,6 +208,3 @@ endfunction
 autocmd BufEnter *.m nmap <silent> <buffer> <C-]> lb"ayE:call MTag(@a)<CR>
 
 let s:did_mt_ftplugin = 1
-
-
-" $RCSfile: mtags.vim $

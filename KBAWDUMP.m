@@ -1,4 +1,4 @@
-KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 11/25/11 4:21pm
+KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 11/27/11 1:45pm
  ;;0.9.0;m-tools;****LOCAL RTN**;David Wicksell @2010,2011
  ;
  ; Written by David Wicksell <dlw@linux.com>
@@ -16,9 +16,6 @@ KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 11/25/11 4:21pm
  ;
  ; You should have received a copy of the GNU Affero General Public License
  ; along with this program. If not, see http://www.gnu.org/licenses/.
- ;
- ; $Source: endor:/home/dlw/axiom/KBAWDUMP.m $
- ; $Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
  ;
  ; This routine was created for GT.M in a Unix environment
  ;
@@ -163,6 +160,3 @@ ERR ;Handle globals that don't exist
  N $ET S $ET="H"
  W $P($ZS," ",2,$L($ZS," ")),!
  Q
- ;
- ;
- ; $RCSfile: KBAWDUMP.m $

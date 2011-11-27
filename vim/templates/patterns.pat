@@ -1,10 +1,8 @@
 " Package:       m-tools
 " File:          patterns.pat
 " Summary:       template patterns script for MUMPS/GT.M
-" Version:       0.9.0
 " Maintainer:    David Wicksell
 " Last Modified: Nov 25, 2011
-" Licence:       AGPL Ver 3 (or later)
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011 Fourth Watch Software, LC
@@ -22,9 +20,6 @@
 " You should have received a copy of the GNU Affero General Public License
 " along with this program. If not, see http://www.gnu.org/licenses/.
 "
-" $Source: endor:/home/dlw/axiom/vim/templates/patterns.pat $
-" $Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
-"
 " Script to jump from pattern to pattern and make changes for each template.
 "
 " This is the master pattern script. You should make symbolic links for every
@@ -38,6 +33,3 @@
 nmap <silent> <buffer> ,, /<+.\{-}+><CR>
 "key mapping, bound to ",.", to quickly change the patterns
 nmap <buffer> ,. cf>
-
-
-" $RCSfile: patterns.pat $

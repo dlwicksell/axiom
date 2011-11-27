@@ -4,13 +4,27 @@
           VIM TOOLS FOR MUMPS    by David Wicksell
 
 
-Package: m-tools
-Author:  David Wicksell
-Email:   dlw@linux.com
-Version: 0.9.0
+Package:       m-tools
+File:          m-tools.txt
+Summary:       vim help documentation
+Maintainer:    David Wicksell
+Last Modified: Nov 26, 2011
 
-$Source: endor:/home/dlw/axiom/vim/doc/m-tools.txt $
-$Revision: [5:2e04241962d7] 2011-11-26 14:36 -0700 $
+Written by David Wicksell <dlw@linux.com>
+Copyright © 2011 Fourth Watch Software, LC
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License (AGPL)
+as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see http://www.gnu.org/licenses/.
 
 
 Utility package for the GT.M programming language       *m-tools*
@@ -214,5 +228,3 @@ using the wonderful vim editor. If you have any questions, concerns, feature
 requests, or bugs to report, please contact:
 
     David Wicksell at <dlw@linux.com> ~
-
-$RCSfile: m-tools.txt $

@@ -1,10 +1,8 @@
 " Package:       m-tools
 " File:          datetime.vim
 " Summary:       Auto datetime stamp for MUMPS routines
-" Version:       0.9.0
 " Maintainer:    David Wicksell <dlw@linux.com>
 " Last Modified: Nov 25, 2011
-" License:       AGPL Ver 3 (or later)
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010,2011 Fourth Watch Software, LC
@@ -21,9 +19,6 @@
 "
 " You should have received a copy of the GNU Affero General Public License
 " along with this program. If not, see http://www.gnu.org/licenses/.
-"
-" $Source: endor:/home/dlw/axiom/vim/ftplugin/mumps/datetime.vim $
-" $Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
 "
 " Imprints a Datetime stamp in either new or old VPE formats,
 " at the end of the first line.
@@ -80,6 +75,3 @@ autocmd BufEnter *.m nmap <buffer> <C-H> :call DateTimeToggle()<CR>
 autocmd BufWrite *.m call DateTime()
 
 let s:did_dt_ftplugin = 1
-
-
-" $RCSfile: datetime.vim $

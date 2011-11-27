@@ -3,10 +3,8 @@
 # Package:       m-tools
 # File:          mktags
 # Summary:       Builds a tag file for MUMPS/GT.M routines
-# Version:       0.9.0
 # Maintainer:    David Wicksell
 # Last Modified: Nov 25, 2011
-# Licence:       AGPL Ver 3 (or later)
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2010,2011 Fourth Watch Software, LC
@@ -23,9 +21,6 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program. If not, see http://www.gnu.org/licenses/.
-#
-# $Source: endor:/home/dlw/axiom/mktags $
-# $Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
 #
 # This script was created to be run in a Red Hat or Ubuntu environment.
 #
@@ -288,6 +283,3 @@ rm -rf ${TMPDIR}                                                 >> ${LOG} 2>&1
 echo "Finished `basename $0` ; User: ${USER} ; `date`"           >> ${LOG} 2>&1
 
 exit 0
-
-
-# $RCSfile: mktags $

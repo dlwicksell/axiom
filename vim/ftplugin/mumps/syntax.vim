@@ -1,10 +1,8 @@
 " Package:       m-tools
 " File:          syntax.vim
 " Summary:       Configuration to support the MUMPS syntax file
-" Version:       0.9.0
 " Maintainer:    David Wicksell <dlw@linux.com>
 " Last Modified: Nov 25, 2011
-" License:       AGPL Ver 3 (or later)
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011 Fourth Watch Software, LC
@@ -21,9 +19,6 @@
 "
 " You should have received a copy of the GNU Affero General Public License
 " along with this program. If not, see http://www.gnu.org/licenses/.
-"
-" $Source: endor:/home/dlw/axiom/vim/ftplugin/mumps/syntax.vim $
-" $Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
 "
 " This is a companion script to the mumps.vim syntax highlighting file.
 " It sets up certain options in vim that are required for that file to
@@ -103,6 +98,3 @@ autocmd BufEnter *.m call StartSyntax()
 autocmd BufLeave *.m call EndSyntax()
 
 let s:did_syn_ftplugin = 1
-
-
-" $RCSfile: syntax.vim $

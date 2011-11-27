@@ -1,10 +1,8 @@
 " Package:       m-tools
 " File:          .vimrc
 " Summary:       Sample .vimrc for the m-tools package
-" Version:       0.9.0
 " Maintainer:    David Wicksell
 " Last Modified: Nov 25, 2011
-" Licence:       AGPL Ver 3 (or later)
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011 Fourth Watch Software, LC
@@ -21,9 +19,6 @@
 "
 " You should have received a copy of the GNU Affero General Public License
 " along with this program. If not, see http://www.gnu.org/licenses/.
-"
-" $Source: endor:/home/dlw/axiom/vimrc $
-" $Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
 "
 " My personal .vimrc settings. Make sure to turn on filetype, if it isn't
 " on already. I think that vim is nearly perfectly configured out of the
@@ -60,6 +55,3 @@ else
   source ~/.vim/ftplugin/mumps/mtags.vim
   source ~/.vim/ftplugin/mumps/syntax.vim
 endif
-
-
-" $RCSfile: vimrc $

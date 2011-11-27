@@ -3,10 +3,8 @@
 Package:       m-tools
 File:          README
 Summary:       Install documentation
-Version:       0.9.0
 Maintainer:    David Wicksell <dlw@linux.com>
-Last Modified: Nov 25, 2011
-License:       AGPL Ver 3 (or later)
+Last Modified: Nov 26, 2011
 
 Package written by David Wicksell <dlw@linux.com>
 Copyright © 2011 Fourth Watch Software, LC
@@ -23,9 +21,6 @@ GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see http://www.gnu.org/licenses/.
-
-$Source: endor:/home/dlw/axiom/README $
-$Revision: [8:a2a0bf5573db] 2011-11-26 16:54 -0700 $
 
 ATTENTION: This package is written to be run in a Red Hat or Ubuntu
            environment. Tweaks maybe needed for other distributions.
@@ -94,5 +89,3 @@ accessed inside of any vim editing session..
 If you have any further questions you can contact:
     David Wicksell of Fourth Watch Software, LC
     at dlw@linux.com or (575)636-2229
-
-$RCSfile: README $

@@ -1,10 +1,8 @@
 " Package:       m-tools
 " File:          templates.vim
 " Summary:       Template loader script
-" Version:       0.9.0
 " Maintainer:    David Wicksell
 " Last Modified: Nov 25, 2011
-" Licence:       AGPL Ver 3 (or later)
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011 Fourth Watch Software, LC
@@ -21,9 +19,6 @@
 "
 " You should have received a copy of the GNU Affero General Public License
 " along with this program. If not, see http://www.gnu.org/licenses/.
-"
-" $Source: endor:/home/dlw/axiom/vim/plugin/templates.vim $
-" $Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
 "
 " Script to automatically load any template file stored in
 " ~/.vim/templates with a .tpl extension.
@@ -53,6 +48,3 @@ endfunction
 
 "uncomment this autocmd line to use templates
 "autocmd BufNewFile * silent! call LoadTemplate('%:e')
-
-
-" $RCSfile: templates.vim $

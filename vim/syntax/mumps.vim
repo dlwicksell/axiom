@@ -2,10 +2,8 @@
 " File:          mumps.vim
 " Language:      MUMPS/GT.M
 " Summary:       Syntax file
-" Version:       0.9.0
 " Maintainer:    David Wicksell <dlw@linux.com>
 " Last Modified: Nov 25, 2011
-" License:       AGPL Ver 3 (or later)
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010,2011 Fourth Watch Software, LC
@@ -22,9 +20,6 @@
 "
 " You should have received a copy of the GNU Affero General Public License
 " along with this program. If not, see http://www.gnu.org/licenses/.
-"
-" $Source: endor:/home/dlw/axiom/vim/syntax/mumps.vim $
-" $Revision: [0:681a24778a9d] 2011-11-25 23:20 -0700 $
 "
 " This vim syntax file was created to deal with a GT.M environment.
 " It was inspired by earlier work by Jim Self <jaself@ucdavis.edu>.
@@ -228,6 +223,3 @@ highlight def link mumpsSpecialVariable Identifier
 highlight def link mumpsBlock Folded
 
 let b:current_syntax = "mumps"
-
-
-" $RCSfile: mumps.vim $
