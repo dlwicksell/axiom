@@ -1,4 +1,4 @@
-*m-tools.txt*      For Vim version 7.2.  Last change: 2011 Nov 25
+*m-tools.txt*      For Vim version 7.2.  Last change: 2011 Nov 27
 
 
           VIM TOOLS FOR MUMPS    by David Wicksell
@@ -8,7 +8,6 @@ Package:       m-tools
 File:          m-tools.txt
 Summary:       vim help documentation
 Maintainer:    David Wicksell
-Last Modified: Nov 26, 2011
 
 Written by David Wicksell <dlw@linux.com>
 Copyright © 2011 Fourth Watch Software, LC
@@ -27,7 +26,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see http://www.gnu.org/licenses/.
 
 
-Utility package for the GT.M programming language       *m-tools*
+Utility package for the GT.M programming language                    *m-tools*
 
 1. Syntax file for GT.M              |m-tools-syntax|
 2. Datetime stamp                    |m-tools-datetime|
@@ -35,7 +34,7 @@ Utility package for the GT.M programming language       *m-tools*
 4. Jump to labels in routines        |m-tools-mtags|
 
 ==============================================================================
-1. Syntax file for GT.M                                 *m-tools-syntax*
+1. Syntax file for GT.M                                       *m-tools-syntax*
 
 Summary ~
 
@@ -95,7 +94,7 @@ but will instead color it like it was a variable. This only happens with
 the underscore '_' character, and I have no idea why it is happening.
 
 ==============================================================================
-2. Datetime stamp                                       *m-tools-datetime*
+2. Datetime stamp                                           *m-tools-datetime*
 
 Summary ~
 
@@ -113,7 +112,7 @@ The script is called {datetime.vim} and should be installed in: >
 It will be installed in the right place automatically by the install script.
 
 ==============================================================================
-3. Dump the contents of a global                        *m-tools-globaldump*
+3. Dump the contents of a global                          *m-tools-globaldump*
 
 Summary ~
 
@@ -135,7 +134,7 @@ The script is called {globaldump.vim} and should be installed in: >
 <
 It will be installed in the right place automatically by the install script.
 
-                                                        *:ZWR*
+                                                                        *:ZWR*
 
 In addition to the key mapping for CTRL-K, the m-tools package provides a user
 defined ex command, called 'ZWR', which is used as follows.
@@ -146,7 +145,7 @@ defined ex command, called 'ZWR', which is used as follows.
               necessary to type the initial '^', nor to
               quote or escape {value}.
 
-                                                        *b:globalsplit*
+                                                               *b:globalsplit*
 
 There is a buffer variable, called {b:globalsplit}, which controls whether
 a global dump is shown in a vertical split screen, or in the current buffer.
@@ -168,7 +167,7 @@ There may be bugs in the handling of global references. It is a tricky
 endeavor.
 
 ==============================================================================
-4. Jump to labels in routines                           *m-tools-mtags*
+4. Jump to labels in routines                   *m-tools-mtags* *m-tools-tags*
 
 Summary ~
 
@@ -202,7 +201,7 @@ The script is called {mtags.vim} and should be installed in: >
 
     ~/.vim/ftplugin/mumps
 <
-                                                        *m-tools-mtags-script*
+                                       *m-tools-mktags* *m-tools-mtags-script*
 
 Supplied with the m-tools package is a shell script called 'mktags', which can
 be executed to create a proper tags file for the mtags functionality. Here are

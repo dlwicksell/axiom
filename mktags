@@ -77,7 +77,7 @@ function error {
     RET=2
     ;;
   env)
-    echo -n "Define the gtmroutines environment"         | tee -a ${LOG} 2>&1
+    echo -n "Define the \$gtmroutines environment"       | tee -a ${LOG} 2>&1
     echo " variable in order to use the -$2 argument"    | tee -a ${LOG} 2>&1
 
     RET=3
@@ -132,12 +132,12 @@ function mtags {
   done
 } # End of mtags
 
-# Build a tags file by parsing the gtmroutines search path
+# Build a tags file by parsing the $gtmroutines search path
 function mtags_default {
   for DIRS in ${gtmroutines}
   do
-      #regex syntax (~) for the following test does not work on Red Hat systems
-    if [[ ${DIRS} != ${DIRS/"("/} ]]; then #gtmroutines with "()" source syntax
+      #regex syntax (=~) for the following test does not work on Red Hat systems
+    if [[ ${DIRS} != ${DIRS/"("/} ]]; then #$gtmroutines with "()" source syntax
       DIRS=`echo ${DIRS} | cut -d "(" -f 2 | cut -d ")" -f 1`
     else
       if [ "${DIRS: -3}" == ".so" ]; then
@@ -145,7 +145,7 @@ function mtags_default {
       fi
     fi
 
-    for DIR in ${DIRS} #call mtags for each directory in gtmroutines
+    for DIR in ${DIRS} #call mtags for each directory in $gtmroutines
       do
         ls ${DIR}/*.m > /dev/null 2>&1
         LS=$?
@@ -193,7 +193,7 @@ LOCK=mtags.lock
 while getopts :epg opt
 do
   case ${opt} in
-  g) #gtmroutines mode
+  g) #$gtmroutines mode
     if [ "${gtmroutines}" == "" ]; then
       error env ${opt}
     fi

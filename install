@@ -61,12 +61,12 @@ function question {
       ;;
     overwrite)
       #be extra careful with the overwrite option
-      echo -n "You have chosen to ${answer} ~/$1, is this correct? [Y]/N "
+      echo -n "You have chosen to ${answer} $HOME/$1, is this correct? [Y]/N "
       read ANS
 
       ANS=`echo ${ANS} | tr [:lower:] [:upper:]`
 
-      if [ "${ANS}" == "Y" -o "${ANS}" == "YES" ]; then
+      if [ "${ANS}" == "Y" -o "${ANS}" == "YES" -o "${ANS}" == "" ]; then
         cp -p ${1/"."/} ~/$1
 
         echo "Installed new $1 file"
@@ -93,15 +93,15 @@ clear
 OS=`lsb_release -is` #Ubuntu and Red Hat do a few things differently
 
 if [ -z "${gtmroutines}" ]; then
-  echo "The gtmroutines environment variable is not defined. In order to use"
+  echo "The \$gtmroutines environment variable is not defined. In order to use"
   echo "the global dumping functionality of m-tools you have to install GT.M"
-  echo "and KBAWDUMP.m, as well as define gtmroutines. See the documentation:"
+  echo "and KBAWDUMP.m, as well as define \$gtmroutines. See the documentation:"
   echo "    http://www.fisglobal.com/products-technologyplatforms-gtm"
   echo
 else
   DIR=`echo ${gtmroutines} | awk '{print $1}'`
 
-  if [[ ${DIR} != ${DIR/"("/} ]]; then #gtmroutines with "()" source syntax
+  if [[ ${DIR} != ${DIR/"("/} ]]; then #$gtmroutines with "()" source syntax
     DIR=`echo ${DIR} | cut -d "(" -f 2 | cut -d ")" -f 1`
   fi
 
@@ -124,14 +124,14 @@ echo "Run mktags to build the tags file for the mtags functionality."
 echo "See the man page for details on how to use it. E.g. $ man mktags"
 echo
 
-if [[ $PATH == ${PATH/"${HOME}/bin"/} ]]; then #does PATH contain ~/bin?
+if [[ $PATH == ${PATH/"${HOME}/bin"/} ]]; then #does $PATH contain ~/bin?
   if [ "${OS}" == "Ubuntu" ]; then
     echo "export PATH=\$HOME/bin:\$PATH" >> ~/.profile
-    echo "Appended a command to add $HOME/bin to PATH in $HOME/.profile"
+    echo "Appended a command to add \$HOME/bin to \$PATH in ~/.profile"
     echo
   else
     echo "export PATH=\$HOME/bin:\$PATH" >> ~/.bash_profile
-    echo "Appended a command to add $HOME/bin to PATH in $HOME/.bash_profile"
+    echo "Appended a command to add \$HOME/bin to \$PATH in ~/.bash_profile"
     echo
   fi
 fi
@@ -140,13 +140,7 @@ if [ ! -d ~/man/man1 ]; then
   mkdir -p ~/man/man1
 fi
 
-#these could be pre-compressed
-gzip -9 mktags.1 KBAWDUMP.1
-
 cp -p mktags.1.gz KBAWDUMP.1.gz ~/man/man1
-
-#keep the man pages uncompressed so that keyword expansion happens with builds
-gunzip mktags.1.gz KBAWDUMP.1.gz
 
 echo "Copied the mktags and KBAWDUMP man pages to $HOME/man/man1"
 echo
@@ -159,22 +153,22 @@ if [ "${OS}" == "Ubuntu" ]; then
 
   mandb -q
 
-  echo "Added the $HOME/man directory to manpath, and rebuilt the database"
+  echo "Added the ~/man directory to \$MANPATH, and rebuilt the database"
   echo
 else
   grep -q MANPATH ~/.bash_profile
 
   if [ $? -eq 0 ]; then
-    echo "Make sure ~/man is in the MANPATH search variable in ~/.bash_profile"
+    echo "Make sure \$HOME/man is in the \$MANPATH variable in ~/.bash_profile"
   else
     echo >> ~/.bash_profile
-    echo "export MANPATH=~/man:`manpath`" >> ~/.bash_profile
+    echo "export MANPATH=\$HOME/man:`manpath`" >> ~/.bash_profile
 
-    echo "Appended a command to add $HOME/man to MANPATH in $HOME/.bash_profile"
+    echo "Appended a command to add \$HOME/man to \$MANPATH in ~/.bash_profile"
   fi
 
-    echo "To access your man pages now, type: $ source $HOME/.bash_profile"
-    echo
+  echo "To access your man pages now, type: $ source ~/.bash_profile"
+  echo
 fi
 
 if [ -f ~/.vimrc ]; then
@@ -193,7 +187,7 @@ fi
 if [ ! -d ~/.vim ]; then
   cp -a vim ~/.vim
 
-  echo "Copied the vim utility package to $HOME/.vim"
+  echo Copied the vim utility package to ~/.vim
   echo
 else
   if [ -f ~/.vim/filetype.vim ]; then

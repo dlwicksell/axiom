@@ -25,9 +25,15 @@ along with this program. If not, see http://www.gnu.org/licenses/.
 ATTENTION: This package is written to be run in a Red Hat or Ubuntu
            environment. Tweaks may be needed for other distributions.
 
-This is a package of utility programs that help your productivity
+This is a package of developer tools that can help your productivity
 when editing MUMPS/GT.M routines with the vim editor, preferrably
 version 6.0 or newer.
+
+A colleague of mine, John Willis <chocolatejollis38@gmail.com>, has created
+a similar package of tools for use with the emacs editor. It is called
+LorikeeM and you can download it from: http://code.google.com/p/lorikeem/
+The KBAWDUMP.m routine and mktags/mtags.sh script also work with LorikeeM
+and are included with the LorikeeM package.
 
 NOTE: In order to use the mtags functionality, you must build a tags
       file. In order to build the tags file with the included mktags
@@ -46,13 +52,6 @@ NOTE: In order to use the mtags functionality, you must build a tags
 NOTE: In order to use the global dump functionality you
       must install GT.M and set the environment variables that GT.M
       requires. http://www.fisglobal.com/products-technologyplatforms-gtm
-
-A colleague of mine, John Willis <chocolatejollis38@gmail.com>, has created
-a similar package of tools for use with the emacs editor. It is called
-LorikeeM and you can download it from: http://code.google.com/p/lorikeem/
-LorikeeM also includes my KBAWDUMP.m routine for support of global dumps
-inside of vim or emacs, and my mktags/mtags.sh script for building a tags
-file for either vim or emacs.
 
 Any reference to m-tools in the commands below, may also have a version
 number in it.
@@ -77,7 +76,7 @@ create the tags file necessary for the mtags/ctags functionality..
 
 If you want to install m-tools manually, make sure you copy the
 following files and directories to the right places at a minimum.
-<MUMPS-source-directory> refers to a directory in your gtmroutines
+<MUMPS-source-directory> refers to a directory in your $gtmroutines
 environment variable. 
       $ cp m-tools/KBAWDUMP.m <MUMPS-source-directory>
       $ cp m-tools/mktags ~/bin
