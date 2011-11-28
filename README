@@ -4,7 +4,7 @@ Package:       m-tools
 File:          README
 Summary:       Install documentation
 Maintainer:    David Wicksell <dlw@linux.com>
-Last Modified: Nov 26, 2011
+Last Modified: Nov 27, 2011
 
 Package written by David Wicksell <dlw@linux.com>
 Copyright © 2011 Fourth Watch Software, LC
@@ -23,14 +23,27 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see http://www.gnu.org/licenses/.
 
 ATTENTION: This package is written to be run in a Red Hat or Ubuntu
-           environment. Tweaks maybe needed for other distributions.
+           environment. Tweaks may be needed for other distributions.
 
 This is a package of utility programs that help your productivity
 when editing MUMPS/GT.M routines with the vim editor, preferrably
 version 6.0 or newer.
 
 NOTE: In order to use the mtags functionality, you must build a tags
-      file, and in order to use the global dump functionality you
+      file. In order to build the tags file with the included mktags
+      shell script, you will need to install the ctags program. In
+      Ubuntu you would install it via:
+          $ sudo apt-get install exuberant-ctags
+      In Red Hat/CentOS you would install it via:
+          $ sudo yum install ctags
+      You have to use a version of ctags with regular expression support
+      compiled in, in order to build the tags file for MUMPS. To confirm
+      that your version is the correct one:
+          $ ctags --version
+      Look for this line:
+          "Optional compiled features: +wildcards, +regex"
+
+NOTE: In order to use the global dump functionality you
       must install GT.M and set the environment variables that GT.M
       requires. http://www.fisglobal.com/products-technologyplatforms-gtm
 
@@ -41,19 +54,17 @@ LorikeeM also includes my KBAWDUMP.m routine for support of global dumps
 inside of vim or emacs, and my mktags/mtags.sh script for building a tags
 file for either vim or emacs.
 
-To install this, you untar the tarball, as you've already done..
-      $ tar xfz m-tools-0.9.0.tgz
+Any reference to m-tools in the commands below, may also have a version
+number in it.
 
-Then you move to the resulting m-tools-0.9.0/ directory..
-      $ cd m-tools-0.9.0/
+To install this, you untar the tarball, as you've already done..
+      $ tar xfz m-tools.tgz
+
+Then you move to the resulting m-tools/ directory..
+      $ cd m-tools/
 
 Or, you can clone the repository with the instructions on the bitbucket
 page. https://bitbucket.org/dlw/m-tools
-
-Keep in mind that if you clone it, it will create a directory named
-m-tools, rather than one with a version number. If you download the
-tarball from the bitbucket site, the directory will be a different name
-still. But everything else should be the same.
 
 Then you run the install script to install the m-tools utility
 scripts, in the appropriate places, as well as create a .vimrc run
@@ -68,10 +79,16 @@ If you want to install m-tools manually, make sure you copy the
 following files and directories to the right places at a minimum.
 <MUMPS-source-directory> refers to a directory in your gtmroutines
 environment variable. 
-      $ cp m-tools-0.9.0/KBAWDUMP.m <MUMPS-source-directory>
-      $ cp m-tools-0.9.0/mktags ~/bin
-      $ cp m-tools-0.9.0/vim ~/.vim
-      $ cp m-tools-0.9.0/vimrc ~/.vimrc
+      $ cp m-tools/KBAWDUMP.m <MUMPS-source-directory>
+      $ cp m-tools/mktags ~/bin
+      $ cp m-tools/vim ~/.vim
+      $ cp m-tools/vimrc ~/.vimrc
+You will also need to install the mktags and KBAWDUMP man pages. For
+information on how to do that on your system, consult the man page:
+      $ man man
+You will also need to install the m-tools.txt vim help documentation.
+In a vim editing session, type:
+      :helptags ~/.vim/doc
 
 That is pretty much all there is to it. If you have questions on how
 to use the mktags shell script, consult the man page..
