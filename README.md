@@ -7,7 +7,7 @@ Version 0.9.5 - 2011 Dec 1
 ## Copyright and License
 
 Package written and maintained by David Wicksell <dlw@linux.com>  
-Copyright &copy; 2011 Fourth Watch Software, LC
+Copyright © 2011 Fourth Watch Software, LC
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License (AGPL)
