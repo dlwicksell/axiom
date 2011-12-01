@@ -1,10 +1,10 @@
 #!/bin/bash -
 #
-# Package:       m-tools
+# Package:       M-tools
 # File:          install
-# Summary:       install script for the m-tools package
+# Summary:       install script for the M-tools package
 # Maintainer:    David Wicksell <dlw@linux.com>
-# Last Modified: Nov 27, 2011
+# Last Modified: Dec 01, 2011
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2011 Fourth Watch Software, LC
@@ -94,7 +94,7 @@ OS=`lsb_release -is` #Ubuntu and Red Hat do a few things differently
 
 if [ -z "${gtmroutines}" ]; then
   echo "The \$gtmroutines environment variable is not defined. In order to use"
-  echo "the global dumping functionality of m-tools you have to install GT.M"
+  echo "the global dumping functionality of M-tools you have to install GT.M"
   echo "and KBAWDUMP.m, as well as define \$gtmroutines. See the documentation:"
   echo "    http://www.fisglobal.com/products-technologyplatforms-gtm"
   echo
@@ -187,7 +187,7 @@ fi
 if [ ! -d ~/.vim ]; then
   cp -a vim ~/.vim
 
-  echo Copied the vim utility package to ~/.vim
+  echo Copied the Vim utility package to ~/.vim
   echo
 else
   if [ -f ~/.vim/filetype.vim ]; then
@@ -272,9 +272,9 @@ fi
 
 vim "+helptags $HOME/.vim/doc" "+quit"
 
-echo "Installed the vim help documentation"
+echo "Installed the Vim help documentation"
 echo
 
-echo "Finished installing the m-tools package"
+echo "Finished installing the M-tools package"
 
 exit 0

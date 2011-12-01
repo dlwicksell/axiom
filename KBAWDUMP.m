@@ -1,5 +1,5 @@
-KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 11/27/11 1:45pm
- ;;0.9.0;m-tools;****LOCAL RTN**;David Wicksell @2010,2011
+KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 12/1/11 2:01pm
+ ;;0.9.5;M-tools;****LOCAL RTN**;David Wicksell @2010,2011
  ;
  ; Written by David Wicksell <dlw@linux.com>
  ; Copyright © 2010,2011 Fourth Watch Software, LC

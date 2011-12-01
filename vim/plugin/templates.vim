@@ -1,4 +1,4 @@
-" Package:       m-tools
+" Package:       M-tools
 " File:          templates.vim
 " Summary:       Template loader script
 " Maintainer:    David Wicksell

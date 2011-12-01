@@ -1,4 +1,4 @@
-" Package:       m-tools
+" Package:       M-tools
 " File:          patterns.pat
 " Summary:       template patterns script for MUMPS/GT.M
 " Maintainer:    David Wicksell

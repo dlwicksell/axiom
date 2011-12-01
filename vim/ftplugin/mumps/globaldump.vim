@@ -1,4 +1,4 @@
-" Package:       m-tools
+" Package:       M-tools
 " File:          globaldump.vim
 " Summary:       Dumps a global reference while editing
 " Maintainer:    David Wicksell <dlw@linux.com>

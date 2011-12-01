@@ -1,8 +1,8 @@
-" Package:       m-tools
+" Package:       M-tools
 " File:          .vimrc
-" Summary:       Sample .vimrc for the m-tools package
+" Summary:       Sample .vimrc for the M-tools package
 " Maintainer:    David Wicksell
-" Last Modified: Nov 25, 2011
+" Last Modified: Dec 01, 2011
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011 Fourth Watch Software, LC
@@ -21,7 +21,7 @@
 " along with this program. If not, see http://www.gnu.org/licenses/.
 "
 " My personal .vimrc settings. Make sure to turn on filetype, if it isn't
-" on already. I think that vim is nearly perfectly configured out of the
+" on already. I think that Vim is nearly perfectly configured out of the
 " box, which is why my .vimrc is small. 
 
 
@@ -37,7 +37,7 @@ set softtabstop=4
 set shiftwidth=4
 set tabpagemax=20
 
-"turn on filetype in order to seamlessly use the m-tools package
+"turn on filetype in order to seamlessly use the M-tools package
 if v:version >= 600
   "turn on syntax and automatic filetype detection
   syntax enable
@@ -47,7 +47,7 @@ if v:version >= 600
   filetype plugin on
   filetype indent on
 else
-  "turn on syntax and source the m-tools utility functions
+  "turn on syntax and source the M-tools utility functions
   syntax on
 
   source ~/.vim/ftplugin/mumps/datetime.vim

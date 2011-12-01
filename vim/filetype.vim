@@ -1,8 +1,8 @@
-" Package:       m-tools
+" Package:       M-tools
 " File:          filetype.vim
 " Summary:       Filetype syntax file
 " Maintainer:    David Wicksell
-" Last Modified: Nov 25, 2011
+" Last Modified: Dec 01, 2011
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011 Fourth Watch Software, LC
@@ -20,7 +20,7 @@
 " You should have received a copy of the GNU Affero General Public License
 " along with this program. If not, see http://www.gnu.org/licenses/.
 "
-" This vim file was created to deal with a GT.M/EWD environment.
+" This Vim file was created to deal with a GT.M/EWD environment.
 " It was inspired by earlier work by Jim Self <jaself@ucdavis.edu>.
 "
 " Set the filetype to mumps if its extension is .m or .ro, to xml
@@ -47,11 +47,15 @@ autocmd! BufRead,BufNewFile *.RSA setfiletype mumps
 "EWD design pages, either xml or html will work
 autocmd! BufRead,BufNewFile *.ewd setfiletype xml
 
-"tags files for the m-tools package
+"tags files for the M-tools package
 autocmd! BufRead,BufNewFile mtags setfiletype tags
 autocmd! BufRead,BufNewFile .mtags setfiletype tags
 
 "patterns ex script, associated with template files
 autocmd! BufRead,BufNewFile *.pat setfiletype vim
+
+"markdown file defaults to modula2, which we don't want
+"most text files default to conf
+autocmd! BufRead,BufNewFile *.md setfiletype conf
 
 augroup END

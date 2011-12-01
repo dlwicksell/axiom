@@ -1,4 +1,4 @@
-" Package:       m-tools
+" Package:       M-tools
 " File:          datetime.vim
 " Summary:       Auto datetime stamp for MUMPS routines
 " Maintainer:    David Wicksell <dlw@linux.com>

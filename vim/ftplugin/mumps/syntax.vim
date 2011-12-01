@@ -1,8 +1,8 @@
-" Package:       m-tools
+" Package:       M-tools
 " File:          syntax.vim
 " Summary:       Configuration to support the MUMPS syntax file
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Nov 25, 2011
+" Last Modified: Dec 01, 2011
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011 Fourth Watch Software, LC
@@ -21,7 +21,7 @@
 " along with this program. If not, see http://www.gnu.org/licenses/.
 "
 " This is a companion script to the mumps.vim syntax highlighting file.
-" It sets up certain options in vim that are required for that file to
+" It sets up certain options in Vim that are required for that file to
 " work properly. It also sets up some options for the globaldump.vim and
 " mtags.vim scripts. When you leave a mumps buffer it puts everything that
 " it changed back to the way it was.
@@ -35,7 +35,7 @@ if exists("s:did_syn_ftplugin")
 endif
 
 function! StartSyntax() "set necessary syntax options in one place
-  setlocal tags+=~/.mtags,~/mtags "add the tags files for the m-tools package
+  setlocal tags+=~/.mtags,~/mtags "add the tags files for the M-tools package
   "required to define mumps intrinsic functions and special variables
   setlocal iskeyword+=$
 

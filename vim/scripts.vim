@@ -1,8 +1,8 @@
-" Package:       m-tools
+" Package:       M-tools
 " File:          scripts.vim
 " Summary:       Scripts syntax file
 " Maintainer:    David Wicksell
-" Last Modified: Nov 25, 2011
+" Last Modified: Dec 01, 2011
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011 Fourth Watch Software, LC
@@ -20,7 +20,7 @@
 " You should have received a copy of the GNU Affero General Public License
 " along with this program. If not, see http://www.gnu.org/licenses/.
 "
-" This vim file was created to deal with a GT.M/EWD environment.
+" This Vim file was created to deal with a GT.M/EWD environment.
 " It was inspired by earlier work by Jim Self <jaself@ucdavis.edu>.
 "
 " There is no .m or .ro extension, but it still looks like a MUMPS routine.

@@ -1,4 +1,4 @@
-" Package:       m-tools
+" Package:       M-tools
 " File:          mtags.vim
 " Summary:       Jumps to different labels in a MUMPS routine
 " Maintainer:    David Wicksell <dlw@linux.com>

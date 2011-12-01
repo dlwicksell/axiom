@@ -1,9 +1,9 @@
-" Package:       m-tools
+" Package:       M-tools
 " File:          mumps.vim
 " Language:      MUMPS/GT.M
 " Summary:       Syntax file
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Nov 25, 2011
+" Last Modified: Dec 01, 2011
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010,2011 Fourth Watch Software, LC
@@ -21,7 +21,7 @@
 " You should have received a copy of the GNU Affero General Public License
 " along with this program. If not, see http://www.gnu.org/licenses/.
 "
-" This vim syntax file was created to deal with a GT.M environment.
+" This Vim syntax file was created to deal with a GT.M environment.
 " It was inspired by earlier work by Jim Self <jaself@ucdavis.edu>.
 "
 " It isn't perfect, since a regular expression engine isn't really up
