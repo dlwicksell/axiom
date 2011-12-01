@@ -71,7 +71,7 @@ Look for this line:
 Any reference to M-tools in the commands below, may also have a version
 number in it, either a version tag or a version hash.
 
-To install this, you untar the tarball, as you've already done..
+To install this, you untar the tarball..
 
     $ tar xfz m-tools.tgz
 
