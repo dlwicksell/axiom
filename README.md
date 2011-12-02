@@ -140,7 +140,7 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * The [exuberant-ctags][] tag file building program.
 
 [GT.M]: http://sourceforge.net/projects/fis-gtm/
-[Vim]: http://www.vim.org)
+[Vim]: http://www.vim.org
 [exuberant-ctags]: http://ctags.sourceforge.net/
 
 ### Package List ###
@@ -174,3 +174,4 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * Added filetype for the README.md to filetype.vim
 * Various changes in typographical conventions throughout the package
 * Updated various bits of information throughout the package
+* Fixed a couple of typos in README.md
