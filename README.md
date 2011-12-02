@@ -100,8 +100,8 @@ environment variable.
 
     $ cp m-tools/KBAWDUMP.m <MUMPS-source-directory>
     $ cp m-tools/mktags ~/bin
-    $ cp m-tools/vim ~/.vim
     $ cp m-tools/vimrc ~/.vimrc
+    $ cp -r m-tools/vim ~/.vim
 
 If you are installing manually, you will also need to install the mktags and
 KBAWDUMP man pages. For information on how to do that on your system, consult
