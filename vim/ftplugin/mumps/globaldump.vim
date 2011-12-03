@@ -2,7 +2,7 @@
 " File:          globaldump.vim
 " Summary:       Dumps a global reference while editing
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Nov 25, 2011
+" Last Modified: Dec 03, 2011
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010,2011 Fourth Watch Software, LC
@@ -119,14 +119,15 @@ function! ZWRArgument(global)
   else
     if exists("b:globalsplit") "in case b:globalsplit isn't defined
       if b:globalsplit == 1 "global split window mode is on
-        "need to unmap <C-K> and delete ZWR, when we have already dumped data
-        "so we can't split the screen again
-        "nunmap <buffer> <C-K>
-        "delcommand ZWR
+        if v:version >= 702
+          let l:PPID = getpid()
+        else
+          let l:PPID = system("echo -n $PPID") "getpid() function doesn't exist
+        endif
 
-        let l:tempfile = "~/.globaldump.tmp." . getpid() "create a temp file
+        let l:tempfile = "~/.globaldump.tmp." . l:PPID "create a temp file
 
-        if !filereadable(glob(l:tempfile))
+        if !filereadable(glob(l:tempfile)) "doesn't already exist
           execute "redir! > " . l:tempfile | "dump the global to the temp file
 
           if strpart(a:global, 0, 1) != "^"
@@ -156,7 +157,7 @@ function! ZWRArgument(global)
           nmap <silent> <buffer> , <C-W>>
           ". will decrease the size of the window with the global data
           nmap <silent> <buffer> . <C-W><
-        else
+        else "already exists, don't want multiple split screens
           echohl ErrorMsg
           echo "Close the global dump window with Ctl-K first"
           echohl None

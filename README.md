@@ -2,7 +2,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.9.5 - 2011 Dec 1
+Version 0.9.6 - 2011 Dec 3
 
 ## Copyright and License
 
@@ -166,12 +166,6 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up keybindings to change patterns in templates
 
 ### Changelog ###
-* Rewrote README to contain more useful information and a nicer layout
-* Moved README to README.md, adding markdown syntax
-* Added documentation to KBAWDUMP.1.gz for the - option
-* Added documentation to m-tools.txt to explain the wildcard syntax
-* Added documentation to mktags.1.gz to clarify how to run mktags from cron
-* Added filetype for the README.md to filetype.vim
-* Various changes in typographical conventions throughout the package
-* Updated various bits of information throughout the package
-* Fixed a couple of typos in README.md
+* Fixed bug in globaldump.vim where the getpid() function doesn't exist
+* Changed storage of the man pages to be uncompressed for easier searching
+* Changed install script to compress the man pages during install
