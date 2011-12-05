@@ -151,6 +151,10 @@ function! ZWRArgument(global)
           nmap <silent> <buffer> , <C-W>>
           ". will decrease the size of the window with the global data
           nmap <silent> <buffer> . <C-W><
+
+          "remap the key mappings for the tag stack, so buffer won't mess it up
+          nmap <silent> <buffer> <C-]> :call FileDelete()<CR>
+          nmap <silent> <buffer> <C-T> :call FileDelete()<CR>
         else "already exists, don't want multiple split screens
           echohl ErrorMsg
           echo "Close the global dump window with Ctl-K first"
@@ -175,7 +179,7 @@ function! MGlobal(global)
 
   "parsing a character at a time, tracking where we are
   for l:char in range(0, len(l:global))
-    "shouldn't have a tic ' outside of a string, so sanitize it and quit
+    "shouldn't have a tick ' outside of a string, so sanitize it and quit
     "letting the regular error handling deal with it
     if strpart(l:global, l:char, 1) == "'" && !l:quote
       let l:global = substitute(l:global, "'", '"', "g")

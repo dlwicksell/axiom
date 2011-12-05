@@ -2,7 +2,7 @@
 " File:          .vimrc
 " Summary:       Sample .vimrc for the M-tools package
 " Maintainer:    David Wicksell
-" Last Modified: Dec 01, 2011
+" Last Modified: Dec 04, 2011
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011 Fourth Watch Software, LC
@@ -53,5 +53,5 @@ else
   source ~/.vim/ftplugin/mumps/datetime.vim
   source ~/.vim/ftplugin/mumps/globaldump.vim
   source ~/.vim/ftplugin/mumps/mtags.vim
-  source ~/.vim/ftplugin/mumps/syntax.vim
+  source ~/.vim/ftplugin/mumps/settings.vim
 endif

@@ -2,7 +2,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.9.7 - 2011 Dec 4
+Version 0.9.8 - 2011 Dec 4
 
 ## Copyright and License
 
@@ -158,7 +158,7 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *datetime.vim* - Script to imprint a datetime stamp in MUMPS routines
 * *globaldump.vim* - Script to call KBAWDUMP from within vim
 * *mtags.vim* - Script to call the tag file built by mktags
-* *syntax.vim* - Script to set things up for mumps.vim
+* *settings.vim* - Script to set up various settings for M-tools
 * *templates.vim* - Script to call template files
 * *mumps.vim* - Syntax file for MUMPS routines
 * *ewd.tpl* - Sample template for an EWD design page
@@ -166,6 +166,7 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up keybindings to change patterns in templates
 
 ### Changelog ###
-* Fixed bug in mktags where the temp directory couldn't be created sometimes
-* Fixed bug in globaldump.vim where an error was still displayed in split screen
-* Fixed bug in globaldump.vim where a couple settings weren't scoped to a buffer
+* Fixed bug in datetime.vim where a key map wasn't set to silent
+* Fixed bug in globaldump.vim where tag stack can be accessed in split screen
+* Clarified the documentation in m-tools.txt for the b:globalsplit section
+* Moved syntax.vim to settings.vim to better represent what the script does

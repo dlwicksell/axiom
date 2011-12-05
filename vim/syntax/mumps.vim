@@ -3,7 +3,7 @@
 " Language:      MUMPS/GT.M
 " Summary:       Syntax file
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Dec 01, 2011
+" Last Modified: Dec 04, 2011
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010,2011 Fourth Watch Software, LC
@@ -136,7 +136,7 @@ syntax keyword mumpsCommand contained ZSYSTEM ZTCOMMIT ZTSTART ZWITHDRAW ZWRITE
   \ nextgroup=mumpsArgument,mumpsPostCondition,mumpsCommandEnd,mumpsComment
 
 "mumps intrinsic functions, you have to add $ to iskeyword for this to work
-"it is already added in syntax.vim, sourced if in a mumps filetype buffer
+"it is already added in settings.vim, sourced if in a mumps filetype buffer
 syntax keyword mumpsFunction contained $A $C $D $E $F $FN $G $I $INCR $J $L $NA
 syntax keyword mumpsFunction contained $N $O $P $QL $QS $Q $R $RE $S $ST $T $TR
 syntax keyword mumpsFunction contained $V $ZAH $ZA $ZC $ZD $ZE $ZF $ZINCR $ZJ
@@ -156,7 +156,7 @@ syntax keyword mumpsFunction contained $ZJOBEXAM $ZMESSAGE $ZPARSE $ZPREVIOUS
 syntax keyword mumpsFunction contained $ZQGBLMOD $ZSEARCH $ZTRIGGER $ZTRNLNM
 
 "mumps special variables, you have to add $ to iskeyword for this to work
-"it is already added in syntax.vim, sourced if in a mumps filetype buffer
+"it is already added in settings.vim, sourced if in a mumps filetype buffer
 syntax keyword mumpsSpecialVariable contained $D $EC $ES $ET $H $I $J $K $P $Q
 syntax keyword mumpsSpecialVariable contained $R $ST $S $SY $T $TL $TR $X $Y
 syntax keyword mumpsSpecialVariable contained $ZA $ZB $ZCH $ZDA $ZD $ZED $ZEO

@@ -2,7 +2,7 @@
 " File:          datetime.vim
 " Summary:       Auto datetime stamp for MUMPS routines
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Nov 25, 2011
+" Last Modified: Dec 04, 2011
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010,2011 Fourth Watch Software, LC
@@ -70,7 +70,7 @@ endfunction
 
 
 "define a key mapping, bound to Ctl-H, in order to toggle datetime stamping
-autocmd BufEnter *.m nmap <buffer> <C-H> :call DateTimeToggle()<CR>
+autocmd BufEnter *.m nmap <silent> <buffer> <C-H> :call DateTimeToggle()<CR>
 "defaults to on
 autocmd BufWrite *.m call DateTime()
 

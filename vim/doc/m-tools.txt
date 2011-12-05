@@ -1,4 +1,4 @@
-*m-tools.txt*      For Vim version 7.2.  Last change: 2011 Dec 01
+*m-tools.txt*      For Vim version 7.2.  Last change: 2011 Dec 04
 
 
           VIM TOOLS FOR MUMPS    by David Wicksell
@@ -63,7 +63,7 @@ system.
 
 Additonal scripts ~
 
-The syntax file requires a script called {syntax.vim} which should be
+The syntax file requires a script called {settings.vim} which should be
 installed in: >
 
     ~/.vim/ftplugin/mumps
@@ -163,12 +163,15 @@ Here are some examples: >
 
 There is a buffer variable, called {b:globalsplit}, which controls whether
 a global dump is shown in a vertical split screen, or in the current buffer.
-It defaults to a vertical split screen. When in this mode, while in a split
-screen, the key mapping for CTRL-K will now close the split screen, and
-clean up after itself. If {b:globalsplit is set to 1, a global dump will
-write to a vertical split screen, and you can navigate between the split
-screens via CTRL-W CTRL-W. For more information about split screens, see
-|new-vertsplit|.
+It defaults to a vertical split screen and is defined in settings.vim.
+
+If {b:globalsplit} is set to 1, a global dump will write to a vertical split
+screen, and you can navigate between the split screens via CTRL-W CTRL-W. For
+more information about split screens, see |new-versplit|. When in this mode,
+while in a split screen, the key mapping for CTRL-K will now close the split
+screen, and clean up after itself.  In addition, in order to avoid messing
+with the tag stack while in the global screen, the key mappings for CTRL-]
+and CTRL-T will also close the split screen, and clean up.
 
 There are two more key mappings that make it more convenient to resize the
 split screen containg the contents of the global reference. While in the

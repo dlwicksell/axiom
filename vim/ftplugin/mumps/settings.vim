@@ -1,8 +1,8 @@
 " Package:       M-tools
-" File:          syntax.vim
-" Summary:       Configuration to support the MUMPS syntax file
+" File:          settings.vim
+" Summary:       Configuration script
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Dec 01, 2011
+" Last Modified: Dec 04, 2011
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011 Fourth Watch Software, LC
