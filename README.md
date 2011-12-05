@@ -146,10 +146,10 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 ### Package List ###
 * *COPYING* - Copyright information
 * *install* - Installation script for the M-tools package
-* *KBAWDUMP.1.gz* - Man page for KBAWDUMP
+* *KBAWDUMP.1* - Man page for KBAWDUMP
 * *KBAWDUMP.m* - Routine to display all or some of a global's data
 * *mktags* - Script to build a tag file for the mtags functionality
-* *mktags.1.gz* - Man page for mktags
+* *mktags.1* - Man page for mktags
 * *README.md* - This README file in markdown format
 * *vimrc* - Sample .vimrc run command file
 * *filetype.vim* - Script to set up a filetype by file extension
@@ -163,7 +163,7 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *mumps.vim* - Syntax file for MUMPS routines
 * *ewd.tpl* - Sample template for an EWD design page
 * *m.tpl* - Sample template for a MUMPS routine
-* *patterns.pat* - Script to set up keybindings to change patterns in templates
+* *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
 * Fixed bug in datetime.vim where a key map wasn't set to silent
