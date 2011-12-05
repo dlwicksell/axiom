@@ -4,7 +4,7 @@
 # File:          mktags
 # Summary:       Builds a tag file for MUMPS/GT.M routines
 # Maintainer:    David Wicksell
-# Last Modified: Dec 01, 2011
+# Last Modified: Dec 04, 2011
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2010,2011 Fourth Watch Software, LC
@@ -245,6 +245,12 @@ if [ -f ${TMPDIR}/${DOT}${LOCK} ]; then
 fi
 
 if [ ! -d ${TMPDIR} ]; then
+  if [ -f ${TMPDIR} ]; then
+    mv ${TMPDIR} ${TMPDIR}.orig
+    
+    echo "Your old ${TMPDIR} file is now ${TMPDIR}.orig"         >> ${LOG} 2>&1
+  fi
+
   mkdir ${TMPDIR}
 fi
 

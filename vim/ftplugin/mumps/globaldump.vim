@@ -2,7 +2,7 @@
 " File:          globaldump.vim
 " Summary:       Dumps a global reference while editing
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Dec 03, 2011
+" Last Modified: Dec 04, 2011
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010,2011 Fourth Watch Software, LC
@@ -97,25 +97,19 @@ function! ZWRArgument(global)
     echohl ErrorMsg
     echo "Either an identifier or a left parenthesis is expected Try :ZWR"
     echohl None
-  "catch an undefined global next 3, so we don't display it in split screen
-  elseif l:global == "Global variable undefined: " . a:global . "\n" "^ included
-    echohl ErrorMsg
-    echo "Global variable undefined: " . a:global
-    echohl None
-  elseif l:global == "Global variable undefined: ^" . a:global . "\n"
-    echohl ErrorMsg
-    echo "Global variable undefined: ^" . a:global
-    echohl None
-  elseif l:global == "" "seems to come back empty sometimes
-    echohl ErrorMsg
+  "catch an undefined global, so we don't display it in split screen
+  elseif l:global =~ "Global variable undefined:" || l:global == ""
+    if l:global !~ "^^"
+      echohl ErrorMsg
 
-    if strpart(a:global, 0, 1) == "^"
-      echo "Global variable undefined: " . a:global
-    else
-      echo "Global variable undefined: ^" . a:global
+      if strpart(a:global, 0, 1) == "^"
+        echo "Global variable undefined: " . a:global
+      else
+        echo "Global variable undefined: ^" . a:global
+      endif
+
+      echohl None
     endif
-
-    echohl None
   else
     if exists("b:globalsplit") "in case b:globalsplit isn't defined
       if b:globalsplit == 1 "global split window mode is on
@@ -143,8 +137,8 @@ function! ZWRArgument(global)
 
           execute "rightbelow vsplit " . l:tempfile | "open up the split window
 
-          set readonly "require a ! in order to alter the contents of the window
-          set nomodifiable "no reason to allow changing the contents
+          setlocal nomodifiable "no reason to allow changing the contents
+          setlocal readonly "require a ! in order to alter the contents
 
           setlocal nolinebreak "wraps lines
 
