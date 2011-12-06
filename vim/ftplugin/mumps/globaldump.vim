@@ -210,7 +210,7 @@ function! MGlobal(global)
         break
       endif
     "no subscripts, so end on operators or whitespace
-    elseif strpart(l:global, l:char, 1) =~ "[*_+-/\=<>'#&!?,:[\]]" && !l:quote
+    elseif strpart(l:global, l:char, 1) =~ "[]*_+-/\=<>'#&!?@,:[]" && !l:quote
       let l:global = strpart(l:global, 0, l:char) "and we're done
     endif
   endfor

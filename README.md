@@ -2,7 +2,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.9.8 - 2011 Dec 4
+Version 0.9.9 - 2011 Dec 6
 
 ## Copyright and License
 
@@ -166,7 +166,4 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Fixed bug in datetime.vim where a key map wasn't set to silent
-* Fixed bug in globaldump.vim where tag stack can be accessed in split screen
-* Clarified the documentation in m-tools.txt for the b:globalsplit section
-* Moved syntax.vim to settings.vim to better represent what the script does
+* Fixed a bug with a regular expression in globaldump.vim
