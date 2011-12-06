@@ -4,7 +4,7 @@
 
 Version 0.9.9 - 2011 Dec 6
 
-## Copyright and License
+## Copyright and License ##
 
 Package written and maintained by David Wicksell <dlw@linux.com>  
 Copyright © 2011 Fourth Watch Software, LC
@@ -23,6 +23,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 ***
+
+## Summary and Info ##
 
 M-tools is a package of developer tools that can help your productivity when
 editing M[UMPS]/GT.M routines with the Vim editor, preferrably version 6.0 or
