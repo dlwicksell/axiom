@@ -89,9 +89,7 @@ Then you run the install script to install the M-tools utility scripts,
 in the appropriate places, as well as create a .vimrc run command file,
 or append or overwrite your current one. This is to ensure that the
 package works correctly. It will also install a M[UMPS]/GT.m routine, which
-is necessary to use the mtags functionality, and a man page for the mktags
-shell script, which will create the tags file necessary for the mtags
-functionality..
+is necessary to use the mtags functionality, and all the documentation..
 
     $ ./install
 
@@ -121,8 +119,8 @@ the mktags shell script, consult the man page..
 
     $ man mktags
 
-If you have any questions on how to use the KBAWDUMP.m M[UMPS]/GT.M routine,
-consult the man page..
+If you have any questions on how to use the KBAWDUMP.m routine, consult the
+man page..
 
     $ man KBAWDUMP
 
@@ -152,7 +150,7 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *KBAWDUMP.m* - Routine to display all or some of a global's data
 * *mktags* - Script to build a tag file for the mtags functionality
 * *mktags.1* - Man page for mktags
-* *README.md* - This README file in markdown format
+* *README.md* - This README file
 * *vimrc* - Sample .vimrc run command file
 * *filetype.vim* - Script to set up a filetype by file extension
 * *scripts.vim* - Script to set up a filetype by first line
@@ -162,7 +160,7 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *mtags.vim* - Script to call the tag file built by mktags
 * *settings.vim* - Script to set up various settings for M-tools
 * *templates.vim* - Script to call template files
-* *mumps.vim* - Syntax file for MUMPS routines
+* *mumps.vim* - Syntax file for M[UMPS]/GT.M routines
 * *ewd.tpl* - Sample template for an EWD design page
 * *m.tpl* - Sample template for a MUMPS routine
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
