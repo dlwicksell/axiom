@@ -2,7 +2,7 @@
 " File:          globaldump.vim
 " Summary:       Dumps a global reference while editing
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Dec 04, 2011
+" Last Modified: Dec 12, 2011
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010,2011 Fourth Watch Software, LC
@@ -186,7 +186,13 @@ function! MGlobal(global)
 
       break
     elseif strpart(l:global, l:char, 1) == '"' "dealing with strings is hard
-      let l:quote += 1
+      if l:lparen
+        let l:quote += 1
+      else
+        let l:global = strpart(l:global, 0, l:char) "no strings outside parens
+
+        break
+      endif
     "beginning of subscript arguments
     elseif strpart(l:global, l:char, 1) == "(" && !l:quote
       let l:lparen += 1
@@ -210,8 +216,10 @@ function! MGlobal(global)
         break
       endif
     "no subscripts, so end on operators or whitespace
-    elseif strpart(l:global, l:char, 1) =~ "[]*_+-/\=<>'#&!?@,:[]" && !l:quote
-      let l:global = strpart(l:global, 0, l:char) "and we're done
+    elseif !l:lparen && !l:rparen
+      if strpart(l:global, l:char, 1) =~ "[]*_+-/\=<>'#&!?@,:[]"
+        let l:global = strpart(l:global, 0, l:char) "and we're done
+      endif
     endif
   endfor
 
