@@ -4,7 +4,7 @@
 # File:          install
 # Summary:       install script for the M-tools package
 # Maintainer:    David Wicksell <dlw@linux.com>
-# Last Modified: Dec 03, 2011
+# Last Modified: Dec 12, 2011
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2011 Fourth Watch Software, LC
@@ -141,7 +141,7 @@ if [ ! -d ~/man/man1 ]; then
 fi
 
 cp -p mktags.1 KBAWDUMP.1 ~/man/man1
-gzip -9 ~/man/man1/{mktags,KBAWDUMP}.1 #compress the man pages
+gzip -f9 ~/man/man1/{mktags,KBAWDUMP}.1 #compress the man pages
 
 echo "Copied the mktags and KBAWDUMP man pages to $HOME/man/man1"
 echo
