@@ -34,7 +34,7 @@ set nomodeline
 set more
 set tabstop=4
 set softtabstop=4
-set shiftwidth=4
+set shiftwidth=2
 set tabpagemax=20
 
 "turn on filetype in order to seamlessly use the M-tools package
