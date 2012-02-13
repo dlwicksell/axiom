@@ -2,7 +2,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.10.0 - 2012 Feb 13
+Version 0.10.1 - 2012 Feb 13
 
 ## Copyright and License ##
 
@@ -94,6 +94,14 @@ documentation..
 
     $ ./install
 
+To install in quiet mode, add the -q flag. This will allow you to install
+M-tools non-interactively..
+
+    $ ./install -q
+
+**NOTE:** Using install in quiet mode will overwrite existing files that
+are used by M-tools.
+
 If you want to install M-tools manually, make sure you copy the following
 files and directories to the right places at a minimum.
 <MUMPS-source-directory> refers to a directory in your $gtmroutines
@@ -169,6 +177,7 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
+* Added documentation about the -q option of install to README.md
 * Small correction to README.md
 * Added html.vim and xml.vim to Package List in README.md
 * Added -q option to allow for quiet installs for package managers to install
