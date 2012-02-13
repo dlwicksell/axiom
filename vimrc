@@ -2,10 +2,10 @@
 " File:          .vimrc
 " Summary:       Sample .vimrc for the M-tools package
 " Maintainer:    David Wicksell
-" Last Modified: Dec 04, 2011
+" Last Modified: Feb 13, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
-" Copyright © 2011 Fourth Watch Software, LC
+" Copyright © 2011,2012 Fourth Watch Software, LC
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU Affero General Public License (AGPL)
@@ -32,9 +32,9 @@ set smarttab
 set nohlsearch
 set nomodeline
 set more
-set tabstop=4
+set tabstop=8
 set softtabstop=4
-set shiftwidth=2
+set shiftwidth=4
 set tabpagemax=20
 
 "turn on filetype in order to seamlessly use the M-tools package

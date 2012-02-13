@@ -2,12 +2,12 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.9.11 - 2011 Dec 12
+Version 0.10.0 - 2012 Feb 13
 
 ## Copyright and License ##
 
 Package written and maintained by David Wicksell <dlw@linux.com>  
-Copyright © 2011 Fourth Watch Software, LC
+Copyright © 2011,2012 Fourth Watch Software, LC
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License (AGPL)
@@ -89,7 +89,8 @@ Then you run the install script to install the M-tools utility scripts,
 in the appropriate places, as well as create a .vimrc run command file,
 or append or overwrite your current one. This is to ensure that the
 package works correctly. It will also install a M[UMPS]/GT.m routine, which
-is necessary to use the mtags functionality, and all the documentation..
+is necessary to use the global dump functionality, as well as all the
+documentation..
 
     $ ./install
 
@@ -155,10 +156,12 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *filetype.vim* - Script to set up a filetype by file extension
 * *scripts.vim* - Script to set up a filetype by first line
 * *m-tools.txt* - Help documentation for vim
+* *html.vim* - Local settings for html files
 * *datetime.vim* - Script to imprint a datetime stamp in MUMPS routines
 * *globaldump.vim* - Script to call KBAWDUMP from within vim
 * *mtags.vim* - Script to call the tag file built by mktags
 * *settings.vim* - Script to set up various settings for M-tools
+* *xml.vim* - Local settings for xml files
 * *templates.vim* - Script to call template files
 * *mumps.vim* - Syntax file for M[UMPS]/GT.M routines
 * *ewd.tpl* - Sample template for an EWD design page
@@ -166,4 +169,14 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Fixed small bug with gzip in install.
+* Small correction to README.md
+* Added html.vim and xml.vim to Package List in README.md
+* Added -q option to allow for quiet installs for package managers to install
+* Added support for Linux Mint to install
+* Added an option to force ctags to use the MUMPS language definition in mktags
+* Added use of a variable that should be present when running mktags from cron
+* Reworded some of the documentation in mktags.1
+* Reworded some of the documentation in m-tools.txt
+* Added html.vim and xml.vim to change some settings for html and xml files
+* Reworded some of the comments and code in mumps.vim
+* Changed some of the settings in vimrc

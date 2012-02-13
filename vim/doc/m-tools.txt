@@ -1,4 +1,4 @@
-*m-tools.txt*      For Vim version 7.2.  Last change: 2011 Dec 04
+*m-tools.txt*      For Vim version 7.2.  Last change: 2012 Feb 13
 
 
           VIM TOOLS FOR MUMPS    by David Wicksell
@@ -10,7 +10,7 @@ Summary:       Vim help documentation
 Maintainer:    David Wicksell
 
 Written by David Wicksell <dlw@linux.com>
-Copyright © 2011 Fourth Watch Software, LC
+Copyright © 2011,2012 Fourth Watch Software, LC
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License (AGPL)
@@ -200,9 +200,11 @@ stack with CTRL-], and pop tags off of the stack, going back to where you
 were previously, with CTRL-T. In addition to the key mapping for CTRL-],
 the M-tools package can leverage the built-in tags functionality of Vim.
 For example, you can use the :tag ex command to jump directly to any label
-in any MUMPS/GT.M routine. See |tags| for more information on how to use the
-tags functionality in Vim. See |ctags| and the documentation and man page for
-the 'ctags' program.
+in any MUMPS/GT.M routine. This includes the ability to leverage
+|cmdline-completion| to be able to search through every label in any
+MUMPS/GT.M routine. See |tags| for more information on how to use the tags
+functionality in Vim. See |ctags| and the documentation and man page for the
+'ctags' program.
 
 Note: You must create a tags file, called .mtags or mtags, in your home
 directory, in order to use the mtags functionality. In order to make this

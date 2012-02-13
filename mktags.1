@@ -2,10 +2,10 @@
 .\" File:          mktags.1
 .\" Summary:       manpage for the mktags shell script
 .\" Maintainer:    David Wicksell <dlw@linux.com>
-.\" Last Modified: Dec 03, 2011
+.\" Last Modified: Feb 13, 2012
 .\"
 .\" Written by David Wicksell <dlw@linux.com>
-.\" Copyright © 2011 Fourth Watch Software, LC
+.\" Copyright © 2011,2012 Fourth Watch Software, LC
 .\"
 .\" This program is free software: you can redistribute it and/or modify
 .\" it under the terms of the GNU Affero General Public License (AGPL)
@@ -21,7 +21,7 @@
 .\" along with this program. If not, see http://www.gnu.org/licenses/.
 
 
-.TH MKTAGS 1 "03 December 2011" "Version 0.9.6" "M-TOOLS Utilities"
+.TH MKTAGS 1 "13 February 2012" "Version 0.10.0" "M-TOOLS Utilities"
 
 .SH NAME
 \fBmktags\fP - A script to build a tags file for use with the M-tools package
@@ -63,8 +63,7 @@ can take a long time. In that case, use post sort mode, which should speed up
 the mktags script a lot.
 
 .SH LOGS
-The mktags script will log everything it does to a log file called
-~/log/mktags.log
+The mktags script will log things to a log file called ~/log/mktags.log.
 
 .SH EXAMPLE
 Normally mktags is run from the command line in post sort mode, on each
@@ -76,9 +75,10 @@ If you want, you can run it from cron by adding it to your crontab file. Keep
 in mind that you will either need to use the full path to mktags, or you will
 need to define $PATH in your crontab file. If you are using the -g option, you
 will need to make sure to source the file that builds the $gtmroutines
-environment variable, since the -g option requires that it be defined.
-Running mktags from cron could be done to keep your tags file up-to-date.
-Then it will keep up with added, removed, or modified MUMPS routines.
+environment variable, in your crontab entry, since the -g option requires that
+it be defined. Running mktags from cron could be done to keep your tags file
+up-to-date. Then it will keep up with added, removed, or modified MUMPS
+routines.
 
 .SH BUGS
 There are no known bugs.

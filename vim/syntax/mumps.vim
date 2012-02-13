@@ -3,10 +3,10 @@
 " Language:      MUMPS/GT.M
 " Summary:       Syntax file
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Dec 04, 2011
+" Last Modified: Feb 12, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
-" Copyright © 2010,2011 Fourth Watch Software, LC
+" Copyright © 2010-2012 Fourth Watch Software, LC
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU Affero General Public License (AGPL)
@@ -24,20 +24,15 @@
 " This Vim syntax file was created to deal with a GT.M environment.
 " It was inspired by earlier work by Jim Self <jaself@ucdavis.edu>.
 "
-" It isn't perfect, since a regular expression engine isn't really up
-" to the task of perfectly defining a valid MUMPS routine. You'd need
-" a parser to do that. There is one known bug. If an underscore '_' is
-" present right before or after an intrinsic variable, then it will
-" highlight it as an operator and a regular variable. I have no idea
-" why, but hope to figure it out eventually.
+" There is one known bug. If an underscore '_' is present right before or
+" after an intrinsic variable, then it will highlight it as an operator and a
+" regular variable. I have no idea why, but hope to figure it out eventually.
 
-
-if exists("b:current_syntax")
-  finish
-endif
 
 if v:version < 600
   syntax clear
+elseif exists("b:current_syntax")
+  finish
 endif
 
 syntax case ignore

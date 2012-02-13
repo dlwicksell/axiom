@@ -4,10 +4,10 @@
 # File:          mktags
 # Summary:       Builds a tag file for MUMPS/GT.M routines
 # Maintainer:    David Wicksell
-# Last Modified: Dec 04, 2011
+# Last Modified: Feb 13, 2012
 #
 # Written by David Wicksell <dlw@linux.com>
-# Copyright © 2010,2011 Fourth Watch Software, LC
+# Copyright © 2010-2012 Fourth Watch Software, LC
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License (AGPL)
@@ -125,9 +125,10 @@ function mtags {
     if [ "${ROUTINE: -2}" == ".m" ]; then
       FILE=`basename ${ROUTINE} .m | tr _ %`
 
-      ctags ${ARGS} -a --langdef=MUMPS --langmap=MUMPS:.m \
+      ctags ${ARGS} -a --langdef=MUMPS \
+        --langmap=MUMPS:.m --language-force=MUMPS \
         --regex-MUMPS="/^([%[:alnum:]]+)/\1\^${FILE}/l,label/i" \
-        ${ROUTINE}                                         | tee -a ${LOG} 2>&1
+        ${ROUTINE}                                    2>&1 | tee -a ${LOG}
     fi
   done
 } # End of mtags
@@ -159,6 +160,11 @@ function mtags_default {
   done
 } # End of mtags_default
 
+
+#mktags script starts here
+if [ ! "${USER}" ]; then
+  USER=${LOGNAME}
+fi
 
 TMPDIR=${HOME}/.tags
 
