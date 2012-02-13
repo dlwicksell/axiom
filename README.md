@@ -2,7 +2,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.10.1 - 2012 Feb 13
+Version 0.10.2 - 2012 Feb 13
 
 ## Copyright and License ##
 
@@ -100,12 +100,13 @@ M-tools non-interactively..
     $ ./install -q
 
 **NOTE:** Using install in quiet mode will overwrite existing files that
-are used by M-tools.
+are used by M-tools. Make sure that you have the $gtmroutines environment
+variable defined, so that install -q will know where to put KBAWDUMP.m.
 
 If you want to install M-tools manually, make sure you copy the following
 files and directories to the right places at a minimum.
 <MUMPS-source-directory> refers to a directory in your $gtmroutines
-environment variable.
+environment variable..
 
     $ cp m-tools/KBAWDUMP.m <MUMPS-source-directory>
     $ cp m-tools/mktags ~/bin
