@@ -2,7 +2,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.10.3 - 2012 Apr 29
+Version 0.10.4 - 2012 Apr 30
 
 ## Copyright and License ##
 
@@ -181,3 +181,4 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * Added ERROR CODES section to mktags.1 man page
 * Fixed small bug with syntax highlighting while using gvim in mumps.vim.
 * Small correction to README.md
+* Added some default settings for using M-tools with gvim in .vimrc.

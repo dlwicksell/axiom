@@ -37,6 +37,14 @@ set softtabstop=4
 set shiftwidth=4
 set tabpagemax=20
 
+if has("gui_running")
+  colorscheme torte
+  set guifont=Monospace\ 16
+  set mouse=a
+  set lines=28
+  set columns=80
+endif
+
 "turn on filetype in order to seamlessly use the M-tools package
 if v:version >= 600
   "turn on syntax and automatic filetype detection
@@ -55,3 +63,5 @@ else
   source ~/.vim/ftplugin/mumps/mtags.vim
   source ~/.vim/ftplugin/mumps/settings.vim
 endif
+
+" vim: set ft=vim :
