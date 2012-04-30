@@ -2,7 +2,7 @@
 .\" File:          mktags.1
 .\" Summary:       manpage for the mktags shell script
 .\" Maintainer:    David Wicksell <dlw@linux.com>
-.\" Last Modified: Feb 13, 2012
+.\" Last Modified: Apr 29, 2012
 .\"
 .\" Written by David Wicksell <dlw@linux.com>
 .\" Copyright © 2011,2012 Fourth Watch Software, LC
@@ -21,7 +21,7 @@
 .\" along with this program. If not, see http://www.gnu.org/licenses/.
 
 
-.TH MKTAGS 1 "13 February 2012" "Version 0.10.0" "M-TOOLS Utilities"
+.TH MKTAGS 1 "29 April 2012" "Version 0.10.3" "M-TOOLS Utilities"
 
 .SH NAME
 \fBmktags\fP - A script to build a tags file for use with the M-tools package
@@ -79,6 +79,25 @@ environment variable, in your crontab entry, since the -g option requires that
 it be defined. Running mktags from cron could be done to keep your tags file
 up-to-date. Then it will keep up with added, removed, or modified MUMPS
 routines.
+
+.SH EXIT CODES
+0   Success
+
+1   ctags is not installed
+
+2   exuberant-ctags is not installed
+
+3   -g option being used without $gtmroutines being defined
+
+4   Invalid option
+
+5   Not enough arguments supplied
+
+6   mktags is already running
+
+7   Bad error code (Should never happen)
+
+8   User interrupted program execution (CTRL-C/SIGINT)
 
 .SH BUGS
 There are no known bugs.

@@ -2,7 +2,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.10.2 - 2012 Feb 13
+Version 0.10.3 - 2012 Apr 29
 
 ## Copyright and License ##
 
@@ -164,10 +164,10 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *vimrc* - Sample .vimrc run command file
 * *filetype.vim* - Script to set up a filetype by file extension
 * *scripts.vim* - Script to set up a filetype by first line
-* *m-tools.txt* - Help documentation for vim
+* *m-tools.txt* - Help documentation for Vim
 * *html.vim* - Local settings for html files
 * *datetime.vim* - Script to imprint a datetime stamp in MUMPS routines
-* *globaldump.vim* - Script to call KBAWDUMP from within vim
+* *globaldump.vim* - Script to call KBAWDUMP from within Vim
 * *mtags.vim* - Script to call the tag file built by mktags
 * *settings.vim* - Script to set up various settings for M-tools
 * *xml.vim* - Local settings for xml files

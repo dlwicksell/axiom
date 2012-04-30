@@ -3,7 +3,7 @@
 " Language:      MUMPS/GT.M
 " Summary:       Syntax file
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Feb 12, 2012
+" Last Modified: Apr 29, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -184,9 +184,9 @@ syntax region mumpsBlock keepend transparent fold
   \ end=/\n\ze\z1\@!/
 
 "highlight the syntax groups, change colors easily with :colorscheme
-highlight def link mumpsLevelLine Cursor
-highlight def link mumpsFormalLine Cursor
-highlight def link mumpsCommentLine Cursor
+highlight def link mumpsLevelLine Normal
+highlight def link mumpsFormalLine Normal
+highlight def link mumpsCommentLine Normal
 
 highlight def link mumpsDotLevel Statement
 highlight def link mumpsDotRegion Statement
@@ -202,11 +202,11 @@ highlight def link mumpsVariable PreProc
 highlight def link mumpsNumber Number
 highlight def link mumpsOperator Type
 highlight def link mumpsComma Type
-highlight def link mumpsSpace Cursor
-highlight def link mumpsCommandEnd Cursor
+highlight def link mumpsSpace Normal
+highlight def link mumpsCommandEnd Normal
 
-highlight def link mumpsArgument Cursor
-highlight def link mumpsPostCondition Cursor
+highlight def link mumpsArgument Normal
+highlight def link mumpsPostCondition Normal
 
 highlight def link mumpsExtrinsicFunction Function
 highlight def link mumpsFunctionList Error
