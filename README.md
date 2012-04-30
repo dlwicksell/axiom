@@ -178,15 +178,6 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Added documentation about the -q option of install to README.md
+* Added ERROR CODES section to mktags.1 man page
+* Fixed small bug with syntax highlighting while using gvim in mumps.vim.
 * Small correction to README.md
-* Added html.vim and xml.vim to Package List in README.md
-* Added -q option to allow for quiet installs for package managers to install
-* Added support for Linux Mint to install
-* Added an option to force ctags to use the MUMPS language definition in mktags
-* Added use of a variable that should be present when running mktags from cron
-* Reworded some of the documentation in mktags.1
-* Reworded some of the documentation in m-tools.txt
-* Added html.vim and xml.vim to change some settings for html and xml files
-* Reworded some of the comments and code in mumps.vim
-* Changed some of the settings in vimrc
