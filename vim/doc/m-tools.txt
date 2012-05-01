@@ -1,4 +1,4 @@
-*m-tools.txt*      For Vim version 7.2.  Last change: 2012 Feb 13
+*m-tools.txt*      For Vim version 7.2.  Last change: 2012 Apr 30
 
 
           VIM TOOLS FOR MUMPS    by David Wicksell
@@ -167,7 +167,7 @@ It defaults to a vertical split screen and is defined in settings.vim.
 
 If {b:globalsplit} is set to 1, a global dump will write to a vertical split
 screen, and you can navigate between the split screens via CTRL-W CTRL-W. For
-more information about split screens, see |new-versplit|. When in this mode,
+more information about split screens, see |new-vertsplit|. When in this mode,
 while in a split screen, the key mapping for CTRL-K will now close the split
 screen, and clean up after itself.  In addition, in order to avoid messing
 with the tag stack while in the global screen, the key mappings for CTRL-]

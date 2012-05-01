@@ -2,11 +2,11 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.10.4 - 2012 Apr 30
+Version 0.10.5 - 2012 Apr 30
 
 ## Copyright and License ##
 
-Package written and maintained by David Wicksell <dlw@linux.com>  
+Package written and maintained by David Wicksell <dlw@linux.com>
 Copyright © 2011,2012 Fourth Watch Software, LC
 
 This program is free software: you can redistribute it and/or modify
@@ -75,7 +75,7 @@ number in it, either a version tag or a version hash.
 
 To install this, you untar the tarball..
 
-    $ tar xfz m-tools.tgz
+    $ tar -xfz m-tools.tgz
 
 Or, you can clone the repository with this command..
 
@@ -179,6 +179,7 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 
 ### Changelog ###
 * Added ERROR CODES section to mktags.1 man page
-* Fixed small bug with syntax highlighting while using gvim in mumps.vim.
+* Fixed small bug with syntax highlighting while using gvim in mumps.vim
 * Small correction to README.md
-* Added some default settings for using M-tools with gvim in .vimrc.
+* Added some default settings for using M-tools with gvim in .vimrc
+* Fixed small issue in m-tools.txt
