@@ -2,10 +2,10 @@
 " File:          globaldump.vim
 " Summary:       Dumps a global reference while editing
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Dec 12, 2011
+" Last Modified: May 06, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
-" Copyright © 2010,2011 Fourth Watch Software, LC
+" Copyright © 2010-2012 Fourth Watch Software, LC
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU Affero General Public License (AGPL)
@@ -56,7 +56,7 @@ endfunction
 
 "call KBAWDUMP.m and pass it the global to display in VIM mode, no children
 function! ZWRArgument(global)
-  let l:global = system("mumps -r KBAWDUMP '-" . a:global . "'")
+  let l:global = system("exec mumps -r KBAWDUMP '-" . a:global . "'")
 
   "output more useful error messages if we get an error from GT.M
   if l:global =~ "%GTM-E-FILENOTFND" && l:global !~ "^^"
@@ -116,7 +116,7 @@ function! ZWRArgument(global)
         if v:version >= 702
           let l:PPID = getpid()
         else
-          let l:PPID = system("echo -n $PPID") "getpid() function doesn't exist
+          let l:PPID = system("exec echo -n $PPID") "getpid() doesn't exist
         endif
 
         let l:tempfile = "~/.globaldump.tmp." . l:PPID "create a temp file

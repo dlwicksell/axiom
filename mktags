@@ -4,7 +4,7 @@
 # File:          mktags
 # Summary:       Builds a tag file for MUMPS/GT.M routines
 # Maintainer:    David Wicksell
-# Last Modified: Apr 29, 2012
+# Last Modified: May 06, 2012
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2010-2012 Fourth Watch Software, LC
@@ -61,6 +61,7 @@
 function usage {
   echo "Usage: `basename $0` -[ep] -g"                   | tee -a ${LOG} 2>&1
   echo "    or `basename $0` -[ep] files ..."            | tee -a ${LOG} 2>&1
+  echo "    or `basename $0` -h"                         | tee -a ${LOG} 2>&1
 } # End of usage
 
 # Error message and exit status
@@ -195,7 +196,7 @@ fi
 GTM=off POSTSORT=off EMACS=off 
 LOCK=mtags.lock
 
-while getopts :epg opt
+while getopts :epgh opt
 do
   case ${opt} in
   g) #$gtmroutines mode
@@ -211,6 +212,11 @@ do
   e) #emacs mode
     EMACS=on
     LOCK=MTAGS.lock
+    ;;
+  h) #help, nullifies other options when present
+    usage
+
+    exit 0
     ;;
   '?') #invalid option
     error option ${OPTARG}

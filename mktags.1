@@ -2,7 +2,7 @@
 .\" File:          mktags.1
 .\" Summary:       manpage for the mktags shell script
 .\" Maintainer:    David Wicksell <dlw@linux.com>
-.\" Last Modified: Apr 29, 2012
+.\" Last Modified: May 06, 2012
 .\"
 .\" Written by David Wicksell <dlw@linux.com>
 .\" Copyright © 2011,2012 Fourth Watch Software, LC
@@ -21,7 +21,7 @@
 .\" along with this program. If not, see http://www.gnu.org/licenses/.
 
 
-.TH MKTAGS 1 "29 April 2012" "Version 0.10.3" "M-TOOLS Utilities"
+.TH MKTAGS 1 "06 May 2012" "Version 0.10.6" "M-TOOLS Utilities"
 
 .SH NAME
 \fBmktags\fP - A script to build a tags file for use with the M-tools package
@@ -33,6 +33,8 @@
 .B mktags
 .BI "[-ep] \fIfile(s)\fP"
 
+.B mktags
+.BI "-h"
 
 .SH DESCRIPTION
 .B mktags
@@ -61,6 +63,8 @@ routines on your system, this works just fine. But when you have a large
 amount of routines to tag, like with VistA or any other large system, this
 can take a long time. In that case, use post sort mode, which should speed up
 the mktags script a lot.
+.IP -h
+Display a helpful usage message and exit.
 
 .SH LOGS
 The mktags script will log things to a log file called ~/log/mktags.log.

@@ -2,11 +2,11 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.10.5 - 2012 Apr 30
+Version 0.10.6 - 2012 May 06
 
 ## Copyright and License ##
 
-Package written and maintained by David Wicksell <dlw@linux.com>
+Package written and maintained by David Wicksell <dlw@linux.com>  
 Copyright © 2011,2012 Fourth Watch Software, LC
 
 This program is free software: you can redistribute it and/or modify
@@ -32,8 +32,7 @@ newer.
 
 A colleague of mine, John Willis, has created a similar package of tools for
 use with the Emacs editor. It is called *LorikeeM* and you can download it
-from: <http://code.google.com/p/lorikeem/>. The KBAWDUMP.m routine and mktags
-script also work with LorikeeM and are included in the LorikeeM package.
+from: <http://code.google.com/p/lorikeem/>.
 
 Special thanks to Sam Habiel for encouraging me in my work on M-tools.
 
@@ -178,8 +177,7 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Added ERROR CODES section to mktags.1 man page
-* Fixed small bug with syntax highlighting while using gvim in mumps.vim
-* Small correction to README.md
-* Added some default settings for using M-tools with gvim in .vimrc
-* Fixed small issue in m-tools.txt
+* Added -h option to mktags
+* Added documentation for the -h option to mktags.1
+* Added some optimizations to globaldump.vim
+* Changed a bit of wording in README.md
