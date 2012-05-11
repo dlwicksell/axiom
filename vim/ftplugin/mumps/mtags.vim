@@ -1,11 +1,11 @@
-" Package:       M-tools
+" Package:       Axiom
 " File:          mtags.vim
 " Summary:       Jumps to different labels in a MUMPS routine
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Nov 25, 2011
+" Last Modified: May 10, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
-" Copyright © 2010,2011 Fourth Watch Software, LC
+" Copyright © 2010-2012 Fourth Watch Software, LC
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU Affero General Public License (AGPL)

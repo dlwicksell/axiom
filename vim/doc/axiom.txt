@@ -1,11 +1,11 @@
-*m-tools.txt*      For Vim version 7.2.  Last change: 2012 Apr 30
+*axiom.txt*      For Vim version 7.3.  Last change: 2012 May 10
 
 
           VIM TOOLS FOR MUMPS    by David Wicksell
 
 
-Package:       M-tools
-File:          m-tools.txt
+Package:       Axiom
+File:          axiom.txt
 Summary:       Vim help documentation
 Maintainer:    David Wicksell
 
@@ -26,19 +26,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see http://www.gnu.org/licenses/.
 
 
-Utility package for the GT.M programming language                    *m-tools*
+Utility package for the GT.M programming language                      *axiom*
 
-1. Syntax file for GT.M              |m-tools-syntax|
-2. Datetime stamp                    |m-tools-datetime|
-3. Dump the contents of a global     |m-tools-globaldump|
-4. Jump to labels in routines        |m-tools-mtags|
+1. Syntax file for GT.M              |axiom-syntax|
+2. Datetime stamp                    |axiom-datetime|
+3. Dump the contents of a global     |axiom-globaldump|
+4. Jump to labels in routines        |axiom-mtags|
 
 ==============================================================================
-1. Syntax file for GT.M                                       *m-tools-syntax*
+1. Syntax file for GT.M                                         *axiom-syntax*
 
 Summary ~
 
-The M-tools utility package for MUMPS/GT.M contains a syntax highlighting
+The Axiom utility package for MUMPS/GT.M contains a syntax highlighting
 file. It should work in VIM version 5.0 and above.
 
 It contains the ability to define a dotted do-block in MUMPS as a syntax
@@ -56,9 +56,9 @@ installed in: >
 
     ~/.vim/syntax
 <
-The M-tools package comes with an script, called 'install', that does
-this automatically for you. But you've most likely already run this script
-or you probably wouldn't have this documentation included in your VIM help
+The Axiom package comes with a script, called 'install', that does this
+automatically for you. But you've most likely already run this script or
+you probably wouldn't have this documentation included in your VIM help
 system.
 
 Additonal scripts ~
@@ -69,7 +69,7 @@ installed in: >
     ~/.vim/ftplugin/mumps
 <
 It will be sourced automatically whenever you open up a file of type
-mumps. Again, the installation script provided with M-tools does this
+mumps. Again, the installation script provided with Axiom does this
 automatically. This script sets a few options needed by the syntax file in
 order to function properly. The options are set either locally to the
 buffer, or are reset when changing buffers to one that is not file of type
@@ -94,14 +94,15 @@ but will instead color it like it was a variable. This only happens with
 the underscore '_' character, and I have no idea why it is happening.
 
 ==============================================================================
-2. Datetime stamp                                           *m-tools-datetime*
+2. Datetime stamp                                             *axiom-datetime*
 
 Summary ~
 
-The M-tools package comes with an automatic datetime stamp function, which
-will imprint a new datetime stamp in a VistA SAC compliant way. There is a
-key mapping, bound to CTRL-H, that will toggle the stamp on or off. It is
-on by default, since you should be SAC compliant.
+The Axiom package comes with an automatic datetime stamp function, which
+will imprint a new datetime stamp in a VISTA (Veterans Health Information
+Systems and Technology Architecture) SAC (Standards and Conventions)
+compliant way. There is a key mapping, bound to CTRL-H, that will toggle
+the stamp on or off. It is on by default.
 
 Installation ~
 
@@ -112,11 +113,11 @@ The script is called {datetime.vim} and should be installed in: >
 It will be installed in the right place automatically by the install script.
 
 ==============================================================================
-3. Dump the contents of a global                          *m-tools-globaldump*
+3. Dump the contents of a global                            *axiom-globaldump*
 
 Summary ~
 
-The M-tools package comes with functionality to display, either in the current
+The Axiom package comes with functionality to display, either in the current
 buffer, or in a vertical split screen, the contents of a MUMPS global. It will
 display the data from the exact global reference under the cursor, or if there
 are variables in any of the subscript locations, it will display the data from
@@ -138,7 +139,7 @@ It will be installed in the right place automatically by the install script.
 
                                                                         *:ZWR*
 
-In addition to the key mapping for CTRL-K, the M-tools package provides a user
+In addition to the key mapping for CTRL-K, the Axiom package provides a user
 defined ex command, called 'ZWR', which is used as follows.
 
 :ZWR {value}
@@ -184,7 +185,7 @@ There may be bugs in the handling of global references. It is a tricky
 endeavor.
 
 ==============================================================================
-4. Jump to labels in routines                   *m-tools-mtags* *m-tools-tags*
+4. Jump to labels in routines                       *axiom-mtags* *axiom-tags*
 
 Summary ~
 
@@ -198,7 +199,7 @@ The behavior, however, is the same as if you were navigating C code using
 'ctags' and a tag stack is created, allowing you to push new tags onto the
 stack with CTRL-], and pop tags off of the stack, going back to where you
 were previously, with CTRL-T. In addition to the key mapping for CTRL-],
-the M-tools package can leverage the built-in tags functionality of Vim.
+the Axiom package can leverage the built-in tags functionality of Vim.
 For example, you can use the :tag ex command to jump directly to any label
 in any MUMPS/GT.M routine. This includes the ability to leverage
 |cmdline-completion| to be able to search through every label in any
@@ -220,9 +221,9 @@ The script is called {mtags.vim} and should be installed in: >
 
     ~/.vim/ftplugin/mumps
 <
-                                       *m-tools-mktags* *m-tools-mtags-script*
+                                           *axiom-mktags* *axiom-mtags-script*
 
-Supplied with the M-tools package is a shell script called 'mktags', which can
+Supplied with the Axiom package is a shell script called 'mktags', which can
 be executed to create a proper tags file for the mtags functionality. Here are
 a few examples of how to run the 'mktags' command: >
 
@@ -232,7 +233,7 @@ a few examples of how to run the 'mktags' command: >
     $ mktags -gp
 <
 For more information about the 'mktags' shell script, please read the man page
-supplied with the M-tools package, via: >
+supplied with the Axiom package, via: >
 
     $ man mktags
 <
@@ -241,7 +242,7 @@ Disclaimer ~
 There may be bugs in the handling of label references. It is a tricky
 endeavor.
 
-I hope you enjoy the M-tools utility package for editing MUMPS/GT.M routines
+I hope you enjoy the Axiom utility package for editing MUMPS/GT.M routines
 using the wonderful Vim editor. If you have any questions, concerns, feature
 requests, or bugs to report, please contact:
 

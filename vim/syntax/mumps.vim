@@ -1,9 +1,9 @@
-" Package:       M-tools
+" Package:       Axiom
 " File:          mumps.vim
 " Language:      MUMPS/GT.M
 " Summary:       Syntax file
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Apr 29, 2012
+" Last Modified: May 10, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC

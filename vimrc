@@ -1,8 +1,8 @@
-" Package:       M-tools
+" Package:       Axiom
 " File:          .vimrc
-" Summary:       Sample .vimrc for the M-tools package
+" Summary:       Sample .vimrc for the Axiom package
 " Maintainer:    David Wicksell
-" Last Modified: Feb 13, 2012
+" Last Modified: May 10, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011,2012 Fourth Watch Software, LC
@@ -45,7 +45,7 @@ if has("gui_running")
   set columns=80
 endif
 
-"turn on filetype in order to seamlessly use the M-tools package
+"turn on filetype in order to seamlessly use the Axiom package
 if v:version >= 600
   "turn on syntax and automatic filetype detection
   syntax enable
@@ -55,7 +55,7 @@ if v:version >= 600
   filetype plugin on
   filetype indent on
 else
-  "turn on syntax and source the M-tools utility functions
+  "turn on syntax and source the Axiom utility functions
   syntax on
 
   source ~/.vim/ftplugin/mumps/datetime.vim

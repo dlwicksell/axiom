@@ -1,8 +1,18 @@
-# M-tools #
+                             _          _       __  __ 
+                            / \   __  _(_) ___ |  \/  |
+                           / _ \  \ \/ / |/ _ \| |\/| |
+                          / ___ \  >  <| | (_) | |  | |
+                         /_/   \_\/_/\_\_|\___/|_|  |_|
+                                                       
+                       A Vim plugin providing an Advanced
+                  Developer Environment for MUMPS programmers
+                -----------------------------------------------
+
+# Axiom #
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.10.6 - 2012 May 06
+Version 0.11.0 - 2012 May 10
 
 ## Copyright and License ##
 
@@ -26,7 +36,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 ## Summary and Info ##
 
-M-tools is a package of developer tools that can help your productivity when
+Axiom is a package of developer tools that can help your productivity when
 editing M[UMPS]/GT.M routines with the Vim editor, preferrably version 6.0 or
 newer.
 
@@ -34,7 +44,7 @@ A colleague of mine, John Willis, has created a similar package of tools for
 use with the Emacs editor. It is called *LorikeeM* and you can download it
 from: <http://code.google.com/p/lorikeem/>.
 
-Special thanks to Sam Habiel for encouraging me in my work on M-tools.
+Special thanks to Sam Habiel for encouraging me in my work on Axiom.
 
 **ATTENTION:** This package was written and tested on Red Hat and Ubuntu Linux.
 I can make no guarantees about other Operating Systems or Linux distributions.
@@ -69,22 +79,22 @@ Look for this line:
 
 ## Installation ##
 
-Any reference to M-tools in the commands below, may also have a version
+Any reference to Axiom in the commands below, may also have a version
 number in it, either a version tag or a version hash.
 
 To install this, you untar the tarball..
 
-    $ tar -xfz m-tools.tgz
+    $ tar -xfz axiom.tgz
 
 Or, you can clone the repository with this command..
 
-    $ hg clone https://bitbucket.org/dlw/m-tools
+    $ hg clone https://bitbucket.org/dlw/axiom
 
-Then you move to the resulting m-tools/ directory..
+Then you move to the resulting axiom/ directory..
 
-    $ cd m-tools/
+    $ cd axiom/
 
-Then you run the install script to install the M-tools utility scripts,
+Then you run the install script to install the Axiom utility scripts,
 in the appropriate places, as well as create a .vimrc run command file,
 or append or overwrite your current one. This is to ensure that the
 package works correctly. It will also install a M[UMPS]/GT.m routine, which
@@ -94,23 +104,23 @@ documentation..
     $ ./install
 
 To install in quiet mode, add the -q flag. This will allow you to install
-M-tools non-interactively..
+Axiom non-interactively..
 
     $ ./install -q
 
 **NOTE:** Using install in quiet mode will overwrite existing files that
-are used by M-tools. Make sure that you have the $gtmroutines environment
+are used by Axiom. Make sure that you have the $gtmroutines environment
 variable defined, so that install -q will know where to put KBAWDUMP.m.
 
-If you want to install M-tools manually, make sure you copy the following
+If you want to install Axiom manually, make sure you copy the following
 files and directories to the right places at a minimum.
 <MUMPS-source-directory> refers to a directory in your $gtmroutines
 environment variable..
 
-    $ cp m-tools/KBAWDUMP.m <MUMPS-source-directory>
-    $ cp m-tools/mktags ~/bin
-    $ cp m-tools/vimrc ~/.vimrc
-    $ cp -r m-tools/vim ~/.vim
+    $ cp axiom/KBAWDUMP.m <MUMPS-source-directory>
+    $ cp axiom/mktags ~/bin
+    $ cp axiom/vimrc ~/.vimrc
+    $ cp -r axiom/vim ~/.vim
 
 If you are installing manually, you will also need to install the mktags and
 KBAWDUMP man pages. For information on how to do that on your system, consult
@@ -118,7 +128,7 @@ the man page:
 
     $ man man
 
-If you are installing manually, you will also need to install the m-tools.txt
+If you are installing manually, you will also need to install the axiom.txt
 Vim help documentation. In a Vim editing session, type:
 
     :helptags ~/.vim/doc
@@ -133,13 +143,13 @@ man page..
 
     $ man KBAWDUMP
 
-If you have questions on how to use any of the features of the M-tools
+If you have questions on how to use any of the features of the Axiom
 package, consult the Vim help page, built-in to the package, and accessible
 inside of any Vim editing session..
 
-    :help m-tools
+    :help axiom
 
-I hope you enjoy the M-tools package. If you have any questions, feature
+I hope you enjoy the Axiom package. If you have any questions, feature
 requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 
 ### See Also ###
@@ -154,7 +164,7 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 
 ### Package List ###
 * *COPYING* - Copyright information
-* *install* - Installation script for the M-tools package
+* *install* - Installation script for the Axiom package
 * *KBAWDUMP.1* - Man page for KBAWDUMP
 * *KBAWDUMP.m* - Routine to display all or some of a global's data
 * *mktags* - Script to build a tag file for the mtags functionality
@@ -163,12 +173,12 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *vimrc* - Sample .vimrc run command file
 * *filetype.vim* - Script to set up a filetype by file extension
 * *scripts.vim* - Script to set up a filetype by first line
-* *m-tools.txt* - Help documentation for Vim
+* *axiom.txt* - Help documentation for Vim
 * *html.vim* - Local settings for html files
 * *datetime.vim* - Script to imprint a datetime stamp in MUMPS routines
 * *globaldump.vim* - Script to call KBAWDUMP from within Vim
 * *mtags.vim* - Script to call the tag file built by mktags
-* *settings.vim* - Script to set up various settings for M-tools
+* *settings.vim* - Script to set up various settings for Axiom
 * *xml.vim* - Local settings for xml files
 * *templates.vim* - Script to call template files
 * *mumps.vim* - Syntax file for M[UMPS]/GT.M routines
@@ -177,7 +187,9 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Added -h option to mktags
-* Added documentation for the -h option to mktags.1
-* Added some optimizations to globaldump.vim
-* Changed a bit of wording in README.md
+* Changed the name of the package to Axiom
+* Improved the filetype.vim file in a few places
+* Renamed m-tools.txt to axiom.txt
+* Fixed a typo in axiom.txt
+* Fixed a few typos in KBAWDUMP.1 and mktags.1
+* Fixed a small bug in globaldump.vim

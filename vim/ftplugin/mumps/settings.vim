@@ -1,11 +1,11 @@
-" Package:       M-tools
+" Package:       Axiom
 " File:          settings.vim
 " Summary:       Configuration script
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Dec 04, 2011
+" Last Modified: May 10, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
-" Copyright © 2011 Fourth Watch Software, LC
+" Copyright © 2011,2012 Fourth Watch Software, LC
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU Affero General Public License (AGPL)
@@ -35,7 +35,7 @@ if exists("s:did_syn_ftplugin")
 endif
 
 function! StartSyntax() "set necessary syntax options in one place
-  setlocal tags+=~/.mtags,~/mtags "add the tags files for the M-tools package
+  setlocal tags+=~/.mtags,~/mtags "add the tags files for the Axiom package
   "required to define mumps intrinsic functions and special variables
   setlocal iskeyword+=$
 

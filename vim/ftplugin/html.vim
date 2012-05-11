@@ -1,8 +1,8 @@
-" Package:       M-tools
+" Package:       Axiom
 " File:          html.vim
 " Summary:       Settings for html indentation
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Feb 13, 2012
+" Last Modified: May 10, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2012 Fourth Watch Software, LC

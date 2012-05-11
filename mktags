@@ -1,10 +1,10 @@
 #! /bin/bash -
 #
-# Package:       M-tools
+# Package:       Axiom
 # File:          mktags
 # Summary:       Builds a tag file for MUMPS/GT.M routines
 # Maintainer:    David Wicksell
-# Last Modified: May 06, 2012
+# Last Modified: May 10, 2012
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2010-2012 Fourth Watch Software, LC
@@ -40,7 +40,7 @@
 #
 # E.g. set tags+=~/.mtags,~/mtags
 #
-# If you installed M-tools via the install script
+# If you installed Axiom via the install script
 # provided in the tar ball, it will set the tags option
 # for you.
 #

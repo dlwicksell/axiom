@@ -1,10 +1,10 @@
 #! /bin/bash -
 #
-# Package:       M-tools
+# Package:       Axiom
 # File:          install
-# Summary:       install script for the M-tools package
+# Summary:       install script for the Axiom package
 # Maintainer:    David Wicksell <dlw@linux.com>
-# Last Modified: Feb 13, 2012
+# Last Modified: May 10, 2012
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2011,2012 Fourth Watch Software, LC
@@ -110,7 +110,7 @@ OS=`lsb_release -is` #Ubuntu and Red Hat do a few things differently
 if [ -z "${gtmroutines}" ]; then
   if [ "${quiet}" == "off" ]; then
     echo The \$gtmroutines environment variable is not defined. In order to use
-    echo the global dumping functionality of M-tools you have to install GT.M
+    echo the global dumping functionality of Axiom you have to install GT.M
     echo and KBAWDUMP.m, as well as define \$gtmroutines. See the documentation:
     echo     http://www.fisglobal.com/products-technologyplatforms-gtm
     echo
@@ -259,9 +259,9 @@ if [ "${quiet}" == "off" ]; then
       mkdir ~/.vim/doc
     fi
     
-    cp -p vim/doc/m-tools.txt ~/.vim/doc/
+    cp -p vim/doc/axiom.txt ~/.vim/doc/
   
-    echo Copied vim/doc/m-tools.txt to ~/.vim/doc
+    echo Copied vim/doc/axiom.txt to ~/.vim/doc
     echo
   
     if [ ! -d ~/.vim/ftplugin ]; then
@@ -319,7 +319,7 @@ if [ "${quiet}" == "off" ]; then
   echo "Installed the Vim help documentation"
   echo
 
-  echo "Finished installing the M-tools package"
+  echo "Finished installing the Axiom package"
 fi
 
 exit 0
