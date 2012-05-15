@@ -2,7 +2,7 @@
 " File:          settings.vim
 " Summary:       Configuration script
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: May 10, 2012
+" Last Modified: May 15, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011,2012 Fourth Watch Software, LC
@@ -60,6 +60,8 @@ function! StartSyntax() "set necessary syntax options in one place
   "set this variable to 1 if you want a split screen view of dumped globals
   "or set it to 0 or comment it out if you don't want a split screen
   let b:globalsplit = 1
+
+  NoMatchParen "turn off matching parens in MUMPS as it is confusing
 endfunction
 
 "clean up the syntax options and put things back the way they were
@@ -70,7 +72,11 @@ function! EndSyntax()
     set virtualedit-=onemore
   endif
 
-  unlet b:globalsplit
+  if exists("b:globalsplit")
+    unlet b:globalsplit
+  endif
+
+  DoMatchParen "turn on matching parens for everything else
 endfunction
 
 function! FoldToggle() "enables toggling of folding the mumpsBlock
