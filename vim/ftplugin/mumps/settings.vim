@@ -61,7 +61,10 @@ function! StartSyntax() "set necessary syntax options in one place
   "or set it to 0 or comment it out if you don't want a split screen
   let b:globalsplit = 1
 
-  NoMatchParen "turn off matching parens in MUMPS as it is confusing
+  "turn off matching parens while in a mumps buffer
+  if exists("g:loaded_matchparen")
+    NoMatchParen
+  endif
 endfunction
 
 "clean up the syntax options and put things back the way they were
@@ -76,7 +79,9 @@ function! EndSyntax()
     unlet b:globalsplit
   endif
 
-  DoMatchParen "turn on matching parens for everything else
+  "turn on matching parens for everything else when leaving the buffer
+  "DoMatchParen breaks the help command
+  runtime plugin/matchparen.vim
 endfunction
 
 function! FoldToggle() "enables toggling of folding the mumpsBlock

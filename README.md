@@ -188,3 +188,4 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 
 ### Changelog ###
 * Turned off the matchparen plugin for MUMPS code in settings.vim
+* Fixed a bug caused by using the built-in matchparen commands in settings.vim
