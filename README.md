@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.11.1 - 2012 May 15
+Version 0.11.3 - 2012 May 21
 
 ## Copyright and License ##
 
@@ -41,7 +41,7 @@ editing M[UMPS]/GT.M routines with the Vim editor, preferrably version 6.0 or
 newer.
 
 A colleague of mine, John Willis, has created a similar package of tools for
-use with the Emacs editor. It is called *LorikeeM* and you can download it
+use with the Emacs editor. It is called *Lorikeem* and you can download it
 from: <http://code.google.com/p/lorikeem/>.
 
 Special thanks to Sam Habiel for encouraging me in my work on Axiom.
@@ -187,5 +187,4 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Turned off the matchparen plugin for MUMPS code in settings.vim
-* Fixed a bug caused by using the built-in matchparen commands in settings.vim
+* Left matchparen plugin on, but turned off matchpairs for brackets and braces
