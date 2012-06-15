@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.11.3 - 2012 May 21
+Version 0.11.4 - 2012 June 14
 
 ## Copyright and License ##
 
@@ -187,4 +187,5 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Left matchparen plugin on, but turned off matchpairs for brackets and braces
+* Changed the behavior of the :ZWR command without subscripts in globaldump.vim
+* Fixed a bug in globaldump.vim

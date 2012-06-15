@@ -2,7 +2,7 @@
 " File:          globaldump.vim
 " Summary:       Dumps a global reference while editing
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: May 10, 2012
+" Last Modified: June 14, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -24,11 +24,11 @@
 " If you define b:globalsplit and set it to 1, then it will
 " display the contents of the global in a split window, otherwise
 " the contents of the global will be displayed in your current
-" buffer, underneath or on top of your routine.
+" buffer, on top of your routine.
 "
-" Binds Ctl-K in the split screen containing the contents of the
-" global, if you set the b:globalsplit variable to 1, to close the
-" window and remove the buffer's contents.
+" Binds Ctl-K, Ctl-], and Ctl-T in the split screen containing the
+" contents of the global, if you set the b:globalsplit variable to
+" 1, to close the window and remove the buffer's contents.
 "
 " Creates an ex command called :ZWR that will dump a global, also in
 " split screen or in the current buffer.
@@ -51,21 +51,26 @@ function! FileDelete()
 
   "Need to remap <C-K> and redefine ZWR after deleting the dump buffer
   nmap <silent> <buffer> <C-K> "by$:call MGlobal(@b)<CR>
-  command! -nargs=1 -buffer ZWR call ZWRArgument(<q-args>)
+  command! -nargs=1 -buffer ZWR call ZWRArgument(<q-args>, 1)
 endfunction
 
 "call KBAWDUMP.m and pass it the global to display in VIM mode, no children
-function! ZWRArgument(global)
-  let l:global = system("mumps -r KBAWDUMP '-" . a:global . "'")
+function! ZWRArgument(global, mode)
+  if a:mode && a:global !~ "[()]"
+    "turn off VIM mode for calls without subscripts, with the :ZWR command
+    let l:global = system("mumps -r KBAWDUMP '" . a:global . "'")
+  else
+    let l:global = system("mumps -r KBAWDUMP '-" . a:global . "'")
+  endif
 
   "output more useful error messages if we get an error from GT.M
   if l:global =~ "%GTM-E-FILENOTFND" && l:global !~ "^^"
     echohl ErrorMsg
-    echo "%GTM-E-FILENOTFND: Put KBAWDUMP.m in your MUMPS search path"
+    echo "%GTM-E-FILENOTFND: Put KBAWDUMP.m in your $gtmroutines search path"
     echohl None
   elseif l:global =~ "mumps: command not found" && l:global !~ "^^"
     echohl ErrorMsg
-    echo "mumps: command not found: Install MUMPS on your system"
+    echo "mumps: command not found: Install GT.M on your system"
     echohl None
   "catch too many arguments passed via :ZWR, and don't display in split screen
   elseif l:global == "KBAWDUMP takes one argument, the global reference.\n"
@@ -217,19 +222,19 @@ function! MGlobal(global)
       endif
     "no subscripts, so end on operators or whitespace
     elseif !l:lparen && !l:rparen
-      if strpart(l:global, l:char, 1) =~ "[]*_+-/\=<>'#&!?@,:[]"
+      if strpart(l:global, l:char, 1) =~ "[]*_+-/\=<>'#&!?@,: []"
         let l:global = strpart(l:global, 0, l:char) "and we're done
       endif
     endif
   endfor
 
-  call ZWRArgument(l:global)
+  call ZWRArgument(l:global, 0)
 endfunction 
 
 "define a key mapping, bound to Ctl-K, to dump the global data under the cursor
 "works if you put the cursor on the ^ of the global reference
 autocmd BufEnter *.m nmap <silent> <buffer> <C-K> "by$:call MGlobal(@b)<CR>
 "creates a user-defined command to dump global data directly
-autocmd BufEnter *.m command! -nargs=1 -buffer ZWR call ZWRArgument(<q-args>)
+autocmd BufEnter *.m command! -nargs=1 -buffer ZWR call ZWRArgument(<q-args>, 1)
 
 let s:did_gd_ftplugin = 1
