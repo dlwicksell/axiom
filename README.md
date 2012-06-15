@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.11.4 - 2012 June 14
+Version 0.11.5 - 2012 June 14
 
 ## Copyright and License ##
 
@@ -189,3 +189,4 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 ### Changelog ###
 * Changed the behavior of the :ZWR command without subscripts in globaldump.vim
 * Fixed a bug in globaldump.vim
+* Fixed a typo and clarified some text in axiom.txt

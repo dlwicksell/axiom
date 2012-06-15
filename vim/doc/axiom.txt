@@ -1,4 +1,4 @@
-*axiom.txt*      For Vim version 7.3.  Last change: 2012 May 10
+*axiom.txt*      For Vim version 7.3.  Last change: 2012 June 14
 
 
           VIM TOOLS FOR MUMPS    by David Wicksell
@@ -39,7 +39,7 @@ Utility package for the GT.M programming language                      *axiom*
 Summary ~
 
 The Axiom utility package for MUMPS/GT.M contains a syntax highlighting
-file. It should work in VIM version 5.0 and above.
+file. It should work in Vim version 5.0 and above.
 
 It contains the ability to define a dotted do-block in MUMPS as a syntax
 region, and then transparently fold it, to give you a better view of the
@@ -51,14 +51,14 @@ commands that are built in to Vim. For more info, see |fold-commands|.
 
 Installation ~
 
-It is called {mumps.vim} and in order to funtion properly, it should be
+It is called {mumps.vim} and in order to function properly, it should be
 installed in: >
 
     ~/.vim/syntax
 <
 The Axiom package comes with a script, called 'install', that does this
 automatically for you. But you've most likely already run this script or
-you probably wouldn't have this documentation included in your VIM help
+you probably wouldn't have this documentation included in your Vim help
 system.
 
 Additonal scripts ~
@@ -148,16 +148,19 @@ defined ex command, called 'ZWR', which is used as follows.
               necessary to type the initial '^', nor to
               quote or escape {value}.
 
-You may use the '*' and ':' wildcard characters with :ZWR. The '*' at a
+You may use the '*' and ':' wildcard characters with :ZWR. The '*' at the last
 subscript location will display the data for all the possible values for that
 subscript, as well as all the children of that subscript. The ':' at a
 particular subscript location will display the data for all the possible values
 for that subscript, but will not display any of the children of that subscript.
-You may only use the '*' wildcard as the last subscript in the global reference.
-Here are some examples: >
+You may supply a range with ':' and it will display all the possible values in
+that range. You may only use the '*' wildcard as the last subscript in the
+global reference. For more details, consult the GT.M documentation for the
+ZWRITE command. Here are some examples: >
 
     :ZWR DD(*)
     :ZWR DIC(:,0)
+    :ZWR DIC(4:7,0)
     :ZWR VA(200,0,*)
 <
                                                                *b:globalsplit*
