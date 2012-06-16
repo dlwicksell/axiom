@@ -4,7 +4,7 @@
 # File:          install
 # Summary:       install script for the Axiom package
 # Maintainer:    David Wicksell <dlw@linux.com>
-# Last Modified: May 10, 2012
+# Last Modified: June 16, 2012
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2011,2012 Fourth Watch Software, LC
@@ -122,7 +122,7 @@ else
     DIR=`echo ${DIR} | cut -d "(" -f 2 | cut -d ")" -f 1`
   fi
 
-  cp -p KBAWDUMP.m ${DIR}
+  cp -p KBAWDUMP.m ${DIR}/
 
   if [ "${quiet}" == "off" ]; then
     echo Copied the KBAWDUMP.m global dumping routine to ${DIR}
@@ -135,7 +135,7 @@ if [ ! -d ~/bin ]; then
   mkdir ~/bin
 fi
 
-cp -p mktags ~/bin
+cp -p mktags ~/bin/
 
 if [ "${quiet}" == "off" ]; then
   echo Copied the mktags shell script to $HOME/bin
@@ -167,7 +167,7 @@ if [ ! -d ~/man/man1 ]; then
   mkdir -p ~/man/man1
 fi
 
-cp -p mktags.1 KBAWDUMP.1 ~/man/man1
+cp -p mktags.1 KBAWDUMP.1 ~/man/man1/
 gzip -f9 ~/man/man1/{mktags,KBAWDUMP}.1 #compress the man pages
 
 if [ "${quiet}" == "off" ]; then
@@ -224,7 +224,7 @@ if [ "${quiet}" == "off" ]; then
   fi
   
   if [ ! -d ~/.vim ]; then
-    cp -a vim ~/.vim
+    cp -aT vim ~/.vim
   
     echo Copied the Vim utility package to ~/.vim
     echo
@@ -236,7 +236,7 @@ if [ "${quiet}" == "off" ]; then
   
       question .vim/filetype.vim
     else
-      cp -p vim/filetype.vim ~/.vim
+      cp -p vim/filetype.vim ~/.vim/
   
       echo "Installed new filetype.vim file"
       echo
@@ -249,7 +249,7 @@ if [ "${quiet}" == "off" ]; then
   
       question .vim/scripts.vim
     else
-      cp -p vim/scripts.vim ~/.vim
+      cp -p vim/scripts.vim ~/.vim/
   
       echo "Installed new scripts.vim file"
       echo
@@ -284,7 +284,7 @@ if [ "${quiet}" == "off" ]; then
   
       question .vim/plugin/templates.vim
     else
-      cp -p vim/plugin/templates.vim ~/.vim/plugin
+      cp -p vim/plugin/templates.vim ~/.vim/plugin/
   
       echo "Installed new templates.vim file"
       echo
@@ -310,7 +310,7 @@ if [ "${quiet}" == "off" ]; then
   fi
 else
   cp -p vimrc ~/.vimrc
-  cp -a vim ~/.vim
+  cp -aT vim ~/.vim
 fi
 
 vim "+helptags $HOME/.vim/doc" "+quit"
