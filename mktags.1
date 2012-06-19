@@ -2,7 +2,7 @@
 .\" File:          mktags.1
 .\" Summary:       man page for the mktags shell script
 .\" Maintainer:    David Wicksell <dlw@linux.com>
-.\" Last Modified: May 10, 2012
+.\" Last Modified: June 19, 2012
 .\"
 .\" Written by David Wicksell <dlw@linux.com>
 .\" Copyright © 2011,2012 Fourth Watch Software, LC
@@ -21,7 +21,7 @@
 .\" along with this program. If not, see http://www.gnu.org/licenses/.
 .\"
 .\"
-.TH MKTAGS 1 "10 May 2012" "Version 0.11.0" "AXIOM Developer Tools"
+.TH MKTAGS 1 "19 June 2012" "Version 0.11.7" "AXIOM Developer Tools"
 
 .SH NAME
 \fBmktags\fP - A script to build a tags file for use with the Axiom package
@@ -51,16 +51,16 @@ files is required.
 Parse the $gtmroutines environment variable, going through the specified
 directories, building a tags file called ~/.mtags or ~/.MTAGS.
 .IP -e
-Run in emacs mode, building a tags file called ~/.MTAGS or ~/MTAGS in emacs
+Run in Emacs mode, building a tags file called ~/.MTAGS or ~/MTAGS in Emacs
 format.
 .IP -p
 Run in post sort mode. Normally ctags runs recursively, but because of the
-difference between the internal and external format of GT.M files (% vs. _),
+difference between the internal and external names of GT.M files (% vs. _),
 it has to be run individually for each routine. So mktags will keep appending
 to the tags file. By default, it will keep the tags file sorted, for faster
 lookups by Vim, after every routine. If you have a small amount of GT.M
 routines on your system, this works just fine. But when you have a large
-amount of routines to tag, like with VistA or any other large system, this
+amount of routines to tag, like with VISTA or any other large system, this
 can take a long time. In that case, use post sort mode, which should speed up
 the mktags script a lot.
 .IP -h

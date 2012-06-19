@@ -1,5 +1,5 @@
-KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 5/10/12 9:17pm
- ;;0.11.0;Axiom;****LOCAL RTN**;David Wicksell @2010-2012
+KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 6/19/12 7:36am
+ ;;0.11.7;Axiom;****LOCAL RTN**;David Wicksell @2010-2012
  ;
  ; Written by David Wicksell <dlw@linux.com>
  ; Copyright © 2010,2011 Fourth Watch Software, LC
@@ -17,7 +17,7 @@ KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 5/10/12 9:17pm
  ; You should have received a copy of the GNU Affero General Public License
  ; along with this program. If not, see http://www.gnu.org/licenses/.
  ;
- ; This routine was created for GT.M in a Unix environment
+ ; This routine was created for GT.M in a Unix environment.
  ;
  ; This routine will dump the contents of a MUMPS global
  ; from a shell prompt. It is invoked as a mumps -run
@@ -26,7 +26,7 @@ KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 5/10/12 9:17pm
  ; The single quotes around the global name are required.
  ; If you don't use them, then most shells (BASH for sure)
  ; will think you are trying to start a subshell with the
- ; "()" The "^" is optional, and putting a "-" as the first 
+ ; parens. The "^" is optional, and putting a "-" as the first 
  ; character, will dump only the node referenced, otherwise
  ; it will be assumed that you want that node and every one
  ; of its children.
@@ -39,10 +39,10 @@ KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 5/10/12 9:17pm
  ; shell. Also added the ability to specify a range.
  ;
  ; If your screen becomes messed up after piping this
- ; program to less, it probably means that 'te' is not set
+ ; program to less, it probably means that "te" is not set
  ; to reset the terminal to the settings that were present
- ; when 'ti' was called. GT.M is not very user friendly in
- ; this regard. Though I haven't really dug into the issue.
+ ; when "ti" was called. GT.M may not be user friendly in
+ ; this regard, though I haven't really dug into the issue.
  ; If you don't plan on doing your own custom terminal
  ; handling, a quick solution would be to create an alias
  ; for less to put your screen back to "sane" settings

@@ -4,7 +4,7 @@
 # File:          install
 # Summary:       install script for the Axiom package
 # Maintainer:    David Wicksell <dlw@linux.com>
-# Last Modified: June 16, 2012
+# Last Modified: June 19, 2012
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2011,2012 Fourth Watch Software, LC
@@ -213,7 +213,8 @@ if [ "${quiet}" == "off" ]; then
   if [ -f ~/.vimrc ]; then
     echo -n "Please type <enter> to continue: "
     read X
-    echo
+
+    clear
   
     question .vimrc
   else
@@ -232,7 +233,8 @@ if [ "${quiet}" == "off" ]; then
     if [ -f ~/.vim/filetype.vim ]; then
       echo -n "Please type <enter> to continue: "
       read X
-      echo
+
+      clear
   
       question .vim/filetype.vim
     else
@@ -245,7 +247,8 @@ if [ "${quiet}" == "off" ]; then
     if [ -f ~/.vim/scripts.vim ]; then
       echo -n "Please type <enter> to continue: "
       read X
-      echo
+
+      clear
   
       question .vim/scripts.vim
     else
@@ -280,7 +283,8 @@ if [ "${quiet}" == "off" ]; then
     if [ -f ~/.vim/plugin/templates.vim ]; then
       echo -n "Please type <enter> to continue: "
       read X
-      echo
+
+      clear
   
       question .vim/plugin/templates.vim
     else

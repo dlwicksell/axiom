@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.11.6 - 2012 June 16
+Version 0.11.7 - 2012 June 19
 
 ## Copyright and License ##
 
@@ -187,7 +187,5 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Changed the behavior of the :ZWR command without subscripts in globaldump.vim
-* Fixed a bug in globaldump.vim
-* Fixed a typo and clarified some text in axiom.txt
-* Fixed a bug in install
+* Cleaned up some comments in KBAWDUMP.m and mktags.1
+* Simplified the output of install when not in quiet mode
