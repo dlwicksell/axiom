@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.11.7 - 2012 June 19
+Version 0.11.8 - 2012 June 19
 
 ## Copyright and License ##
 
@@ -189,3 +189,4 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 ### Changelog ###
 * Cleaned up some comments in KBAWDUMP.m and mktags.1
 * Simplified the output of install when not in quiet mode
+* Fixed a bug in KBAWDUMP.m

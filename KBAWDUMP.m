@@ -1,5 +1,5 @@
-KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 6/19/12 7:36am
- ;;0.11.7;Axiom;****LOCAL RTN**;David Wicksell @2010-2012
+KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 6/19/12 7:20pm
+ ;;0.11.8;Axiom;****LOCAL RTN**;David Wicksell @2010-2012
  ;
  ; Written by David Wicksell <dlw@linux.com>
  ; Copyright © 2010,2011 Fourth Watch Software, LC
@@ -109,7 +109,7 @@ KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 6/19/12 7:36am
  ;deal with extra spaces at the end of the :ZWR command or a quoted argument
  E  S GLOBAL=$E(ZCMD,1,$S(ZCMD[" ":$F(ZCMD," ")-2,1:$L(ZCMD))) ;no subscripts
  ;ZWR command with no subscripts, postcondition stops WRITE if undefined
- I VIM=1 W:$D(@GLOBAL)#2 GLOBAL_"="_@GLOBAL,!
+ I VIM=1,GLOBAL'["(" W:$D(@GLOBAL)#2 GLOBAL_"="_@GLOBAL,!
  E  ZWR @GLOBAL
  Q
  ;
