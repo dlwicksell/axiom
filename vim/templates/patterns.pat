@@ -2,7 +2,7 @@
 " File:          patterns.pat
 " Summary:       template patterns script for MUMPS/GT.M
 " Maintainer:    David Wicksell
-" Last Modified: May 10, 2012
+" Last Modified: July 11, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011,2012 Fourth Watch Software, LC
@@ -30,6 +30,6 @@
 
 
 "key mapping, bound to ",,", to jump from pattern to pattern
-nmap <silent> <buffer> ,, /<+.\{-}+><CR>
+nnoremap <silent> <buffer> ,, /<+.\{-}+><CR>
 "key mapping, bound to ",.", to quickly change the patterns
-nmap <buffer> ,. cf>
+nnoremap <buffer> ,. cf>

@@ -2,7 +2,7 @@
 " File:          .vimrc
 " Summary:       Sample .vimrc for the Axiom package
 " Maintainer:    David Wicksell
-" Last Modified: May 10, 2012
+" Last Modified: July 11, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011,2012 Fourth Watch Software, LC
@@ -32,6 +32,7 @@ set smarttab
 set nohlsearch
 set nomodeline
 set more
+set wildmenu
 set tabstop=8
 set softtabstop=4
 set shiftwidth=4

@@ -2,7 +2,7 @@
 " File:          mtags.vim
 " Summary:       Jumps to different labels in a MUMPS routine
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: May 10, 2012
+" Last Modified: July 11, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -205,6 +205,6 @@ endfunction
 
 "creates a key mapping, bound to Ctl-], to jump to MUMPS labels
 "pass a reference to the label^routine under the cursor
-autocmd BufEnter *.m nmap <silent> <buffer> <C-]> lb"ayE:call MTag(@a)<CR>
+au BufEnter <buffer> nnoremap <silent> <buffer> <C-]> lb"ayE:call MTag(@a)<CR>
 
 let s:did_mt_ftplugin = 1

@@ -1,8 +1,8 @@
 " Package:       Axiom
 " File:          settings.vim
-" Summary:       Configuration script
+" Summary:       Configuration settings script
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: May 15, 2012
+" Last Modified: July 11, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011,2012 Fourth Watch Software, LC
@@ -30,7 +30,7 @@
 " It defaults to off.
 
 
-if exists("s:did_syn_ftplugin")
+if exists("s:did_set_ftplugin")
   finish
 endif
 
@@ -65,11 +65,13 @@ function! StartSyntax() "set necessary syntax options in one place
   "or set it to 0 or comment it out if you don't want a split screen
   let b:globalsplit = 1
 
-  ""turn off matching parens, brackets, and braces while in a mumps buffer
-  ""doesn't affect the % command
-  "if exists("g:loaded_matchparen")
-  "  NoMatchParen
-  "endif
+  "uncomment the next 2 commands to turn on the M Statusline by default
+  "setlocal statusline=%!MTagStatusLine()
+  "setlocal laststatus=2
+
+  "uncomment the next 2 commands to turn on the auto-update feature by default
+  "autocmd CursorMoved <buffer> update
+  "autocmd CursorMovedI <buffer> update
 endfunction
 
 "clean up the syntax options and put things back the way they were
@@ -79,14 +81,6 @@ function! EndSyntax()
   if s:onemore == 0
     set virtualedit-=onemore
   endif
-
-  if exists("b:globalsplit")
-    unlet b:globalsplit
-  endif
-
-  ""turn on matching parens, brackets, and braces when leaving the mumps buffer
-  ""DoMatchParen breaks the help command
-  "runtime plugin/matchparen.vim
 endfunction
 
 function! FoldToggle() "enables toggling of folding the mumpsBlock
@@ -107,10 +101,10 @@ endfunction
 
 "define a key mapping, bound to Ctl-N, in order to toggle mumpsBlock folding
 "defaults to off above
-autocmd BufEnter *.m nmap <silent> <buffer> <C-N> :call FoldToggle()<CR>
+au BufEnter <buffer> nnoremap <silent> <buffer> <C-N> :call FoldToggle()<CR>
 
 "lots of small configuration details need to be set for syntax
-autocmd BufEnter *.m call StartSyntax()
-autocmd BufLeave *.m call EndSyntax()
+autocmd BufEnter <buffer> call StartSyntax()
+autocmd BufLeave <buffer> call EndSyntax()
 
-let s:did_syn_ftplugin = 1
+let s:did_set_ftplugin = 1

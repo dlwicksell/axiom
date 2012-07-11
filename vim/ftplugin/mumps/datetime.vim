@@ -2,7 +2,7 @@
 " File:          datetime.vim
 " Summary:       Auto datetime stamp for MUMPS routines
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: May 10, 2012
+" Last Modified: July 11, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -53,14 +53,14 @@ endfunction
 "toggles the automatic datetime stamp on or off
 function! DateTimeToggle()
   "if you define more bufwrite autocommands for mumps, this will turn them off
-  if exists("#BufWrite#*.m") "check if there is a BufWrite autocommand
-    autocmd! BufWrite *.m
+  if exists("#BufWrite#<buffer>") "check if there is a BufWrite autocommand
+    autocmd! BufWrite <buffer>
 
     echohl ModeMsg
     echo "DateTime stamp is off"
     echohl None
   else
-    autocmd BufWrite *.m call DateTime()
+    autocmd BufWrite <buffer> call DateTime()
 
     echohl ModeMsg
     echo "DateTime stamp is on"
@@ -70,8 +70,8 @@ endfunction
 
 
 "define a key mapping, bound to Ctl-H, in order to toggle datetime stamping
-autocmd BufEnter *.m nmap <silent> <buffer> <C-H> :call DateTimeToggle()<CR>
+au BufEnter <buffer> nnoremap <silent> <buffer> <C-H> :call DateTimeToggle()<CR>
 "defaults to on
-autocmd BufWrite *.m call DateTime()
+autocmd BufWrite <buffer> call DateTime()
 
 let s:did_dt_ftplugin = 1

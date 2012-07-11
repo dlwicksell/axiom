@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.11.8 - 2012 June 19
+Version 0.12.0 - 2012 July 11
 
 ## Copyright and License ##
 
@@ -177,6 +177,7 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *html.vim* - Local settings for html files
 * *datetime.vim* - Script to imprint a datetime stamp in MUMPS routines
 * *globaldump.vim* - Script to call KBAWDUMP from within Vim
+* *mstatus.vim* - Script to create a nice statusline for MUMPS routines
 * *mtags.vim* - Script to call the tag file built by mktags
 * *settings.vim* - Script to set up various settings for Axiom
 * *xml.vim* - Local settings for xml files
@@ -187,6 +188,7 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Cleaned up some comments in KBAWDUMP.m and mktags.1
-* Simplified the output of install when not in quiet mode
-* Fixed a bug in KBAWDUMP.m
+* Minor changes to datetime.vim, globaldump.vim, mtags.vim, and patterns.pat
+* Turned on wildmenu in vimrc
+* Added a new M Statusline feature in a new file called mstatus.vim
+* Minor changes to settings.vim, including ability to turn on the M Statusline

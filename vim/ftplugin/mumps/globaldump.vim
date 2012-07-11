@@ -2,7 +2,7 @@
 " File:          globaldump.vim
 " Summary:       Dumps a global reference while editing
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: June 14, 2012
+" Last Modified: July 11, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -50,7 +50,7 @@ function! FileDelete()
   redraw! "need to do this if the routine buffer is modified
 
   "Need to remap <C-K> and redefine ZWR after deleting the dump buffer
-  nmap <silent> <buffer> <C-K> "by$:call MGlobal(@b)<CR>
+  nnoremap <silent> <buffer> <C-K> "by$:call MGlobal(@b)<CR>
   command! -nargs=1 -buffer ZWR call ZWRArgument(<q-args>, 1)
 endfunction
 
@@ -116,60 +116,56 @@ function! ZWRArgument(global, mode)
       echohl None
     endif
   else
-    if exists("b:globalsplit") "in case b:globalsplit isn't defined
-      if b:globalsplit == 1 "global split window mode is on
-        if v:version >= 702
-          let l:PPID = getpid()
-        else
-          let l:PPID = system("echo -n $PPID") "getpid() doesn't exist
-        endif
-
-        let l:tempfile = "~/.globaldump.tmp." . l:PPID "create a temp file
-
-        if !filereadable(glob(l:tempfile)) "doesn't already exist
-          execute "redir! > " . l:tempfile | "dump the global to the temp file
-
-          if strpart(a:global, 0, 1) != "^"
-            silent echo "^" . a:global | "display the global argument at the top
-          else
-            silent echo a:global | "display the global argument at the top
-          endif
-
-          silent echo ""
-          silent echo l:global
-
-          redir END "change output back to current buffer
-
-          execute "rightbelow vsplit " . l:tempfile | "open up the split window
-
-          setlocal nomodifiable "no reason to allow changing the contents
-          setlocal readonly "require a ! in order to alter the contents
-
-          setlocal nolinebreak "wraps lines
-
-          let s:oldshowbreak = &showbreak
-          set showbreak=>> "shows that lines have wrapped
-
-          "Ctl-K map will only be applicable in the window with the global data
-          nmap <silent> <buffer> <C-K> :call FileDelete()<CR>
-          ", will increase the size of the window with the global data
-          nmap <silent> <buffer> , <C-W>>
-          ". will decrease the size of the window with the global data
-          nmap <silent> <buffer> . <C-W><
-
-          "remap the key mappings for the tag stack, so buffer won't mess it up
-          nmap <silent> <buffer> <C-]> :call FileDelete()<CR>
-          nmap <silent> <buffer> <C-T> :call FileDelete()<CR>
-        else "already exists, don't want multiple split screens
-          echohl ErrorMsg
-          echo "Close the global dump window with Ctl-K first"
-          echohl None
-        endif
+    if getbufvar("%", "globalsplit") == 1 "global split window mode is on
+      if v:version >= 702
+        let l:PPID = getpid()
       else
-        echo l:global | "dump the global in the routine editing buffer
+        let l:PPID = system("echo -n $PPID") "getpid() doesn't exist
+      endif
+
+      let l:tempfile = "~/.globaldump.tmp." . l:PPID "create a temp file
+
+      if !filereadable(glob(l:tempfile)) "doesn't already exist
+        execute "redir! > " . l:tempfile | "dump the global to the temp file
+
+        if strpart(a:global, 0, 1) != "^"
+          silent echo "^" . a:global | "display the global argument at the top
+        else
+          silent echo a:global | "display the global argument at the top
+        endif
+
+        silent echo ""
+        silent echo l:global
+
+        redir END "change output back to current buffer
+
+        execute "rightbelow vsplit " . l:tempfile | "open up the split window
+
+        setlocal nomodifiable "no reason to allow changing the contents
+        setlocal readonly "require a ! in order to alter the contents
+
+        setlocal nolinebreak "wraps lines
+
+        let s:oldshowbreak = &showbreak
+        set showbreak=>> "shows that lines have wrapped
+
+        "Ctl-K map will only be applicable in the window with the global data
+        nnoremap <silent> <buffer> <C-K> :call FileDelete()<CR>
+        ", will increase the size of the window with the global data
+        nnoremap <silent> <buffer> , <C-W>>
+        ". will decrease the size of the window with the global data
+        nnoremap <silent> <buffer> . <C-W><
+
+        "remap the key mappings for the tag stack, so buffer won't mess it up
+        nnoremap <silent> <buffer> <C-]> :call FileDelete()<CR>
+        nnoremap <silent> <buffer> <C-T> :call FileDelete()<CR>
+      else "already exists, don't want multiple split screens
+        echohl ErrorMsg
+        echo "Close the global dump window with Ctl-K first"
+        echohl None
       endif
     else
-      echo l:global  | "dump the global in the routine editing buffer
+      echo l:global | "dump the global in the routine editing buffer
     endif
   endif
 endfunction
@@ -233,8 +229,8 @@ endfunction
 
 "define a key mapping, bound to Ctl-K, to dump the global data under the cursor
 "works if you put the cursor on the ^ of the global reference
-autocmd BufEnter *.m nmap <silent> <buffer> <C-K> "by$:call MGlobal(@b)<CR>
+au BufEnter <buffer> nnoremap <silent> <buffer> <C-K> "by$:call MGlobal(@b)<CR>
 "creates a user-defined command to dump global data directly
-autocmd BufEnter *.m command! -nargs=1 -buffer ZWR call ZWRArgument(<q-args>, 1)
+au BufEnter <buffer> command! -nargs=1 -buffer ZWR call ZWRArgument(<q-args>, 1)
 
 let s:did_gd_ftplugin = 1
