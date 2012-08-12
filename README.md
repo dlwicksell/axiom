@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.12.0 - 2012 July 11
+Version 0.12.1 - 2012 Aug 12
 
 ## Copyright and License ##
 
@@ -188,7 +188,4 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Minor changes to datetime.vim, globaldump.vim, mtags.vim, and patterns.pat
-* Turned on wildmenu in vimrc
-* Added a new M Statusline feature in a new file called mstatus.vim
-* Minor changes to settings.vim, including ability to turn on the M Statusline
+* Minor changes to all the ftplugin script files, including bug fixes

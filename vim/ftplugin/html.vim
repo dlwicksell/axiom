@@ -2,7 +2,7 @@
 " File:          html.vim
 " Summary:       Settings for html indentation
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: May 10, 2012
+" Last Modified: Aug 11, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2012 Fourth Watch Software, LC
@@ -23,11 +23,11 @@
 " Local settings for html indentation
 
 
-if exists("s:did_html_ftplugin")
+if exists("b:did_html_ftplugin")
   finish
 endif
 
 setlocal softtabstop=2
 setlocal shiftwidth=2
 
-let s:did_html_ftplugin = 1
+let b:did_html_ftplugin = 1
