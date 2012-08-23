@@ -1,5 +1,5 @@
-KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 6/19/12 7:20pm
- ;;0.11.8;Axiom;****LOCAL RTN**;David Wicksell @2010-2012
+KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 8/22/12 3:26pm
+ ;;0.12.2;Axiom;****LOCAL RTN**;David Wicksell @2010-2012
  ;
  ; Written by David Wicksell <dlw@linux.com>
  ; Copyright © 2010,2011 Fourth Watch Software, LC
@@ -82,7 +82,7 @@ KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 6/19/12 7:20pm
  . . . S:ARG(I)'="*" ARG(I)=":" ;subscript wildcard
  . . S:ARG(I)="""""" ARG(I)="*" ;special case of "" used as a subscript for $O
  . . ;
- . . I $E(ARG(I),2)="""" D  ;deal with strings inside Xecute strings
+ . . I $E(ARG(I),2)="""" D  ;deal with strings inside XECUTE strings
  . . . N DIV
  . . . F DIV=1:1:$L(ARG(I)) Q:$E(ARG(I),DIV)'=""""
  . . . S DIV=DIV-1

@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.12.1 - 2012 Aug 12
+Version 0.12.2 - 2012 Aug 22
 
 ## Copyright and License ##
 
@@ -177,6 +177,7 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *html.vim* - Local settings for html files
 * *datetime.vim* - Script to imprint a datetime stamp in MUMPS routines
 * *globaldump.vim* - Script to call KBAWDUMP from within Vim
+* *mcompile.vim* - Script to compile MUMPS routines, and display any errors
 * *mstatus.vim* - Script to create a nice statusline for MUMPS routines
 * *mtags.vim* - Script to call the tag file built by mktags
 * *settings.vim* - Script to set up various settings for Axiom
@@ -188,4 +189,5 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Minor changes to all the ftplugin script files, including bug fixes
+* Added mcompile.vim file to support compiling MUMPS routines in Axiom
+* Fixed a typo in KBAWDUMP.m and mumps.vim

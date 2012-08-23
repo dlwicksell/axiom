@@ -3,7 +3,7 @@
 " Language:      MUMPS/GT.M
 " Summary:       Syntax file
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: May 10, 2012
+" Last Modified: Aug 22, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -37,7 +37,7 @@ endif
 
 syntax case ignore
 "we want to sync fromstart, as dotted do blocks can be arbitrarily long
-"in order to insure fast syncing, all but the mumpsBlock are skipped
+"in order to ensure fast syncing, all but the mumpsBlock are skipped
 syntax sync fromstart
 
 "define the lines as containers
