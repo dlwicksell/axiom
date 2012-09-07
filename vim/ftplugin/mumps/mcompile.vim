@@ -2,7 +2,7 @@
 " File:          mcompile.vim
 " Summary:       Compile MUMPS routines and show errors
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Aug 20, 2012
+" Last Modified: Sep 6, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2012 Fourth Watch Software, LC
@@ -19,6 +19,11 @@
 "
 " You should have received a copy of the GNU Affero General Public License
 " along with this program. If not, see http://www.gnu.org/licenses/.
+"
+" Compile the routine in the current buffer, displaying any compiler errors.
+" The routine will be compiled in the object directory that corresponds with
+" the first routine directory in $gtmroutines that contains the routine in
+" the current buffer.
 
 
 if exists("b:did_mc_ftplugin")
@@ -56,7 +61,6 @@ if !exists("*MCompile") "don't define the same function twice
           let l:rdir[l:cnt] = l:cdir[l:cnt]
         endif
 
-        "DLW - need to test to see if .so works after changes
         if l:cdir[l:cnt] =~ ".so"
           let l:cdir[l:cnt] = fnamemodify(l:cdir[l:cnt], ":h")
         endif
@@ -72,7 +76,6 @@ if !exists("*MCompile") "don't define the same function twice
     let l:cnt = 0
 
     while l:cnt < len(l:rdir)
-      "if findfile(expand("%:t"), l:rdir[l:cnt]) == bufname("%")
       "deal with absolute or relative path names
       if expand("%:p:h") == l:rdir[l:cnt] || expand("%:h") == l:rdir[l:cnt]
 

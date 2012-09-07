@@ -4,7 +4,7 @@
 # File:          mktags
 # Summary:       Builds a tag file for MUMPS/GT.M routines
 # Maintainer:    David Wicksell
-# Last Modified: May 10, 2012
+# Last Modified: Sep 6, 2012
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2010-2012 Fourth Watch Software, LC
@@ -41,7 +41,7 @@
 # E.g. set tags+=~/.mtags,~/mtags
 #
 # If you installed Axiom via the install script
-# provided in the tar ball, it will set the tags option
+# provided in the tarball, it will set the tags option
 # for you.
 #
 # If you also include the -e option, it will build the

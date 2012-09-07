@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.12.2 - 2012 Aug 22
+Version 0.12.3 - 2012 Sep 6
 
 ## Copyright and License ##
 
@@ -190,4 +190,6 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 
 ### Changelog ###
 * Added mcompile.vim file to support compiling MUMPS routines in Axiom
-* Fixed a typo in KBAWDUMP.m and mumps.vim
+* Fixed a typo in mktags
+* Added some info to mcompile.vim
+* Fixed a small bug in settings.vim

@@ -2,7 +2,7 @@
 " File:          settings.vim
 " Summary:       Configuration settings script
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Aug 12, 2012
+" Last Modified: Sep 6, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011,2012 Fourth Watch Software, LC
@@ -66,11 +66,11 @@ if !exists("*StartSyntax") "don't define the same function twice
     "or set it to 0 or comment it out if you don't want a split screen
     let b:globalsplit = 1
   
-    "uncomment the next 2 commands to turn on the M Statusline by default
-    "setlocal statusline=%!MTagStatusLine()
-    "setlocal laststatus=2
+    "comment out the next 2 commands to turn off the M Statusline
+    setlocal statusline=%!MTagStatusLine()
+    set laststatus=2 "setlocal doesn't work
   
-    "uncomment the next 2 commands to turn on the auto-update feature by default
+    "uncomment the next 2 commands to turn on the auto-update feature
     "autocmd CursorMoved <buffer> update
     "autocmd CursorMovedI <buffer> update
   endfunction
@@ -84,6 +84,9 @@ if !exists("*EndSyntax") "don't define the same function twice
     if s:onemore == 0
       set virtualedit-=onemore
     endif
+
+    "comment out the next command whenever you comment out the M Statusline
+    set laststatus=1 "setlocal doesn't work
   endfunction
 endif
 
