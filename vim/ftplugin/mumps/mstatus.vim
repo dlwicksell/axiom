@@ -2,7 +2,7 @@
 " File:          mstatus.vim
 " Summary:       Show statusline for MUMPS routines
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Aug 12, 2012
+" Last Modified: Sep 7, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2012 Fourth Watch Software, LC
@@ -24,7 +24,7 @@
 " routine. It also sets up the ability to have it dynamically updated while
 " editing if the file has been modified and the cursor has moved. Creates a
 " command that will turn the statusline on or off, as well as the update
-" ability on or off. Both default to off.
+" ability on or off. MStatus defaults to on, and auto-updating to off.
 
 
 if exists("b:did_ms_ftplugin")
@@ -73,6 +73,9 @@ if !exists("*MTagStatusLine") "don't define the same function twice
       if expand("%:t") !~ "\\.m$" || l:tag == ""
         return "%f\ %h%m%r\ %=%-15(%l,%c%V%)%P"
       else
+        let l:tag = substitute(l:tag, "%", "%%", "")
+        let l:file = substitute(l:file, "%", "%%", "")
+
         return l:tag . "^" . l:file . "\ %h%m%r\ %=%-15(%l,%c%V%)%P"
       endif
     else
