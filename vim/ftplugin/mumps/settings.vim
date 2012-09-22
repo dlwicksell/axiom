@@ -67,7 +67,7 @@ if !exists("*StartSyntax") "don't define the same function twice
     let b:globalsplit = 1
   
     "comment out the next 2 commands to turn off the M Statusline
-    setlocal statusline=%!MTagStatusLine()
+    set statusline=%!MTagStatusLine() "setlocal doesn't work on 700 or older
     set laststatus=2 "setlocal doesn't work
   
     "uncomment the next 2 commands to turn on the auto-update feature
@@ -86,6 +86,7 @@ if !exists("*EndSyntax") "don't define the same function twice
     endif
 
     "comment out the next command whenever you comment out the M Statusline
+    set statusline="" "setlocal doesn't work on 700 or older
     set laststatus=1 "setlocal doesn't work
   endfunction
 endif

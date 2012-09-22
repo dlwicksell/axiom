@@ -2,7 +2,7 @@
 " File:          datetime.vim
 " Summary:       Auto datetime stamp for MUMPS routines
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Aug 11, 2012
+" Last Modified: Sep 22, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -35,18 +35,20 @@ endif
 if !exists("*DateTime") "don't define the same function twice
   "sets the MUMPS routine to the current datetime
   function! DateTime()
-    "- narrows the specifier to 1 character, to match VPE's datetime stamp
-    let l:dt = strftime("%-m/%-d/%y %-I:%M%P")
-    let l:gl = getline(1)
+    if &modified "only update the datetime stamp if you've modified the buffer
+      "- narrows the specifier to 1 character, to match VPE's datetime stamp
+      let l:dt = strftime("%-m/%-d/%y %-I:%M%P")
+      let l:gl = getline(1)
   
-    if l:gl =~ "^.*]$" "old datetime stamp format
-      call setline(1, strpart(l:gl, 0, strridx(l:gl, "[")) . "[" . l:dt . "]")
-    elseif l:gl =~ "^.*;$" "no current datetime stamp
-      call setline(1, l:gl . " " . l:dt)
-    elseif l:gl =~ "^.*/.*/.*:.*$" "overwrite the current datetime stamp
-      call setline(1, strpart(l:gl, 0, strridx(l:gl, ";")) . "; " . l:dt)
-    else
-      call setline(1, getline(1) . " ; " . l:dt)
+      if l:gl =~ "^.*]$" "old datetime stamp format
+        call setline(1, strpart(l:gl, 0, strridx(l:gl, "[")) . "[" . l:dt . "]")
+      elseif l:gl =~ "^.*;$" "no current datetime stamp
+        call setline(1, l:gl . " " . l:dt)
+      elseif l:gl =~ "^.*/.*/.*:.*$" "overwrite the current datetime stamp
+        call setline(1, strpart(l:gl, 0, strridx(l:gl, ";")) . "; " . l:dt)
+      else
+        call setline(1, getline(1) . " ; " . l:dt)
+      endif
     endif
   endfunction
 endif
