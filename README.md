@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.12.5 - 2012 Sep 22
+Version 0.13.0 - 2012 Sep 22
 
 ## Copyright and License ##
 
@@ -189,5 +189,5 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Fixed a small bug in settings.vim
-* Only update the datetime stamp when a file is modified in datetime.vim
+* Added an option to open up a split window horizontally in globaldump.vim
+* Added an option setting to control which type of split window in settings.vim

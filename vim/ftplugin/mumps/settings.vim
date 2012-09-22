@@ -2,7 +2,7 @@
 " File:          settings.vim
 " Summary:       Configuration settings script
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Sep 6, 2012
+" Last Modified: Sep 22, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011,2012 Fourth Watch Software, LC
@@ -65,9 +65,14 @@ if !exists("*StartSyntax") "don't define the same function twice
     "set this variable to 1 if you want a split screen view of dumped globals
     "or set it to 0 or comment it out if you don't want a split screen
     let b:globalsplit = 1
+
+    "set this variable to "down" if you want the split screen on the bottom,
+    "or set it to "right" or comment it out if you want it to the right
+    "Note - This option is ignored if globalsplit mode is turned off
+    let b:splittype = "right"
   
     "comment out the next 2 commands to turn off the M Statusline
-    set statusline=%!MTagStatusLine() "setlocal doesn't work on 700 or older
+    set statusline=%!MTagStatusLine() "setlocal doesn't work on 700 or older?
     set laststatus=2 "setlocal doesn't work
   
     "uncomment the next 2 commands to turn on the auto-update feature
@@ -86,7 +91,7 @@ if !exists("*EndSyntax") "don't define the same function twice
     endif
 
     "comment out the next command whenever you comment out the M Statusline
-    set statusline="" "setlocal doesn't work on 700 or older
+    set statusline="" "setlocal doesn't work on 700 or older?
     set laststatus=1 "setlocal doesn't work
   endfunction
 endif

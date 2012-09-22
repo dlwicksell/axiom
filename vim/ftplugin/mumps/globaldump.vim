@@ -2,7 +2,7 @@
 " File:          globaldump.vim
 " Summary:       Dumps a global reference while editing
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Aug 12, 2012
+" Last Modified: Sep 22, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -22,9 +22,12 @@
 "
 " Binds Ctl-K to jump to a MUMPS global in the current buffer.
 " If you define b:globalsplit and set it to 1, then it will
-" display the contents of the global in a split window, otherwise
-" the contents of the global will be displayed in your current
-" buffer, on top of your routine.
+" display the contents of the global in a vertical split window,
+" to the right of the routine window, otherwise the contents of
+" the global will be displayed in your current buffer, on top of
+" your routine. If you define b:splittype and set it to "down",
+" then the split window will be horizontal, and underneath the
+" routine window.
 "
 " Binds Ctl-K, Ctl-], and Ctl-T in the split screen containing the
 " contents of the global, if you set the b:globalsplit variable to
@@ -142,7 +145,13 @@ if !exists("*ZWRArgument") "don't define the same function twice
   
           redir END "change output back to current buffer
   
-          execute "rightbelow vsplit " . l:tempfile | "open up the split window
+          if getbufvar("%", "splittype") == "down" "split window mode
+            "open up the split window on the bottom
+            execute "rightbelow split " . l:tempfile
+          else
+            "open up the split window on the right
+            execute "rightbelow vsplit " . l:tempfile
+          endif
   
           setlocal nomodifiable "no reason to allow changing the contents
           setlocal readonly "require a ! in order to alter the contents
@@ -154,10 +163,14 @@ if !exists("*ZWRArgument") "don't define the same function twice
   
           "Ctl-K map will only be applicable in the window with the global data
           nnoremap <silent> <buffer> <C-K> :call FileDelete()<CR>
-          ", will increase the size of the window with the global data
-          nnoremap <silent> <buffer> , <C-W>>
-          ". will decrease the size of the window with the global data
-          nnoremap <silent> <buffer> . <C-W><
+
+          "These keybindings are only applicable in a vertical split window
+          if getbufvar("%", "splittype") != "down" "split window mode
+            ", will increase the size of the window with the global data
+            nnoremap <silent> <buffer> , <C-W>>
+            ". will decrease the size of the window with the global data
+            nnoremap <silent> <buffer> . <C-W><
+          endif
   
           "remap the key mappings for the tag stack, so buffer won't mess it up
           nnoremap <silent> <buffer> <C-]> :call FileDelete()<CR>
