@@ -2,7 +2,7 @@
 " File:          mstatus.vim
 " Summary:       Show statusline for MUMPS routines
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Sep 7, 2012
+" Last Modified: Oct 15, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2012 Fourth Watch Software, LC
@@ -94,15 +94,16 @@ if !exists("*MTagStatus") "don't define the same function twice
       echo ":MStatus on|off|update|noupdate"
       echohl None
     elseif l:value == "on"
-      setlocal statusline=%!MTagStatusLine()
-      setlocal laststatus=2
+      set statusline=%!MTagStatusLine() "setlocal doesn't work on 700 or older?
+      set laststatus=2 "setlocal doesn't work
   
       echohl ModeMsg
       echo "M Statusline on"
       echohl None
     elseif l:value == "off"
-      setlocal statusline=""
-      setlocal laststatus=1
+      set statusline="" "setlocal doesn't work on 700 or older?
+      set laststatus=1 "setlocal doesn't work
+
   
       echohl ModeMsg
       echo "M Statusline off"
@@ -130,6 +131,6 @@ if !exists("*MTagStatus") "don't define the same function twice
 endif
 
 "set up a command to turn on the M Statusline and autosave updating
-au BufEnter <buffer> command! -nargs=1 -buffer MStatus call MTagStatus(<q-args>)
+au BufEnter <buffer> command! -nargs=? -buffer MStatus call MTagStatus(<q-args>)
 
 let b:did_ms_ftplugin = 1

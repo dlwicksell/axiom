@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.13.0 - 2012 Sep 22
+Version 0.20.0 - 2012 Oct 16
 
 ## Copyright and License ##
 
@@ -42,7 +42,7 @@ newer.
 
 A colleague of mine, John Willis, has created a similar package of tools for
 use with the Emacs editor. It is called *Lorikeem* and you can download it
-from: <http://code.google.com/p/lorikeem/>.
+from: <http://www.coherent-logic.com/products.html#lorikeem>.
 
 Special thanks to Sam Habiel for encouraging me in my work on Axiom.
 
@@ -189,5 +189,13 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Added an option to open up a split window horizontally in globaldump.vim
-* Added an option setting to control which type of split window in settings.vim
+* Tweaked a few things in the structure of install
+* Rewrote and sped up mktags
+* Updated the documentation in mktags.1
+* Updated the documentation in axiom.txt
+* Tweaked a few settings in globaldump.vim
+* Fixed a couple bugs in mcompile.vim
+* Fixed an inconsistency in one of the options and tweaked mstatus.vim
+* Fixed a bug in mtags.vim
+* Tweaked a couple options in settings.vim
+* Changed a few settings in vimrc

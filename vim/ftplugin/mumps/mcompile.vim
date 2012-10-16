@@ -2,7 +2,7 @@
 " File:          mcompile.vim
 " Summary:       Compile MUMPS routines and show errors
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Sep 6, 2012
+" Last Modified: Sep 26, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2012 Fourth Watch Software, LC
@@ -61,11 +61,11 @@ if !exists("*MCompile") "don't define the same function twice
           let l:rdir[l:cnt] = l:cdir[l:cnt]
         endif
 
-        if l:cdir[l:cnt] =~ ".so"
+        if l:cdir[l:cnt] =~ "\\.so"
           let l:cdir[l:cnt] = fnamemodify(l:cdir[l:cnt], ":h")
         endif
 
-        if l:rdir[l:cnt] =~ ".so"
+        if l:rdir[l:cnt] =~ "\\.so"
           let l:rdir[l:cnt] = fnamemodify(l:rdir[l:cnt], ":h")
         endif
       endif

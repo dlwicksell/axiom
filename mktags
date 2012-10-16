@@ -4,7 +4,7 @@
 # File:          mktags
 # Summary:       Builds a tag file for MUMPS/GT.M routines
 # Maintainer:    David Wicksell
-# Last Modified: Sep 6, 2012
+# Last Modified: Oct 11, 2012
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2010-2012 Fourth Watch Software, LC
@@ -24,291 +24,457 @@
 #
 # This script was created to be run in a Red Hat or Ubuntu environment.
 #
-# This program creates a file called tags, or .tags
-# which it will place in the directory in which you
-# called it, or the home directory. When you use Vim,
-# it will allow you to jump between the caller and
-# the called portions of MUMPS code, regardless of
-# which routine you are in.
+# This program creates a file called mtags which it
+# will place in the directory in which you called it;
+# or .mtags, which it will place in the home directory.
+# When you use Vim or Emacs, it will allow you to jump
+# to the entryref under the cursor and back to the MUMPS
+# code which calls it.
 #
 # Call it either with the -g option, which searchs
-# through the gmtroutines environment variable, and
-# will build the tags file in ${HOME}/.mtags, or with
-# a list of files, and it will build the tags file in
-# ${HOME}/mtags. You should therefore add ~/.mtags and
-# ~/mtags to your Vim configuration.
+# through the $gtmroutines environment variable, and
+# will build the tags file recursively; or with the
+# -d option and a directory name, which will also build
+# the tags file recursively. You may optionally call it
+# with a list of routines, either with the -d option or
+# not, and it will build a different tags file than the
+# -g option. You should therefore add mtags and ~/.mtags
+# to your Vim configuration.
 #
-# E.g. set tags+=~/.mtags,~/mtags
+# E.g. set tags+=mtags,~/.mtags
 #
 # If you installed Axiom via the install script
 # provided in the tarball, it will set the tags option
 # for you.
 #
 # If you also include the -e option, it will build the
-# tags file in emacs mode, and also call it either
-# ${HOME}/.MTAGS or ${HOME}/MTAGS. This will allow you
-# to run mktags twice and create a tags file for both
-# Vim and Emacs.
-#
-# If you also include the -p option, it will build the
-# tags file unsorted, and then call the sort program
-# to sort it after it is finished, which can cut the
-# time it takes to build a very large tags file by up
-# to a factor of 3 or 4.
+# tags file in Emacs mode, and also call it either
+# MTAGS which it will place in the directory in which
+# you called it, or .MTAGS which it will place in the
+# home directory. This will allow you to run mktags
+# twice and create a tags file for both Vim and Emacs.
 
 
 # Usage message
-function usage {
-  echo "Usage: `basename $0` -[ep] -g"                   | tee -a ${LOG} 2>&1
-  echo "    or `basename $0` -[ep] files ..."            | tee -a ${LOG} 2>&1
-  echo "    or `basename $0` -h"                         | tee -a ${LOG} 2>&1
-} # End of usage
+function Usage
+{
+cat << EOF
+Usage: ${SCRIPT} [-elqv] [-d dir | file]+
+    or ${SCRIPT} [-elqv] -g
+    or ${SCRIPT} -h
+EOF
+} # End of Usage
+
+# Log messages to the system log and/or stdout and stderr
+function Log
+{
+  if [ "${LOG}" == "on" ]
+  then
+    if [ "$1" == "err" ]
+    then
+      if [ "${QUIET}" == "on" ]
+      then
+        logger -i -p user.$1 -t mktags "$2"
+      else
+        logger -is -p user.$1 -t mktags "$2" 2>&1
+      fi
+    fi
+
+    echo "$2" >> ${LOGFILE}
+  else
+    if [ "$1" == "err" ]
+    then
+      if [ "${QUIET}" == "off" ]
+      then
+        echo "$2"
+      fi
+    fi
+  fi
+} # End of Log
 
 # Error message and exit status
-function error {
+function Error
+{
   case "$1" in
   ctags)
-    echo "Install ctags in order to continue"            | tee -a ${LOG} 2>&1
+    Log err "Install ctags in order to continue"
 
     RET=1
     ;;
   version)
-    echo "Install exuberant-ctags in order to continue"  | tee -a ${LOG} 2>&1
+    Log err "Install exuberant-ctags in order to continue"
 
     RET=2
     ;;
   env)
-    echo -n "Define the \$gtmroutines environment"       | tee -a ${LOG} 2>&1
-    echo " variable in order to use the -$2 argument"    | tee -a ${LOG} 2>&1
+    Log err "-$2 requires you to set the \$gtmroutines environment variable"
 
     RET=3
     ;;
   option)
-    echo "-$2 is not a valid option"                     | tee -a ${LOG} 2>&1
+    Log err "-$2 is not a valid option"
 
-    usage
+    if [ "${QUIET}" == "off" ]
+    then
+      Usage
+    fi
 
     RET=4
     ;;
   args)
-    echo "Supply either -g or a list of MUMPS routines"  | tee -a ${LOG} 2>&1
+    Log err "Supply either -g, -d <directory>, or a list of MUMPS routines"
 
-    usage
+    if [ "${QUIET}" == "off" ]
+    then
+      Usage
+    fi
 
     RET=5
     ;;
   running)
-    echo "`basename $0` is already running"              | tee -a ${LOG} 2>&1
+    Log err "${SCRIPT} is already running"
 
     RET=6
     ;;
   '*')
     #Should never get here
-    echo "Bad error code ($1) in `basename $0`"          | tee -a ${LOG} 2>&1
+    Log err "Bad error code ($1) in ${SCRIPT}"
 
     RET=7
   esac
 
-  echo "Finished `basename $0` ; User: ${USER} ; `date`"         >> ${LOG} 2>&1
-  echo -e "\t\t------------------------------------------------" >> ${LOG} 2>&1
+  if [ "${LOG}" == "on" ]
+  then
+    Log notice "Finished ${SCRIPT} ; User: ${USER} ; `date`"
+    Log notice "-----------------------------------------------------------"
+  fi
 
   exit ${RET}
-} # End of usage
+} # End of Error
 
 # Build the tags file
-function mtags {
-  for ROUTINE
-  do
-    TMP=`basename ${ROUTINE} .m`
-    if [ "${TMP}" == "*" ]; then #No MUMPS routines present
-      break
-    fi
+function Mtags
+{
+  DIRS="$@"
 
-    if [ "${ROUTINE: -2}" == ".m" ]; then
-      FILE=`basename ${ROUTINE} .m | tr _ %`
+  BUFFER=`ctags ${ARGS} -a --fields=+n --langdef=MUMPS \
+    --langmap=MatLab:,ObjectiveC:,MUMPS:.m --languages=-all,+MUMPS \
+    --regex-MUMPS="/^([%[:alnum:]]+)/\1\^/l,label,line label entryref/i" \
+    ${DIRS} 2>&1`
 
-      ctags ${ARGS} -a --langdef=MUMPS \
-        --langmap=MUMPS:.m --language-force=MUMPS \
-        --regex-MUMPS="/^([%[:alnum:]]+)/\1\^${FILE}/l,label/i" \
-        ${ROUTINE}                                    2>&1 | tee -a ${LOG}
-    fi
-  done
-} # End of mtags
+  if [ "${BUFFER}" ]
+  then
+    Log err "${BUFFER}"
+  fi
+
+  unset BUFFER
+} # End of Mtags
 
 # Build a tags file by parsing the $gtmroutines search path
-function mtags_default {
-  for DIRS in ${gtmroutines}
+function Mtags_gtm
+{
+  for DIR in ${gtmroutines}
   do
-    #regex syntax (=~) for the following test does not work on Red Hat systems
-    if [[ ${DIRS} != ${DIRS/"("/} ]]; then #$gtmroutines with "()" source syntax
-      DIRS=`echo ${DIRS} | cut -d "(" -f 2 | cut -d ")" -f 1`
-    elif [ "${DIRS: -3}" == ".so" ]; then
-        DIRS=`dirname ${DIRS}`
+    #regex syntax (=~) for the following test does not work in Red Hat Bash
+    if [[ ${DIR} != ${DIR/"("/} ]] #$gtmroutines with "()" source syntax
+    then
+      DIR=`echo ${DIR} | cut -d "(" -f 2 | cut -d ")" -f 1`
+    elif [[ ${DIR} != ${DIR/")"/} ]] #$gtmroutines with "()" source syntax
+    then
+      DIR=`echo ${DIR} | cut -d "(" -f 2 | cut -d ")" -f 1`
+    elif [ "${DIR: -3}" == ".so" ]
+    then
+      DIR=`dirname ${DIR}`
     fi
 
-    for DIR in ${DIRS} #call mtags for each directory in $gtmroutines
-      do
-        ls ${DIR}/*.m > /dev/null 2>&1
-        LS=$?
-
-        if [ ${LS} == 0 ]; then
-          mtags ${DIR}/*.m
-        else
-          mtags `dirname ${DIRS}`/*.m #might be in the parent directory
-        fi
-      done
+    DIRS="${DIRS} ${DIR}"
   done
-} # End of mtags_default
+
+  Mtags ${DIRS}
+} # End of Mtags_gtm
 
 
 #mktags script starts here
-if [ ! "${USER}" ]; then
+SCRIPT=`basename $0`
+TAGDIR=${HOME}/.mktags.lock
+
+#define $USER within a limited environment.
+#E.g. when being run by cron
+if [ -z "${USER}" ]
+then
   USER=${LOGNAME}
 fi
 
-TMPDIR=${HOME}/.tags
+#define defaults which will be switched by command line options
+DIRECTORY=off EMACS=off
+GTM=off LOG=off
+QUIET=off VERBOSE=off
 
-trap 'rm -rf ${TMPDIR};echo -e "\e[2DCaught SIGINT; Cleaning up.";exit 8' SIGINT
-
-if [ ! -d ${HOME}/log ]; then
-  mkdir ${HOME}/log
-fi
-
-LOG=${HOME}/log/`basename $0 .sh`.log
-
-echo -e "\t\t------------------------------------------------"   >> ${LOG} 2>&1
-echo "Started `basename $0` ; User: ${USER} ; `date`"            >> ${LOG} 2>&1
-
-which ctags > /dev/null 2>&1
-CTAGS=$?
-
-if [ ${CTAGS} != 0 ]; then
-  error ctags
-fi
-
-ctags --version | grep -q "Exuberant Ctags"
-VERSION=$?
-
-if [ ${VERSION} != 0 ]; then
-  error version
-fi
-
-GTM=off POSTSORT=off EMACS=off 
-LOCK=mtags.lock
-
-while getopts :epgh opt
+while getopts :d:eghlqv OPT
 do
-  case ${opt} in
+  case ${OPT} in
+  d) #directory mode
+    if [ "${GTM}" == "off" ]
+    then
+      DIRECTORY=on
+      DIRECTORIES="${DIRECTORIES} ${OPTARG}"
+    else
+      Error args
+    fi
+    ;;
+  e) #Emacs mode
+    EMACS=on
+    TAGDIR=${HOME}/.MKTAGS.lock
+    ;;
   g) #$gtmroutines mode
-    if [ "${gtmroutines}" == "" ]; then
-      error env ${opt}
+    if [ -z "${gtmroutines}" ]
+    then
+      Error env ${OPT}
     fi
 
-    GTM=on
-    ;;
-  p) #postsort mode
-    POSTSORT=on
-    ;;
-  e) #emacs mode
-    EMACS=on
-    LOCK=MTAGS.lock
+    if [ "${DIRECTORY}" == "off" ]
+    then
+      GTM=on
+    else
+      Error args
+    fi
     ;;
   h) #help, nullifies other options when present
-    usage
+    Usage
 
     exit 0
     ;;
+  l) #log mode
+    LOG=on
+    ;;
+  q) #quiet mode
+    QUIET=on
+    ;;
+  v) #verbose mode
+      VERBOSE=on
+    ;;
   '?') #invalid option
-    error option ${OPTARG}
+    LOG=off
+    QUIET=off
+
+    Error option ${OPTARG}
     ;;
   esac
 done
 
-shift $((OPTIND -1))
+shift $((OPTIND - 1))
 
-if [ "${GTM}" == "off" ]; then
-  if [ $# -lt 1 ]; then
-    error args
-  else
-    DOT=
-    PROGRAM="mtags $@"
+#getopts doesn't handle a single -
+if [ "$1" == "-" ]
+then
+  Error option
+fi
+ 
+#turn on quiet mode when not connected to a controlling terminal
+if [ "`tty`" == "not a tty" ]
+then
+  QUIET=on
+fi
+
+if [ "${LOG}" == "on" ]
+then
+  #create a log directory if there isn't already one
+  if [ ! -d ${HOME}/log ]
+  then
+    mkdir ${HOME}/log
   fi
+
+  LOGFILE=${HOME}/log/`basename $0 .sh`.log
+fi
+
+Log notice "Started ${SCRIPT} ; User: ${USER} ; `date`"
+
+if ! which ctags &> /dev/null
+then
+  Error ctags
+fi
+
+if ! ctags --version | grep -qi "Exuberant Ctags"
+then
+  Error version
+fi
+
+if [ "${GTM}" == "on" ]
+then
+  if [ $# -ne 0 ]
+  then
+    Error args
+  fi
+
+  PROGRAM=Mtags_gtm
 else
-  DOT=.
-  PROGRAM=mtags_default
-
-  if [ $# -gt 0 ]; then
-    error args
+  if [ "${DIRECTORY}" == "on" ]
+  then
+    PROGRAM="Mtags ${DIRECTORIES}"
   fi
-fi
 
-if [ -f ${TMPDIR}/${DOT}${LOCK} ]; then
-  PID=`cat ${TMPDIR}/${DOT}${LOCK}`
-
-  ps -p ${PID} > /dev/null
-  PS=$?
-
-  if [ ${PS} == 0 ]; then
-    error running
+  if [ "${PROGRAM}" ]
+  then
+    PROGRAM="${PROGRAM} $@"
   else
-    rm -rf ${TMPDIR}
+    PROGRAM="Mtags $@"
   fi
 fi
 
-if [ ! -d ${TMPDIR} ]; then
-  if [ -f ${TMPDIR} ]; then
-    mv ${TMPDIR} ${TMPDIR}.orig
+#using a lock directory avoids a race condition
+if mkdir ${TAGDIR} 2> /dev/null
+then
+  #trap common signals and clean up working lock directory on exit
+  trap "rm -rf ${TAGDIR}; exit 127" SIGINT SIGQUIT SIGABRT SIGTERM
+
+  echo "$$" > ${TAGDIR}/pid
+
+  Log notice "Stored the PID: $$ in ${TAGDIR}/pid"
+else
+  if [ -f ${TAGDIR} ]
+  then
+    Log err "May need to remove the ${TAGDIR} file to run ${SCRIPT}"
+  elif [ -f ${TAGDIR}/pid ]
+  then
+    PID=`cat ${TAGDIR}/pid 2> /dev/null`
+
+    if ! ps -p ${PID} &> /dev/null
+    then
+      Log err "May need to remove the ${TAGDIR} directory to run ${SCRIPT}"
+    fi
+  else
+    Log err "May need to remove the ${TAGDIR} directory to run ${SCRIPT}"
+  fi
+
+  Error running
+fi
+
+TAGFILE=${TAGDIR}/mtags
+ARGS="-f ${TAGFILE} -u"
+
+if [ "${EMACS}" == "on" ]
+then
+  TAGFILE=${TAGDIR}/MTAGS
+  ARGS="-f ${TAGFILE} -e"
+fi
+
+if [ "${VERBOSE}" == "on" ]
+then
+  ARGS="${ARGS}V"
+fi
+
+if [ "${DIRECTORY}" == "on" -o "${GTM}" == "on" ]
+then
+  ARGS="${ARGS}R"
+fi
+
+if [ "${GTM}" == "on" ]
+then
+  ARGS="${ARGS} --exclude=gtmsecshrdir" #gtmsecshrdir is owned by root
+fi
+
+${PROGRAM}
+
+FILE=`basename ${TAGFILE}`
+
+if [ "${GTM}" == "on" ]
+then
+  MTAGFILE="${HOME}/.${FILE}"
+else
+  MTAGFILE=${FILE}
+fi
+
+if [ "${EMACS}" == "on" ]
+then
+  awk -F'\t' '
+    BEGIN {
+      FLAG = 0
+      FS = "\x7F"
+    }
     
-    echo "Your old ${TMPDIR} file is now ${TMPDIR}.orig"         >> ${LOG} 2>&1
-  fi
+    {
+      if ($0 == "\f") {
+        print $0
 
-  mkdir ${TMPDIR}
-fi
+        FLAG = 1
 
-if [ "${POSTSORT}" == "off" ]; then
-  TAGFILE=${TMPDIR}/${DOT}mtags
-  ARGS="-f ${TAGFILE}.$$"
+        next
+      }
 
-  if [ "${EMACS}" == "on" ]; then
-    TAGFILE=${TMPDIR}/${DOT}MTAGS
-    ARGS="-f ${TAGFILE}.$$ -e"
-  fi
-
-  echo "$$" > ${TMPDIR}/${DOT}${LOCK}
-  echo "Stored the PID: $$ in ${TMPDIR}/${DOT}${LOCK}"           >> ${LOG} 2>&1
+      if (FLAG == 1) {
+        ROUTINE = $0
   
-  ${PROGRAM}
+        sub("^.*/", "", ROUTINE) 
+        sub(",.*", "", ROUTINE) 
+        sub("_", "%", ROUTINE) 
+        sub("\\.m", "", ROUTINE) 
+
+        FLAG = 0
+
+        print $0
+
+        next
+      } else {
+        TEXT = $1 "\x7F"
+        LABEL = $2
+
+        sub("\x01.*", "", LABEL)
+
+        LABEL = LABEL ROUTINE
+        INFO = $2
+
+        sub(".*\x01", "", INFO)
+
+        INFO = "\x01" INFO
+
+        print TEXT LABEL INFO
+      }
+    }
+  ' ${TAGFILE} > ${TAGDIR}/${FILE}.fixed
 else
-  TAGFILE=${TMPDIR}/${DOT}mtags
-  TMPFILE=${TMPDIR}/${DOT}mtags.tmp
-  ARGS="-f ${TMPFILE}.$$ -u"
-
-  if [ "${EMACS}" == "on" ]; then
-    TAGFILE=${TMPDIR}/${DOT}MTAGS
-    TMPFILE=${TMPDIR}/${DOT}MTAGS.TMP
-    ARGS="-f ${TMPFILE}.$$ -u -e"
-  fi
-
-  echo "$$" > ${TMPDIR}/${DOT}${LOCK}
-  echo "Stored the PID: $$ in ${TMPDIR}/${DOT}${LOCK}"           >> ${LOG} 2>&1
-
-  ${PROGRAM}
+  awk -F'\t' '
+    {
+      if ($2 ~ "\\.m") {
+        ROUTINE = $2 
+  
+        sub("^.*/", "", ROUTINE) 
+        sub("_", "%", ROUTINE) 
+        sub("\\.m", "", ROUTINE) 
+  
+        $1 = $1 ROUTINE 
+      }
+  
+      OFS = "\t"
+  
+      print $0
+    }
+  ' ${TAGFILE} > ${TAGDIR}/${FILE}.fixed
 
   export LC_ALL=C #force ascii sorting, will override locale temporarily
 
-  #sorting the temp tag file, and then changing the header to reflect that
-  sort -u ${TMPFILE}.$$ |
-    sed '2s/\(!_TAG_FILE_SORTED\t\)0\(.*\)/\11\2/' > ${TAGFILE}.$$
-
-  rm ${TMPFILE}.$$
+  sed '1,6s/\(!_TAG_FILE_SORTED\t\)0\(.*\)/\11\2/' ${TAGDIR}/${FILE}.fixed |
+    sort -u -o ${TAGDIR}/${FILE}.fixed
 fi
 
-if [ -s ${TAGFILE}.$$ ]; then
-  mv ${TAGFILE}.$$ ${HOME}/`basename ${TAGFILE}`                 >> ${LOG} 2>&1
+BUFFER=`cp -f ${TAGDIR}/${FILE}.fixed ${MTAGFILE}`
+
+if [ "${BUFFER}" ]
+then
+  Log err "${BUFFER}"
 fi
 
-rm -rf ${TMPDIR}                                                 >> ${LOG} 2>&1
+unset BUFFER
 
-echo "Finished `basename $0` ; User: ${USER} ; `date`"           >> ${LOG} 2>&1
+BUFFER=`rm -rf ${TAGDIR}`
+
+if [ "${BUFFER}" ]
+then
+  Log err "${BUFFER}"
+fi
+
+unset BUFFER
+
+Log notice "Finished ${SCRIPT} ; User: ${USER} ; `date`"
+Log notice "-----------------------------------------------------------"
 
 exit 0

@@ -2,7 +2,7 @@
 " File:          globaldump.vim
 " Summary:       Dumps a global reference while editing
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Sep 22, 2012
+" Last Modified: Oct 16, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -25,7 +25,7 @@
 " display the contents of the global in a vertical split window,
 " to the right of the routine window, otherwise the contents of
 " the global will be displayed in your current buffer, on top of
-" your routine. If you define b:splittype and set it to "down",
+" your routine. If you define b:splittype and set it to 'horizontal',
 " then the split window will be horizontal, and underneath the
 " routine window.
 "
@@ -145,7 +145,7 @@ if !exists("*ZWRArgument") "don't define the same function twice
   
           redir END "change output back to current buffer
   
-          if getbufvar("%", "splittype") == "down" "split window mode
+          if getbufvar("%", "splittype") == "horizontal" "split window mode
             "open up the split window on the bottom
             execute "rightbelow split " . l:tempfile
           else
@@ -164,12 +164,16 @@ if !exists("*ZWRArgument") "don't define the same function twice
           "Ctl-K map will only be applicable in the window with the global data
           nnoremap <silent> <buffer> <C-K> :call FileDelete()<CR>
 
-          "These keybindings are only applicable in a vertical split window
-          if getbufvar("%", "splittype") != "down" "split window mode
+          if getbufvar("%", "splittype") == "vertical" "split window mode
             ", will increase the size of the window with the global data
             nnoremap <silent> <buffer> , <C-W>>
             ". will decrease the size of the window with the global data
             nnoremap <silent> <buffer> . <C-W><
+          else
+            ", will increase the size of the window with the global data
+            nnoremap <silent> <buffer> , <C-W>+
+            ". will decrease the size of the window with the global data
+            nnoremap <silent> <buffer> . <C-W>-
           endif
   
           "remap the key mappings for the tag stack, so buffer won't mess it up

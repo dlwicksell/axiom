@@ -4,7 +4,7 @@
 # File:          install
 # Summary:       install script for the Axiom package
 # Maintainer:    David Wicksell <dlw@linux.com>
-# Last Modified: June 19, 2012
+# Last Modified: Oct 7, 2012
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2011,2012 Fourth Watch Software, LC
@@ -24,21 +24,27 @@
 #
 # This script is written to be run in a Red Hat or Ubuntu environment.
 # Tweaks maybe needed for other distributions.
-#
-# Do NOT set -e
 
+
+# Usage message
+function Usage
+{
+  echo "Usage: ${SCRIPT} [-q]"
+  echo "    or ${SCRIPT} -h"
+} # End of Usage
 
 #find out if they want to overwrite, backup, or append configuration files
-function question {
+function Question
+{
   echo "There is a $1 file installed already. Would you like to make a"
   echo "backup of it, and install the package version, append the options"
   echo "that are required to the end of it, or overwrite the file completely?"
   echo
   echo "Please choose the number of the option you want."
 
-  select answer in backup append overwrite quit
+  select ANSWER in backup append overwrite quit
   do
-    case ${answer} in 
+    case ${ANSWER} in 
     backup)
       cp -p ~/$1 ~/$1.orig
 
@@ -61,12 +67,13 @@ function question {
       ;;
     overwrite)
       #be extra careful with the overwrite option
-      echo -n "You have chosen to ${answer} $HOME/$1, is this correct? [Y]/N "
+      echo -n "You have chosen to ${ANSWER} $HOME/$1, is this correct? [Y]/N "
       read ANS
 
       ANS=`echo ${ANS} | tr [:lower:] [:upper:]`
 
-      if [ "${ANS}" == "Y" -o "${ANS}" == "YES" -o "${ANS}" == "" ]; then
+      if [ "${ANS}" == "Y" -o "${ANS}" == "YES" -o "${ANS}" == "" ]
+      then
         cp -p ${1/"."/} ~/$1
 
         echo "Installed new $1 file"
@@ -78,37 +85,52 @@ function question {
       fi
       ;;
     quit)
-      exit 1
+      exit 0
       ;;
     *)
       echo -n "Please choose the number of the option you want. "
       echo
     esac
   done
-} # End of question
+} # End of Question
 
 
 #install script starts here
-quiet=off
+SCRIPT=`basename $0`
+QUIET=off
 
-#only care about -q, or quiet mode, but ignore all other arguments
-while getopts :q opt
+#only care about -q (quiet mode), or -h (help) but ignore all other arguments
+while getopts :hq OPT
 do
-  case ${opt} in
-  q) #quiet mode
-    quiet=on
+  case ${OPT} in
+  h) #help
+    Usage
+
+    exit 0
+    ;;
+  q) #Quiet mode
+    QUIET=on
+    ;;
+  '?') #invalid option
+    echo "-${OPTARG} is not a valid option"
+    Usage
+
+    exit 1
     ;;
   esac
 done
 
-if [ "${quiet}" == "off" ]; then
+if [ "${QUIET}" == "off" ]
+then
   clear
 fi
 
 OS=`lsb_release -is` #Ubuntu and Red Hat do a few things differently
 
-if [ -z "${gtmroutines}" ]; then
-  if [ "${quiet}" == "off" ]; then
+if [ -z "${gtmroutines}" ]
+then
+  if [ "${QUIET}" == "off" ]
+  then
     echo The \$gtmroutines environment variable is not defined. In order to use
     echo the global dumping functionality of Axiom you have to install GT.M
     echo and KBAWDUMP.m, as well as define \$gtmroutines. See the documentation:
@@ -118,26 +140,30 @@ if [ -z "${gtmroutines}" ]; then
 else
   DIR=`echo ${gtmroutines} | awk '{print $1}'`
 
-  if [[ ${DIR} != ${DIR/"("/} ]]; then #$gtmroutines with "()" source syntax
+  if [[ ${DIR} != ${DIR/"("/} ]] #$gtmroutines with "()" source syntax
+  then
     DIR=`echo ${DIR} | cut -d "(" -f 2 | cut -d ")" -f 1`
   fi
 
   cp -p KBAWDUMP.m ${DIR}/
 
-  if [ "${quiet}" == "off" ]; then
+  if [ "${QUIET}" == "off" ]
+  then
     echo Copied the KBAWDUMP.m global dumping routine to ${DIR}
     echo See the man page for details on how to use it. E.g. $ man KBAWDUMP
     echo
   fi
 fi
 
-if [ ! -d ~/bin ]; then
+if [ ! -d ~/bin ]
+then
   mkdir ~/bin
 fi
 
 cp -p mktags ~/bin/
 
-if [ "${quiet}" == "off" ]; then
+if [ "${QUIET}" == "off" ]
+then
   echo Copied the mktags shell script to $HOME/bin
   echo
   echo Run mktags to build the tags file for the mtags functionality.
@@ -145,32 +171,38 @@ if [ "${quiet}" == "off" ]; then
   echo
 fi
 
-if [[ $PATH == ${PATH/"${HOME}/bin"/} ]]; then #does $PATH contain ~/bin?
-  if [ "${OS}" == "Ubuntu" -o "${OS}" == "LinuxMint" ]; then
+if [[ $PATH == ${PATH/"${HOME}/bin"/} ]] #does $PATH contain ~/bin?
+then
+  if [ "${OS}" == "Ubuntu" -o "${OS}" == "LinuxMint" ]
+  then
     echo "export PATH=\$HOME/bin:\$PATH" >> ~/.profile
 
-    if [ "${quiet}" == "off" ]; then
+    if [ "${QUIET}" == "off" ]
+    then
       echo Appended a command to add \$HOME/bin to \$PATH in ~/.profile
       echo
     fi
   else
     echo "export PATH=\$HOME/bin:\$PATH" >> ~/.bash_profile
 
-    if [ "${quiet}" == "off" ]; then
+    if [ "${QUIET}" == "off" ]
+    then
       echo Appended a command to add \$HOME/bin to \$PATH in ~/.bash_profile
       echo
     fi
   fi
 fi
 
-if [ ! -d ~/man/man1 ]; then
+if [ ! -d ~/man/man1 ]
+then
   mkdir -p ~/man/man1
 fi
 
 cp -p mktags.1 KBAWDUMP.1 ~/man/man1/
 gzip -f9 ~/man/man1/{mktags,KBAWDUMP}.1 #compress the man pages
 
-if [ "${quiet}" == "off" ]; then
+if [ "${QUIET}" == "off" ]
+then
   echo Copied the mktags and KBAWDUMP man pages to $HOME/man/man1
   echo
   echo In order to install them system-wide, you need to be root. Consult the
@@ -178,45 +210,51 @@ if [ "${quiet}" == "off" ]; then
   echo
 fi
 
-if [ "${OS}" == "Ubuntu" -o "${OS}" == "LinuxMint" ]; then
+if [ "${OS}" == "Ubuntu" -o "${OS}" == "LinuxMint" ]
+then
   export MANPATH=:~/man #putting a colon at the beginning is a trick
 
   mandb -q
 
-  if [ "${quiet}" == "off" ]; then
+  if [ "${QUIET}" == "off" ]
+  then
     echo Added the ~/man directory to \$MANPATH, and rebuilt the database
     echo
   fi
 else
-  grep -q MANPATH ~/.bash_profile
-
-  if [ $? -eq 0 ]; then
-    if [ "${quiet}" == "off" ]; then
+  if grep -q MANPATH ~/.bash_profile
+  then
+    if [ "${QUIET}" == "off" ]
+    then
       echo Make sure \$HOME/man is in the \$MANPATH variable in ~/.bash_profile
     fi
   else
     echo >> ~/.bash_profile
     echo "export MANPATH=\$HOME/man:`manpath`" >> ~/.bash_profile
 
-    if [ "${quiet}" == "off" ]; then
+    if [ "${QUIET}" == "off" ]
+    then
       echo Appended a command to add \$HOME/man to \$MANPATH in ~/.bash_profile
     fi
   fi
 
-  if [ "${quiet}" == "off" ]; then
+  if [ "${QUIET}" == "off" ]
+  then
     echo To access your man pages now, type: $ source ~/.bash_profile
     echo
   fi
 fi
 
-if [ "${quiet}" == "off" ]; then
-  if [ -f ~/.vimrc ]; then
-    echo -n "Please type <enter> to continue: "
+if [ "${QUIET}" == "off" ]
+then
+  if [ -f ~/.vimrc ]
+  then
+    echo -n "Please type <Enter> to continue: "
     read X
 
     clear
   
-    question .vimrc
+    Question .vimrc
   else
     cp -p vimrc ~/.vimrc
   
@@ -224,19 +262,21 @@ if [ "${quiet}" == "off" ]; then
     echo
   fi
   
-  if [ ! -d ~/.vim ]; then
+  if [ ! -d ~/.vim ]
+  then
     cp -aT vim ~/.vim
   
     echo Copied the Vim utility package to ~/.vim
     echo
   else
-    if [ -f ~/.vim/filetype.vim ]; then
-      echo -n "Please type <enter> to continue: "
+    if [ -f ~/.vim/filetype.vim ]
+    then
+      echo -n "Please type <Enter> to continue: "
       read X
 
       clear
   
-      question .vim/filetype.vim
+      Question .vim/filetype.vim
     else
       cp -p vim/filetype.vim ~/.vim/
   
@@ -244,13 +284,14 @@ if [ "${quiet}" == "off" ]; then
       echo
     fi
   
-    if [ -f ~/.vim/scripts.vim ]; then
-      echo -n "Please type <enter> to continue: "
+    if [ -f ~/.vim/scripts.vim ]
+    then
+      echo -n "Please type <Enter> to continue: "
       read X
 
       clear
   
-      question .vim/scripts.vim
+      Question .vim/scripts.vim
     else
       cp -p vim/scripts.vim ~/.vim/
   
@@ -258,7 +299,8 @@ if [ "${quiet}" == "off" ]; then
       echo
     fi
   
-    if [ ! -d ~/.vim/doc ]; then
+    if [ ! -d ~/.vim/doc ]
+    then
       mkdir ~/.vim/doc
     fi
     
@@ -267,7 +309,8 @@ if [ "${quiet}" == "off" ]; then
     echo Copied vim/doc/axiom.txt to ~/.vim/doc
     echo
   
-    if [ ! -d ~/.vim/ftplugin ]; then
+    if [ ! -d ~/.vim/ftplugin ]
+    then
       mkdir ~/.vim/ftplugin
     fi
     
@@ -276,17 +319,19 @@ if [ "${quiet}" == "off" ]; then
     echo Copied vim/ftplugin/mumps/*.vim to ~/.vim/ftplugin/mumps
     echo
     
-    if [ ! -d ~/.vim/plugin ]; then
+    if [ ! -d ~/.vim/plugin ]
+    then
       mkdir ~/.vim/plugin
     fi
     
-    if [ -f ~/.vim/plugin/templates.vim ]; then
-      echo -n "Please type <enter> to continue: "
+    if [ -f ~/.vim/plugin/templates.vim ]
+    then
+      echo -n "Please type <Enter> to continue: "
       read X
 
       clear
   
-      question .vim/plugin/templates.vim
+      Question .vim/plugin/templates.vim
     else
       cp -p vim/plugin/templates.vim ~/.vim/plugin/
   
@@ -294,7 +339,8 @@ if [ "${quiet}" == "off" ]; then
       echo
     fi
     
-    if [ ! -d ~/.vim/syntax ]; then
+    if [ ! -d ~/.vim/syntax ]
+    then
       mkdir ~/.vim/syntax
     fi
     
@@ -303,7 +349,8 @@ if [ "${quiet}" == "off" ]; then
     echo Copied vim/syntax/mumps.vim to ~/.vim/syntax
     echo
     
-    if [ ! -d ~/.vim/templates ]; then
+    if [ ! -d ~/.vim/templates ]
+    then
       mkdir ~/.vim/templates
     fi
     
@@ -319,7 +366,8 @@ fi
 
 vim "+helptags $HOME/.vim/doc" "+quit"
 
-if [ "${quiet}" == "off" ]; then
+if [ "${QUIET}" == "off" ]
+then
   echo "Installed the Vim help documentation"
   echo
 

@@ -2,7 +2,7 @@
 " File:          .vimrc
 " Summary:       Sample .vimrc for the Axiom package
 " Maintainer:    David Wicksell
-" Last Modified: July 11, 2012
+" Last Modified: Sep 26, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011,2012 Fourth Watch Software, LC
@@ -36,7 +36,7 @@ set wildmenu
 set tabstop=8
 set softtabstop=4
 set shiftwidth=4
-set tabpagemax=20
+set tabpagemax=30
 
 if has("gui_running")
   colorscheme torte
@@ -59,10 +59,14 @@ else
   "turn on syntax and source the Axiom utility functions
   syntax on
 
-  source ~/.vim/ftplugin/mumps/datetime.vim
-  source ~/.vim/ftplugin/mumps/globaldump.vim
-  source ~/.vim/ftplugin/mumps/mtags.vim
-  source ~/.vim/ftplugin/mumps/settings.vim
+  if bufname("%") =~ "\\.m"
+    source ~/.vim/ftplugin/mumps/datetime.vim
+    source ~/.vim/ftplugin/mumps/globaldump.vim
+    source ~/.vim/ftplugin/mumps/mcompile.vim
+    source ~/.vim/ftplugin/mumps/mstatus.vim
+    source ~/.vim/ftplugin/mumps/mtags.vim
+    source ~/.vim/ftplugin/mumps/settings.vim
+  endif
 endif
 
 " vim: set ft=vim :

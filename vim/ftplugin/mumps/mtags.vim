@@ -2,7 +2,7 @@
 " File:          mtags.vim
 " Summary:       Jumps to different labels in a MUMPS routine
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Aug 12, 2012
+" Last Modified: Sep 26, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -173,7 +173,7 @@ if !exists("*MTag") "don't define the same function twice
       let l:routine = strpart(l:routine, strridx(l:routine, "/")+1)
       let l:routine = tr(l:routine, "_", "%") "change to external format
   
-      if l:routine =~ ".m" "we have the .m extension
+      if l:routine =~ "\\.m" "we have the .m extension
         let l:length = strlen(l:routine)-2 "find the length without the suffix
         let l:routine = strpart(l:routine, 0, l:length) "remove the .m suffix
       endif

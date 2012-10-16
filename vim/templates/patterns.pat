@@ -2,7 +2,7 @@
 " File:          patterns.pat
 " Summary:       template patterns script for MUMPS/GT.M
 " Maintainer:    David Wicksell
-" Last Modified: July 11, 2012
+" Last Modified: Jul 11, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011,2012 Fourth Watch Software, LC

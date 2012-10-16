@@ -2,7 +2,7 @@
 " File:          settings.vim
 " Summary:       Configuration settings script
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Sep 22, 2012
+" Last Modified: Oct 8, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011,2012 Fourth Watch Software, LC
@@ -22,9 +22,9 @@
 "
 " This is a companion script to the mumps.vim syntax highlighting file.
 " It sets up certain options in Vim that are required for that file to
-" work properly. It also sets up some options for the globaldump.vim and
-" mtags.vim scripts. When you leave a mumps buffer it puts everything that
-" it changed back to the way it was.
+" work properly. It also sets up some options for the globaldump.vim,
+" mtags.vim, and mstatus.vim scripts. When you leave a mumps buffer it
+" puts everything that it changed back to the way it was.
 "
 " It binds Ctl-N to toggle on and off syntax folding of dotted do blocks.
 " It defaults to off.
@@ -36,7 +36,7 @@ endif
 
 if !exists("*StartSyntax") "don't define the same function twice
   function! StartSyntax() "set necessary syntax options in one place
-    setlocal tags+=~/.mtags,~/mtags "add the tags files for the Axiom package
+    setlocal tags+=mtags,~/.mtags "add the tags files for the Axiom package
     "required to define mumps intrinsic functions and special variables
     setlocal iskeyword+=$
   
@@ -66,10 +66,10 @@ if !exists("*StartSyntax") "don't define the same function twice
     "or set it to 0 or comment it out if you don't want a split screen
     let b:globalsplit = 1
 
-    "set this variable to "down" if you want the split screen on the bottom,
-    "or set it to "right" or comment it out if you want it to the right
+    "set this variable to 'horizontal' if you want a horizontal split screen
+    "or set it to 'vertical' or comment it out if you want it to be vertical
     "Note - This option is ignored if globalsplit mode is turned off
-    let b:splittype = "right"
+    let b:splittype = "vertical"
   
     "comment out the next 2 commands to turn off the M Statusline
     set statusline=%!MTagStatusLine() "setlocal doesn't work on 700 or older?
