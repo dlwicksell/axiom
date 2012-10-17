@@ -3,7 +3,7 @@
 " Language:      MUMPS/GT.M
 " Summary:       Syntax file
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Oct 10, 2012
+" Last Modified: Oct 17, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -177,15 +177,6 @@ syntax keyword mumpsSpecialVariable contained $ZTOL[DVAL] $ZTRI[GGEROP]
 syntax keyword mumpsSpecialVariable contained $ZTSL[ATE] $ZTUP[DATE] $ZTVA[LUE]
 syntax keyword mumpsSpecialVariable contained $ZTWO[RMHOLE]
 
-"fold comment blocks
-":set foldnestmax=1 for this to work, breaks mumpsDoBlock though
-"syntax region mumpsCommentBlock keepend transparent fold
-"  \ start=/^\s\+;/
-"  \ end=/\n\ze\([%A-Za-z][A-Za-z0-9]*\|[0-9]\+\|\s\+;\@!\)/
-"
-"doesn't work, apparently the \zs can't be on the next line - ridiculous
-"  \ start=/^\([%A-Za-z][A-Za-z0-9]*\|[0-9]\+\|\s\+;\@!\).*\n\zs\s\+;/
-
 "fold dotted do blocks recursively, to an arbitrary depth
 ":set foldnestmax=20 is the default for nesting folds
 syntax region mumpsDoBlock keepend transparent fold
@@ -225,7 +216,6 @@ highlight def link mumpsCommand Keyword
 highlight def link mumpsFunction Function
 highlight def link mumpsSpecialVariable Identifier
 
-"highlight def link mumpsCommentBlock Folded
 highlight def link mumpsDoBlock Folded
 
 let b:current_syntax = "mumps"

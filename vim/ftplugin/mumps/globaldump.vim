@@ -2,7 +2,7 @@
 " File:          globaldump.vim
 " Summary:       Dumps a global reference while editing
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Oct 16, 2012
+" Last Modified: Oct 17, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -128,8 +128,8 @@ if !exists("*ZWRArgument") "don't define the same function twice
         else
           let l:PPID = system("echo -n $PPID") "getpid() doesn't exist
         endif
-  
-        let l:tempfile = "~/.globaldump.tmp." . l:PPID "create a temp file
+
+        let l:tempfile = "~/.globaldump." . l:PPID "create a temp file
   
         if !filereadable(glob(l:tempfile)) "doesn't already exist
           execute "redir! > " . l:tempfile | "dump the global to the temp file
@@ -144,6 +144,9 @@ if !exists("*ZWRArgument") "don't define the same function twice
           silent echo l:global
   
           redir END "change output back to current buffer
+  
+          "expose the splittype variable to the split screen buffer
+          let s:splittype = b:splittype
   
           if getbufvar("%", "splittype") == "horizontal" "split window mode
             "open up the split window on the bottom
@@ -161,10 +164,7 @@ if !exists("*ZWRArgument") "don't define the same function twice
           let s:oldshowbreak = &showbreak
           set showbreak=>> "shows that lines have wrapped
   
-          "Ctl-K map will only be applicable in the window with the global data
-          nnoremap <silent> <buffer> <C-K> :call FileDelete()<CR>
-
-          if getbufvar("%", "splittype") == "vertical" "split window mode
+          if s:splittype == "vertical" "split window mode
             ", will increase the size of the window with the global data
             nnoremap <silent> <buffer> , <C-W>>
             ". will decrease the size of the window with the global data
@@ -176,6 +176,8 @@ if !exists("*ZWRArgument") "don't define the same function twice
             nnoremap <silent> <buffer> . <C-W>-
           endif
   
+          "Ctl-K map will only be applicable in the window with the global data
+          nnoremap <silent> <buffer> <C-K> :call FileDelete()<CR>
           "remap the key mappings for the tag stack, so buffer won't mess it up
           nnoremap <silent> <buffer> <C-]> :call FileDelete()<CR>
           nnoremap <silent> <buffer> <C-T> :call FileDelete()<CR>

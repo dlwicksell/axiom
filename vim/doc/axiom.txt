@@ -1,4 +1,4 @@
-*axiom.txt*      For Vim version 7.3.  Last change: 2012 Oct 16
+*axiom.txt*      For Vim version 7.3.  Last change: 2012 Oct 17
 
 
           VIM TOOLS FOR M[UMPS]/GT.M    by David Wicksell
@@ -8,7 +8,7 @@ Package:       Axiom
 File:          axiom.txt
 Summary:       Vim help documentation
 Maintainer:    David Wicksell
-Version:       0.20.0
+Version:       0.20.2
 
 Written by David Wicksell <dlw@linux.com>
 Copyright © 2011,2012 Fourth Watch Software, LC
@@ -189,9 +189,9 @@ whether a global dump is shown in a vertical split screen, or in a horizontal
 split screen. It defaults to a vertical split screen and is defined in
 settings.vim.
 
-If {b:splittype} is set to 'vertical' or undefined, a global dump will write
+If {b:splittype} is set to "vertical" or undefined, a global dump will write
 to a vertical split screen. This is the default. If {b:splittype} is set to
-'horizontal', then the split screen will be horizontal. For more information
+"horizontal", then the split screen will be horizontal. For more information
 about vertical and horizontal split screens, see |new-vertsplit|, |vsplit|,
 and |split|. If {b:globalsplit} is set to 0, then {b:splittype} is ignored.
 

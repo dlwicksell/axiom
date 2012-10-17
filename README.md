@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.20.1 - 2012 Oct 17
+Version 0.20.2 - 2012 Oct 17
 
 ## Copyright and License ##
 
@@ -189,13 +189,5 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Tweaked a few things in the structure of install
-* Rewrote and sped up mktags
-* Updated the documentation in mktags.1
-* Updated the documentation in axiom.txt
-* Tweaked a few settings in globaldump.vim
-* Fixed a couple bugs in mcompile.vim
-* Fixed an inconsistency in one of the options and tweaked mstatus.vim
-* Fixed a bug in mtags.vim
-* Tweaked a couple options in settings.vim
-* Changed a few settings in vimrc
+* Fixed some typos in axiom.txt
+* Fixed a bug in globaldump.vim
