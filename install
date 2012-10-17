@@ -4,7 +4,7 @@
 # File:          install
 # Summary:       install script for the Axiom package
 # Maintainer:    David Wicksell <dlw@linux.com>
-# Last Modified: Oct 7, 2012
+# Last Modified: Oct 17, 2012
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2011,2012 Fourth Watch Software, LC
@@ -36,9 +36,10 @@ function Usage
 #find out if they want to overwrite, backup, or append configuration files
 function Question
 {
-  echo "There is a $1 file installed already. Would you like to make a"
-  echo "backup of it, and install the package version, append the options"
-  echo "that are required to the end of it, or overwrite the file completely?"
+  echo "There is a $1 file installed already."
+  echo "Would you like to make a backup of it, and install the"
+  echo "package version, append the options that are required"
+  echo "to the end of it, or overwrite the file completely?"
   echo
   echo "Please choose the number of the option you want."
 
@@ -48,7 +49,7 @@ function Question
     backup)
       cp -p ~/$1 ~/$1.orig
 
-      echo "Your old $1 is now $HOME/$1.orig"
+      echo "Your old $1 is now ${HOME}/$1.orig"
 
       cp -p ${1/"."/} ~/$1
 
@@ -60,14 +61,15 @@ function Question
     append)
       cat ${1/"."/} | sed "s/^set/\"set/" >> ~/$1 #don't set things in append
 
-      echo "Appended the relevant configuration options to the end of $1"
+      echo "Appended the relevant configuration options to"
+      echo "the end of $1"
       echo
 
       break
       ;;
     overwrite)
       #be extra careful with the overwrite option
-      echo -n "You have chosen to ${ANSWER} $HOME/$1, is this correct? [Y]/N "
+      echo -n "You have chosen to ${ANSWER} ${HOME}/$1, proceed? [Y]/N "
       read ANS
 
       ANS=`echo ${ANS} | tr [:lower:] [:upper:]`
@@ -134,7 +136,7 @@ then
     echo The \$gtmroutines environment variable is not defined. In order to use
     echo the global dumping functionality of Axiom you have to install GT.M
     echo and KBAWDUMP.m, as well as define \$gtmroutines. See the documentation:
-    echo     http://www.fisglobal.com/products-technologyplatforms-gtm
+    echo     http://www.fisglobal.com/products-technologyplatforms-gtm/
     echo
   fi
 else
@@ -149,7 +151,7 @@ else
 
   if [ "${QUIET}" == "off" ]
   then
-    echo Copied the KBAWDUMP.m global dumping routine to ${DIR}
+    echo Copied the KBAWDUMP.m global dumping routine to ${DIR}/
     echo See the man page for details on how to use it. E.g. $ man KBAWDUMP
     echo
   fi
@@ -164,7 +166,7 @@ cp -p mktags ~/bin/
 
 if [ "${QUIET}" == "off" ]
 then
-  echo Copied the mktags shell script to $HOME/bin
+  echo Copied the mktags shell script to ${HOME}/bin/
   echo
   echo Run mktags to build the tags file for the mtags functionality.
   echo See the man page for details on how to use it. E.g. $ man mktags
@@ -203,7 +205,7 @@ gzip -f9 ~/man/man1/{mktags,KBAWDUMP}.1 #compress the man pages
 
 if [ "${QUIET}" == "off" ]
 then
-  echo Copied the mktags and KBAWDUMP man pages to $HOME/man/man1
+  echo Copied the mktags and KBAWDUMP man pages to $HOME/man/man1/
   echo
   echo In order to install them system-wide, you need to be root. Consult the
   echo SEE ALSO section of the man page on how to do this. E.g. $ man man
@@ -218,7 +220,7 @@ then
 
   if [ "${QUIET}" == "off" ]
   then
-    echo Added the ~/man directory to \$MANPATH, and rebuilt the database
+    echo Added the ~/man/ directory to \$MANPATH, and rebuilt the database
     echo
   fi
 else
@@ -266,7 +268,7 @@ then
   then
     cp -aT vim ~/.vim
   
-    echo Copied the Vim utility package to ~/.vim
+    echo Copied the Vim utility package to ~/.vim/
     echo
   else
     if [ -f ~/.vim/filetype.vim ]
@@ -306,7 +308,7 @@ then
     
     cp -p vim/doc/axiom.txt ~/.vim/doc/
   
-    echo Copied vim/doc/axiom.txt to ~/.vim/doc
+    echo Copied vim/doc/axiom.txt to ~/.vim/doc/
     echo
   
     if [ ! -d ~/.vim/ftplugin ]
@@ -316,7 +318,7 @@ then
     
     cp -a vim/ftplugin/mumps ~/.vim/ftplugin/
   
-    echo Copied vim/ftplugin/mumps/*.vim to ~/.vim/ftplugin/mumps
+    echo Copied vim/ftplugin/mumps/*.vim to ~/.vim/ftplugin/mumps/
     echo
     
     if [ ! -d ~/.vim/plugin ]
@@ -346,7 +348,7 @@ then
     
     cp -p vim/syntax/mumps.vim ~/.vim/syntax/
   
-    echo Copied vim/syntax/mumps.vim to ~/.vim/syntax
+    echo Copied vim/syntax/mumps.vim to ~/.vim/syntax/
     echo
     
     if [ ! -d ~/.vim/templates ]
@@ -356,7 +358,8 @@ then
     
     cp -p vim/templates/*.{tpl,pat} ~/.vim/templates/
   
-    echo Copied vim/templates/*.{tpl,pat} to ~/.vim/templates
+    echo Copied vim/templates/*.{tpl,pat}
+    echo to ~/.vim/templates/
     echo
   fi
 else
@@ -364,7 +367,7 @@ else
   cp -aT vim ~/.vim
 fi
 
-vim "+helptags $HOME/.vim/doc" "+quit"
+vim "+helptags ${HOME}/.vim/doc" "+quit"
 
 if [ "${QUIET}" == "off" ]
 then
