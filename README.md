@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.20.3 - 2012 Oct 22
+Version 0.20.4 - 2012 Oct 22
 
 ## Copyright and License ##
 

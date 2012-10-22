@@ -4,7 +4,7 @@
 # File:          install
 # Summary:       install script for the Axiom package
 # Maintainer:    David Wicksell <dlw@linux.com>
-# Last Modified: Oct 21, 2012
+# Last Modified: Oct 22, 2012
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2011,2012 Fourth Watch Software, LC
@@ -87,7 +87,7 @@ function Question
       fi
       ;;
     quit)
-      cd - #change back to the directory we started from
+      cd -  > /dev/null #change back to the directory we started from
 
       exit 0
       ;;
@@ -382,6 +382,6 @@ then
   echo "Finished installing the Axiom package"
 fi
 
-cd - #change back to the directory we started from
+cd - > /dev/null #change back to the directory we started from
 
 exit 0
