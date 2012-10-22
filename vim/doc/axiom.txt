@@ -1,4 +1,4 @@
-*axiom.txt*      For Vim version 7.3.  Last change: 2012 Oct 17
+*axiom.txt*      For Vim version 7.3.  Last change: 2012 Oct 22
 
 
           VIM TOOLS FOR M[UMPS]/GT.M    by David Wicksell
@@ -8,7 +8,7 @@ Package:       Axiom
 File:          axiom.txt
 Summary:       Vim help documentation
 Maintainer:    David Wicksell
-Version:       0.20.2
+Version:       0.20.3
 
 Written by David Wicksell <dlw@linux.com>
 Copyright © 2011,2012 Fourth Watch Software, LC
@@ -44,10 +44,10 @@ Summary ~
 The Axiom utility package for MUMPS/GT.M contains a syntax highlighting
 file. It should work in Vim version 5.0 and above.
 
-It contains the ability to define a dotted do-block in MUMPS as a syntax
-region, and then transparently fold it, to give you a better view of the
-larger context of the routine. There is a key mapping, bound to CTRL-N,
-which will toggle syntax folding on or off. It is off by default.
+It has the ability to define comment blocks and dotted-do blocks in MUMPS as
+a syntax region, and then transparently fold them, to give you a better view
+of the larger context of the routine. There is a key mapping, bound to
+CTRL-N, which will cycle through several modes for syntax folding.
 
 In order to use syntax folding effectively, you should learn the folding
 commands that are built in to Vim. For more information, see |fold-commands|.
@@ -77,6 +77,16 @@ automatically. This script sets a few options needed by the syntax file
 in order to function properly. The options are set either locally to the
 buffer, or are reset when changing buffers to one that is not file of
 type mumps.
+
+                                                         *b:mumpsfoldingmode*
+
+There is a buffer variable, called {b:mumpsfoldingmode}, which controls
+the default syntax folding mode.
+
+The default mode is "none", and the other modes are "comment", "do", and
+"both".  The mode options do the following: "none" turns off syntax folding,
+"comment" turns on just comment folding, "do" turns on just dotted-do block
+folding, and "both" turns on both folding regions.
 
 Disclaimer ~
 
@@ -177,10 +187,10 @@ If {b:globalsplit} is set to 1, a global dump will write to a vertical or
 horizontal split screen, and you can navigate between the split screens via
 CTRL-W CTRL-W. For more information about split screens, see
 |opening-window|. When in this mode, while in a split screen, the key
-mapping for CTRL-K will now close the split screen, and clean up after
-itself. In addition, in order to avoid messing with the tag stack while in
+mapping for CTRL-K will now close the split screen, and remove the temporary
+file. In addition, in order to avoid messing with the tag stack while in
 the global screen, the key mappings for CTRL-] and CTRL-T will also close
-the split screen, and clean up.
+the split screen, and remove the temporary file, as will ':quit'.
 
                                                                  *b:splittype*
 
@@ -291,18 +301,18 @@ It will be installed in the right place automatically by the install script.
                                                                     *:MStatus*
 
 There is a user defined ex command, called 'MStatus', which will turn
-MStatus on or off, or enable or disable auto-updating. It is used as
+'MStatus' on or off, or enable or disable auto-updating. It is used as
 follows:
 
 :MStatus {value}
                   {value} can be one of: on, off, update, or
                   noupdate. Additionally you may supply a ?
-                  and MStatus will give you a helpful reminder
+                  and 'MStatus' will give you a helpful reminder
                   of what arguments it accepts.
 
 The first two options to 'MStatus' will turn it on or off. It defaults to on.
 In order to keep up with editing changes to the structure of the code, which
-should change the MStatus information, you may also turn on auto-updating.
+should change the 'MStatus' information, you may also turn on auto-updating.
 Auto-updating is turned on with the update argument to 'MStatus', or off with
 the noupdate argument. Auto-updating is implemented as an autocmd which
 invokes the update command whenever the cursor moves. Auto-updating is turned

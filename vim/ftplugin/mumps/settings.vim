@@ -2,7 +2,7 @@
 " File:          settings.vim
 " Summary:       Configuration settings script
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Oct 8, 2012
+" Last Modified: Oct 22, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011,2012 Fourth Watch Software, LC
@@ -26,8 +26,8 @@
 " mtags.vim, and mstatus.vim scripts. When you leave a mumps buffer it
 " puts everything that it changed back to the way it was.
 "
-" It binds Ctl-N to toggle on and off syntax folding of dotted do blocks.
-" It defaults to off.
+" There is also a key mapping, bound to CTRL-N, which will cycle through
+" several modes for syntax folding. It defaults to 'none'.
 
 
 if exists("b:did_set_ftplugin")
@@ -39,20 +39,18 @@ if !exists("*StartSyntax") "don't define the same function twice
     setlocal tags+=mtags,~/.mtags "add the tags files for the Axiom package
     "required to define mumps intrinsic functions and special variables
     setlocal iskeyword+=$
-  
-    "turn off folding, and use the toggle bound to Ctl-N to turn it back on
-    set nofoldenable
+
     set foldmethod=syntax
-  
-    setlocal nolinebreak "wraps lines
-  
+
+    setlocal nolinebreak "wraps lines properly
+
     "turn off matching brackets and braces while in a mumps buffer
     "affects the % command
     setlocal matchpairs=(:)
-  
+
     let s:oldshowbreak = &showbreak
     set showbreak=>> "shows that lines have wrapped
-  
+
     "add an extra virtual column, so that tag jumps work properly at line ends
     "in normal mode, x doesn't quite function the same way with 'onemore' set
     if &virtualedit =~ "onemore"
@@ -61,23 +59,50 @@ if !exists("*StartSyntax") "don't define the same function twice
       let s:onemore = 0
       set virtualedit+=onemore "X in normal mode behaves slightly differently
     endif
-  
+
+    "***USER CONFIG STARTS HERE***
+
+    "set this variable to control which folding mode is on by default
+    "valid options are 'comment', 'do', 'both', or 'none'
+    let b:mumpsfoldingmode = "none"
+
     "set this variable to 1 if you want a split screen view of dumped globals
     "or set it to 0 or comment it out if you don't want a split screen
     let b:globalsplit = 1
 
     "set this variable to 'horizontal' if you want a horizontal split screen
     "or set it to 'vertical' or comment it out if you want it to be vertical
-    "Note - This option is ignored if globalsplit mode is turned off
+    "NOTE - This option is ignored if globalsplit mode is turned off
     let b:splittype = "vertical"
-  
-    "comment out the next 2 commands to turn off the M Statusline
+
+    "comment out the next 2 commands to turn off the MStatus Line
+    "or leave them uncommented to keep the MStatus Line on
     set statusline=%!MTagStatusLine() "setlocal doesn't work on 700 or older?
     set laststatus=2 "setlocal doesn't work
-  
+
     "uncomment the next 2 commands to turn on the auto-update feature
+    "or leave them commented to keep the auto-update feature off
     "autocmd CursorMoved <buffer> update
     "autocmd CursorMovedI <buffer> update
+
+    "***USER CONFIG ENDS HERE***
+
+    if b:mumpsfoldingmode == "none"
+      set nofoldenable
+
+      syntax clear mumpsCommentBlock
+      syntax clear mumpsDoBlock
+    elseif b:mumpsfoldingmode == "comment"
+      set foldenable
+
+      syntax clear mumpsDoBlock
+    elseif b:mumpsfoldingmode == "do"
+      set foldenable
+
+      syntax clear mumpsCommentBlock
+    else
+      set foldenable
+    endif
   endfunction
 endif
 
@@ -85,38 +110,72 @@ if !exists("*EndSyntax") "don't define the same function twice
   "clean up the syntax options and put things back the way they were
   function! EndSyntax()
     let &showbreak = s:oldshowbreak
-  
+
     if s:onemore == 0
       set virtualedit-=onemore
     endif
 
-    "comment out the next command whenever you comment out the M Statusline
+    "comment out the next command whenever you comment out the MStatus Line
     set statusline="" "setlocal doesn't work on 700 or older?
     set laststatus=1 "setlocal doesn't work
   endfunction
 endif
 
-if !exists("*FoldToggle") "don't define the same function twice
-  function! FoldToggle() "enables toggling of folding the mumpsBlock
-    if &foldenable
-      set nofoldenable
-  
+if !exists("*FoldMode") "don't define the same function twice
+  function! FoldMode() "switches mumps folding mode
+    "tests for the previous mode, not the current one
+    if b:mumpsfoldingmode == "both"
+      set foldenable
+    else
+      set foldenable
+
+      "set up variables for sourcing a part of the syntax file
+      unlet b:current_syntax
+      let b:mumps_syntax = 1
+
+      "need to re-source previously cleared syntax regions
+      runtime syntax/mumps.vim
+    endif
+
+    "tests for the previous mode, not the current one
+    if b:mumpsfoldingmode == "none"
+      syntax clear mumpsDoBlock
+
+      echohl ModeMsg
+      echo "MUMPS Comment Blocks folded"
+      echohl None
+
+      let b:mumpsfoldingmode = "comment" "set current mode
+    elseif b:mumpsfoldingmode == "comment"
+      syntax clear mumpsCommentBlock
+
+      echohl ModeMsg
+      echo "MUMPS Do Blocks folded"
+      echohl None
+
+      let b:mumpsfoldingmode = "do" "set current mode
+    elseif b:mumpsfoldingmode == "do"
+      echohl ModeMsg
+      echo "MUMPS Comment Blocks and Do Blocks folded"
+      echohl None
+
+      let b:mumpsfoldingmode = "both" "set current mode
+    elseif b:mumpsfoldingmode == "both"
+      syntax clear mumpsCommentBlock
+      syntax clear mumpsDoBlock
+
       echohl ModeMsg
       echo "Syntax folding disabled"
       echohl None
-    else
-      set foldenable
-  
-      echohl ModeMsg
-      echo "Syntax folding enabled"
-      echohl None
+
+      let b:mumpsfoldingmode = "none" "set current mode
     endif
   endfunction
 endif
 
-"define a key mapping, bound to Ctl-N, in order to toggle mumpsBlock folding
-"defaults to off above
-au BufEnter <buffer> nnoremap <silent> <buffer> <C-N> :call FoldToggle()<CR>
+"define a key mapping, bound to Ctl-N, in order to cycle mumps folding modes
+"defaults to 'none'
+autocmd BufEnter <buffer> nnoremap <silent> <buffer> <C-N> :call FoldMode()<CR>
 
 "lots of small configuration details need to be set for syntax
 autocmd BufEnter <buffer> call StartSyntax()

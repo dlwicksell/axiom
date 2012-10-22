@@ -2,7 +2,7 @@
 " File:          datetime.vim
 " Summary:       Auto datetime stamp for MUMPS routines
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Sep 22, 2012
+" Last Modified: Oct 21, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -39,7 +39,7 @@ if !exists("*DateTime") "don't define the same function twice
       "- narrows the specifier to 1 character, to match VPE's datetime stamp
       let l:dt = strftime("%-m/%-d/%y %-I:%M%P")
       let l:gl = getline(1)
-  
+
       if l:gl =~ "^.*]$" "old datetime stamp format
         call setline(1, strpart(l:gl, 0, strridx(l:gl, "[")) . "[" . l:dt . "]")
       elseif l:gl =~ "^.*;$" "no current datetime stamp
@@ -59,13 +59,13 @@ if !exists("*DateTimeToggle") "don't define the same function twice
     "if you define more bufwrite autocommands for mumps, this will turn them off
     if exists("#BufWrite#<buffer>") "check if there is a BufWrite autocommand
       autocmd! BufWrite <buffer>
-  
+
       echohl ModeMsg
       echo "DateTime stamp is off"
       echohl None
     else
       autocmd BufWrite <buffer> call DateTime()
-  
+
       echohl ModeMsg
       echo "DateTime stamp is on"
       echohl None

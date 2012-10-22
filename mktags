@@ -4,7 +4,7 @@
 # File:          mktags
 # Summary:       Builds a tag file for MUMPS/GT.M routines
 # Maintainer:    David Wicksell
-# Last Modified: Oct 11, 2012
+# Last Modified: Oct 20, 2012
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2010-2012 Fourth Watch Software, LC
@@ -269,7 +269,7 @@ if [ "$1" == "-" ]
 then
   Error option
 fi
- 
+
 #turn on quiet mode when not connected to a controlling terminal
 if [ "`tty`" == "not a tty" ]
 then
@@ -391,7 +391,7 @@ then
       FLAG = 0
       FS = "\x7F"
     }
-    
+
     {
       if ($0 == "\f") {
         print $0
@@ -403,11 +403,11 @@ then
 
       if (FLAG == 1) {
         ROUTINE = $0
-  
-        sub("^.*/", "", ROUTINE) 
-        sub(",.*", "", ROUTINE) 
-        sub("_", "%", ROUTINE) 
-        sub("\\.m", "", ROUTINE) 
+
+        sub("^.*/", "", ROUTINE)
+        sub(",.*", "", ROUTINE)
+        sub("_", "%", ROUTINE)
+        sub("\\.m", "", ROUTINE)
 
         FLAG = 0
 
@@ -435,17 +435,17 @@ else
   awk -F'\t' '
     {
       if ($2 ~ "\\.m") {
-        ROUTINE = $2 
-  
-        sub("^.*/", "", ROUTINE) 
-        sub("_", "%", ROUTINE) 
-        sub("\\.m", "", ROUTINE) 
-  
-        $1 = $1 ROUTINE 
+        ROUTINE = $2
+
+        sub("^.*/", "", ROUTINE)
+        sub("_", "%", ROUTINE)
+        sub("\\.m", "", ROUTINE)
+
+        $1 = $1 ROUTINE
       }
-  
+
       OFS = "\t"
-  
+
       print $0
     }
   ' ${TAGFILE} > ${TAGDIR}/${FILE}.fixed

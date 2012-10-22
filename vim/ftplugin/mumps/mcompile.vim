@@ -2,7 +2,7 @@
 " File:          mcompile.vim
 " Summary:       Compile MUMPS routines and show errors
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Sep 26, 2012
+" Last Modified: Oct 21, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2012 Fourth Watch Software, LC
@@ -37,7 +37,7 @@ if !exists("*MCompile") "don't define the same function twice
     let l:rdir = {}
     let l:cnt = 0
     let l:flag = 0
-  
+
     for l:dir in l:gtmlist "loop through the list of directories
       if l:dir =~ "("
         let l:cdir[l:cnt] = strpart(l:dir, 0, stridx(l:dir, "("))
@@ -72,7 +72,7 @@ if !exists("*MCompile") "don't define the same function twice
 
       let l:cnt = l:cnt + 1
     endfor
-  
+
     let l:cnt = 0
 
     while l:cnt < len(l:rdir)
@@ -96,7 +96,7 @@ if !exists("*MCompile") "don't define the same function twice
           echohl None
           echo l:status
         endif
-  
+
         execute "lcd " . l:directory
 
         break

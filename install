@@ -4,7 +4,7 @@
 # File:          install
 # Summary:       install script for the Axiom package
 # Maintainer:    David Wicksell <dlw@linux.com>
-# Last Modified: Oct 17, 2012
+# Last Modified: Oct 21, 2012
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2011,2012 Fourth Watch Software, LC
@@ -87,6 +87,8 @@ function Question
       fi
       ;;
     quit)
+      cd - #change back to the directory we started from
+
       exit 0
       ;;
     *)
@@ -115,6 +117,7 @@ do
     ;;
   '?') #invalid option
     echo "-${OPTARG} is not a valid option"
+
     Usage
 
     exit 1
@@ -126,6 +129,8 @@ if [ "${QUIET}" == "off" ]
 then
   clear
 fi
+
+cd `find ~ -type d -name axiom -print` #need to install from the repository
 
 OS=`lsb_release -is` #Ubuntu and Red Hat do a few things differently
 
@@ -255,19 +260,19 @@ then
     read X
 
     clear
-  
+
     Question .vimrc
   else
     cp -p vimrc ~/.vimrc
-  
+
     echo "Installed new .vimrc file"
     echo
   fi
-  
+
   if [ ! -d ~/.vim ]
   then
     cp -aT vim ~/.vim
-  
+
     echo Copied the Vim utility package to ~/.vim/
     echo
   else
@@ -277,87 +282,87 @@ then
       read X
 
       clear
-  
+
       Question .vim/filetype.vim
     else
       cp -p vim/filetype.vim ~/.vim/
-  
+
       echo "Installed new filetype.vim file"
       echo
     fi
-  
+
     if [ -f ~/.vim/scripts.vim ]
     then
       echo -n "Please type <Enter> to continue: "
       read X
 
       clear
-  
+
       Question .vim/scripts.vim
     else
       cp -p vim/scripts.vim ~/.vim/
-  
+
       echo "Installed new scripts.vim file"
       echo
     fi
-  
+
     if [ ! -d ~/.vim/doc ]
     then
       mkdir ~/.vim/doc
     fi
-    
+
     cp -p vim/doc/axiom.txt ~/.vim/doc/
-  
+
     echo Copied vim/doc/axiom.txt to ~/.vim/doc/
     echo
-  
+
     if [ ! -d ~/.vim/ftplugin ]
     then
       mkdir ~/.vim/ftplugin
     fi
-    
+
     cp -a vim/ftplugin/mumps ~/.vim/ftplugin/
-  
+
     echo Copied vim/ftplugin/mumps/*.vim to ~/.vim/ftplugin/mumps/
     echo
-    
+
     if [ ! -d ~/.vim/plugin ]
     then
       mkdir ~/.vim/plugin
     fi
-    
+
     if [ -f ~/.vim/plugin/templates.vim ]
     then
       echo -n "Please type <Enter> to continue: "
       read X
 
       clear
-  
+
       Question .vim/plugin/templates.vim
     else
       cp -p vim/plugin/templates.vim ~/.vim/plugin/
-  
+
       echo "Installed new templates.vim file"
       echo
     fi
-    
+
     if [ ! -d ~/.vim/syntax ]
     then
       mkdir ~/.vim/syntax
     fi
-    
+
     cp -p vim/syntax/mumps.vim ~/.vim/syntax/
-  
+
     echo Copied vim/syntax/mumps.vim to ~/.vim/syntax/
     echo
-    
+
     if [ ! -d ~/.vim/templates ]
     then
       mkdir ~/.vim/templates
     fi
-    
+
     cp -p vim/templates/*.{tpl,pat} ~/.vim/templates/
-  
+
     echo Copied vim/templates/*.{tpl,pat}
     echo to ~/.vim/templates/
     echo
@@ -376,5 +381,7 @@ then
 
   echo "Finished installing the Axiom package"
 fi
+
+cd - #change back to the directory we started from
 
 exit 0

@@ -2,7 +2,7 @@
 " File:          globaldump.vim
 " Summary:       Dumps a global reference while editing
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Oct 17, 2012
+" Last Modified: Oct 21, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -31,7 +31,8 @@
 "
 " Binds Ctl-K, Ctl-], and Ctl-T in the split screen containing the
 " contents of the global, if you set the b:globalsplit variable to
-" 1, to close the window and remove the buffer's contents.
+" 1, to close the window and remove the buffer's contents. Also closes
+" the window and removes the buffer's contents if :quit is used instead.
 "
 " Creates an ex command called :ZWR that will dump a global, also in
 " split screen or in the current buffer.
@@ -45,14 +46,18 @@ if !exists("*FileDelete") "don't define the same function twice
   "In global split mode, delete the buffer that displays the global data, and
   "remove the temporary file that contains the data from the filesystem
   function! FileDelete()
+    "turn off the BufWinLeave autocmd so it isn't executed twice while still
+    "in the global buffer, necessary to handle all cases
+    autocmd! BufWinLeave <buffer>
+
     let l:tempfile = bufname("%") "name of global dump buffer
-  
+
     execute "bdelete " . l:tempfile
-  
+
     silent echo delete(l:tempfile)
-  
+
     redraw! "need to do this if the routine buffer is modified
-  
+
     "Need to remap <C-K> and redefine ZWR after deleting the dump buffer
     nnoremap <silent> <buffer> <C-K> "by$:call MGlobal(@b)<CR>
     command! -nargs=1 -buffer ZWR call ZWRArgument(<q-args>, 1)
@@ -68,7 +73,7 @@ if !exists("*ZWRArgument") "don't define the same function twice
     else
       let l:global = system("mumps -r KBAWDUMP '-" . a:global . "'")
     endif
-  
+
     "output more useful error messages if we get an error from GT.M
     if l:global =~ "%GTM-E-FILENOTFND" && l:global !~ "^^"
       echohl ErrorMsg
@@ -112,13 +117,13 @@ if !exists("*ZWRArgument") "don't define the same function twice
     elseif l:global =~ "Global variable undefined:" || l:global == ""
       if l:global !~ "^^"
         echohl ErrorMsg
-  
+
         if strpart(a:global, 0, 1) == "^"
           echo "Global variable undefined: " . a:global
         else
           echo "Global variable undefined: ^" . a:global
         endif
-  
+
         echohl None
       endif
     else
@@ -130,24 +135,24 @@ if !exists("*ZWRArgument") "don't define the same function twice
         endif
 
         let l:tempfile = "~/.globaldump." . l:PPID "create a temp file
-  
+
         if !filereadable(glob(l:tempfile)) "doesn't already exist
           execute "redir! > " . l:tempfile | "dump the global to the temp file
-  
+
           if strpart(a:global, 0, 1) != "^"
             silent echo "^" . a:global | "display the global argument at the top
           else
             silent echo a:global | "display the global argument at the top
           endif
-  
+
           silent echo ""
           silent echo l:global
-  
+
           redir END "change output back to current buffer
-  
+
           "expose the splittype variable to the split screen buffer
           let s:splittype = b:splittype
-  
+
           if getbufvar("%", "splittype") == "horizontal" "split window mode
             "open up the split window on the bottom
             execute "rightbelow split " . l:tempfile
@@ -155,15 +160,15 @@ if !exists("*ZWRArgument") "don't define the same function twice
             "open up the split window on the right
             execute "rightbelow vsplit " . l:tempfile
           endif
-  
+
           setlocal nomodifiable "no reason to allow changing the contents
           setlocal readonly "require a ! in order to alter the contents
-  
+
           setlocal nolinebreak "wraps lines
-  
+
           let s:oldshowbreak = &showbreak
           set showbreak=>> "shows that lines have wrapped
-  
+
           if s:splittype == "vertical" "split window mode
             ", will increase the size of the window with the global data
             nnoremap <silent> <buffer> , <C-W>>
@@ -175,12 +180,17 @@ if !exists("*ZWRArgument") "don't define the same function twice
             ". will decrease the size of the window with the global data
             nnoremap <silent> <buffer> . <C-W>-
           endif
-  
+
           "Ctl-K map will only be applicable in the window with the global data
           nnoremap <silent> <buffer> <C-K> :call FileDelete()<CR>
           "remap the key mappings for the tag stack, so buffer won't mess it up
           nnoremap <silent> <buffer> <C-]> :call FileDelete()<CR>
           nnoremap <silent> <buffer> <C-T> :call FileDelete()<CR>
+
+          "reset &showbreak after shutting down the global dump buffer
+          autocmd BufWinLeave <buffer> :let &showbreak = s:oldshowbreak
+          "delete the buffer and temporary file when :q is used
+          autocmd BufWinLeave <buffer> :call FileDelete()
         else "already exists, don't want multiple split screens
           echohl ErrorMsg
           echo "Close the global dump window with Ctl-K first"
@@ -201,21 +211,21 @@ if !exists("*MGlobal") "don't define the same function twice
     let l:lparen = 0 "track how many left parens we've seen
     let l:rparen = 0 "track how many right parens we've seen
     let l:quote = 0 "track how many quotes we've seen
-  
+
     "parsing a character at a time, tracking where we are
     for l:char in range(0, len(l:global))
       "shouldn't have a tick ' outside of a string, so sanitize it and quit
       "letting the regular error handling deal with it
       if strpart(l:global, l:char, 1) == "'" && !l:quote
         let l:global = substitute(l:global, "'", '"', "g")
-  
+
         break
       elseif strpart(l:global, l:char, 1) == '"' "dealing with strings is hard
         if l:lparen
           let l:quote += 1
         else
           let l:global = strpart(l:global, 0, l:char) "no strings outside parens
-  
+
           break
         endif
       "beginning of subscript arguments
@@ -224,20 +234,20 @@ if !exists("*MGlobal") "don't define the same function twice
       elseif strpart(l:global, l:char, 1) == ")"
         if l:lparen == 1 && l:quote == 0 "finished the subscripts, not in string
           let l:global = strpart(l:global, 0, l:char) . ")" "and we're done
-  
+
           break
         elseif l:lparen == 0 && l:quote == 0 "simple reference in a parenthesis
           let l:global = strpart(l:global, 0, l:char) "also done, but no ) added
-  
+
           break
         "finished with string and not in another set of parens
         elseif !(l:quote % 2) && l:lparen != l:rparen
           let l:rparen += 1 "this paren closes the subscript region
         endif
-  
+
         if !(l:quote % 2) && l:lparen == l:rparen "all regions are closed
           let l:global = strpart(l:global, 0, l:char) . ")" "and we're done
-  
+
           break
         endif
       "no subscripts, so end on operators or whitespace
@@ -247,7 +257,7 @@ if !exists("*MGlobal") "don't define the same function twice
         endif
       endif
     endfor
-  
+
     call ZWRArgument(l:global, 0)
   endfunction 
 endif

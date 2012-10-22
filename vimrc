@@ -2,7 +2,7 @@
 " File:          .vimrc
 " Summary:       Sample .vimrc for the Axiom package
 " Maintainer:    David Wicksell
-" Last Modified: Sep 26, 2012
+" Last Modified: Oct 21, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011,2012 Fourth Watch Software, LC
@@ -69,4 +69,4 @@ else
   endif
 endif
 
-" vim: set ft=vim :
+" vim: set ft=vim:

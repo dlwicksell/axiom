@@ -1,9 +1,9 @@
-                             _          _       __  __ 
+                             _          _       __  __
                             / \   __  _(_) ___ |  \/  |
                            / _ \  \ \/ / |/ _ \| |\/| |
                           / ___ \  >  <| | (_) | |  | |
                          /_/   \_\/_/\_\_|\___/|_|  |_|
-                                                       
+
                        A Vim plugin providing an Advanced
                   Developer Environment for MUMPS programmers
                 -----------------------------------------------
@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.20.2 - 2012 Oct 17
+Version 0.20.3 - 2012 Oct 22
 
 ## Copyright and License ##
 
@@ -86,6 +86,10 @@ To install this, you untar the tarball..
 
     $ tar -xfz axiom.tgz
 
+Or unzip the zip file..
+
+    $ unzip axiom.zip
+
 Or, you can clone the repository with this command..
 
     $ hg clone https://bitbucket.org/dlw/axiom
@@ -117,10 +121,10 @@ files and directories to the right places at a minimum.
 <MUMPS-source-directory> refers to a directory in your $gtmroutines
 environment variable..
 
-    $ cp axiom/KBAWDUMP.m <MUMPS-source-directory>
-    $ cp axiom/mktags ~/bin
+    $ cp axiom/KBAWDUMP.m <MUMPS-source-directory>/
+    $ cp axiom/mktags ~/bin/
     $ cp axiom/vimrc ~/.vimrc
-    $ cp -r axiom/vim ~/.vim
+    $ cp -r axiom/vim ~/.vim/
 
 If you are installing manually, you will also need to install the mktags and
 KBAWDUMP man pages. For information on how to do that on your system, consult
@@ -131,7 +135,7 @@ the man page:
 If you are installing manually, you will also need to install the axiom.txt
 Vim help documentation. In a Vim editing session, type:
 
-    :helptags ~/.vim/doc
+    :helptags ~/.vim/doc/
 
 That is pretty much all there is to it. If you have questions on how to use
 the mktags shell script, consult the man page..
@@ -189,5 +193,10 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Fixed some typos in axiom.txt
-* Fixed a bug in globaldump.vim
+* Added a tweak to change to the right directory in install
+* Added more detail to the instructions in README.md
+* Added documentation about the new syntax folding modes in axiom.txt
+* Added an autocmd to handle improper quits of a global buffer in globaldump.vim
+* Fixed a small bug in mtags.vim
+* Changed the CTRL-N keybinding to cycle through folding options in settings.vim
+* Added comment folding, which works with dotted-do block folding, in mumps.vim

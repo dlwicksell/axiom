@@ -3,7 +3,7 @@
 " Language:      MUMPS/GT.M
 " Summary:       Syntax file
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Oct 17, 2012
+" Last Modified: Oct 21, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -33,10 +33,25 @@ if v:version < 600
   syntax clear
 elseif exists("b:current_syntax")
   finish
+elseif exists("b:mumps_syntax")
+  "fold comment blocks
+  syntax region mumpsCommentBlock keepend transparent fold
+    \ start=/\(^\([%A-Za-z][A-Za-z0-9]*\|[0-9]\+\|\s\+;\@!\).*\n\)\@<=\s\+;/
+    \ end=/\n\ze\([%A-Za-z][A-Za-z0-9]*\|[0-9]\+\|\s\+;\@!\)/
+
+  "fold dotted-do blocks recursively, to an arbitrary depth
+  syntax region mumpsDoBlock keepend transparent fold
+    \ start=/^.*\s[Dd][Oo]\?\(\n\|:.*\n\|\s\{2}.*\n\)\ze\z\(\(\s\+\.\)\+\)/
+    \ skip=/\n\([%A-Za-z][A-Za-z0-9]*\|[0-9]\+\)\z1/
+    \ end=/\n\ze\z1\@!/
+
+  let b:current_syntax = "mumps"
+
+  finish
 endif
 
 syntax case ignore
-"we want to sync fromstart, as dotted do blocks can be arbitrarily long
+"we want to sync fromstart, as dotted-do blocks can be arbitrarily long
 "in order to ensure fast syncing, all but the mumps blocks are skipped
 syntax sync fromstart
 
@@ -177,8 +192,13 @@ syntax keyword mumpsSpecialVariable contained $ZTOL[DVAL] $ZTRI[GGEROP]
 syntax keyword mumpsSpecialVariable contained $ZTSL[ATE] $ZTUP[DATE] $ZTVA[LUE]
 syntax keyword mumpsSpecialVariable contained $ZTWO[RMHOLE]
 
-"fold dotted do blocks recursively, to an arbitrary depth
-":set foldnestmax=20 is the default for nesting folds
+"fold comment blocks
+syntax region mumpsCommentBlock keepend transparent fold
+  \ start=/\(^\([%A-Za-z][A-Za-z0-9]*\|[0-9]\+\|\s\+;\@!\).*\n\)\@<=\s\+;/
+  \ end=/\n\ze\([%A-Za-z][A-Za-z0-9]*\|[0-9]\+\|\s\+;\@!\)/
+
+"fold dotted-do blocks recursively, to an arbitrary depth
+"foldnestmax defaults to 20, which should be more than enough
 syntax region mumpsDoBlock keepend transparent fold
   \ start=/^.*\s[Dd][Oo]\?\(\n\|:.*\n\|\s\{2}.*\n\)\ze\z\(\(\s\+\.\)\+\)/
   \ skip=/\n\([%A-Za-z][A-Za-z0-9]*\|[0-9]\+\)\z1/
@@ -216,6 +236,7 @@ highlight def link mumpsCommand Keyword
 highlight def link mumpsFunction Function
 highlight def link mumpsSpecialVariable Identifier
 
+highlight def link mumpsCommentBlock Folded
 highlight def link mumpsDoBlock Folded
 
 let b:current_syntax = "mumps"

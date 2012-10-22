@@ -1,5 +1,5 @@
-KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 8/22/12 3:26pm
- ;;0.12.2;Axiom;****LOCAL RTN**;David Wicksell @2010-2012
+KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 10/21/12 1:49pm
+ ;;0.20.3;Axiom;****LOCAL RTN**;David Wicksell @2010-2012
  ;
  ; Written by David Wicksell <dlw@linux.com>
  ; Copyright © 2010,2011 Fourth Watch Software, LC
@@ -26,7 +26,7 @@ KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 8/22/12 3:26pm
  ; The single quotes around the global name are required.
  ; If you don't use them, then most shells (BASH for sure)
  ; will think you are trying to start a subshell with the
- ; parens. The "^" is optional, and putting a "-" as the first 
+ ; parens. The "^" is optional, and putting a "-" as the first
  ; character, will dump only the node referenced, otherwise
  ; it will be assumed that you want that node and every one
  ; of its children.
@@ -35,8 +35,8 @@ KBAWDUMP ;FWSLC/DLW-Dump a global on the command line; 8/22/12 3:26pm
  ; every option in the global that the local variable could
  ; represent.
  ;
- ; Added the GLOBALS tag, to simulate calling ^%GD from a
- ; shell. Also added the ability to specify a range.
+ ; Added the GLOBALS entry point, to simulate calling ^%GD
+ ; from a shell. Also added the ability to specify a range.
  ;
  ; If your screen becomes messed up after piping this
  ; program to less, it probably means that "te" is not set
@@ -142,7 +142,7 @@ GLOBALS ;List all the globals to standard out, a simpler version of ^%GD
  . W "GLOBALS^KBAWDUMP takes one argument, the range of the globals to list,",!
  . W "or no arguments and will list every global in the database.",!
  ;
- ;if given, parse range on the :, ignore multiple colons
+ ;if given, parse range on the : (ignore multiple colons)
  N GLOBAL,END
  I ZCMD]"" S GLOBAL="^"_$P(ZCMD,":"),END="^"_$P(ZCMD,":",2)
  E  S GLOBAL="^%",END="" ;% sorts first in default ascii
