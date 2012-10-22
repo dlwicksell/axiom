@@ -2,7 +2,7 @@
 " File:          .vimrc
 " Summary:       Sample .vimrc for the Axiom package
 " Maintainer:    David Wicksell
-" Last Modified: Oct 21, 2012
+" Last Modified: Oct 22, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011,2012 Fourth Watch Software, LC
@@ -59,7 +59,7 @@ else
   "turn on syntax and source the Axiom utility functions
   syntax on
 
-  if bufname("%") =~ "\\.m"
+  if bufname("%") =~ "\\.m$"
     source ~/.vim/ftplugin/mumps/datetime.vim
     source ~/.vim/ftplugin/mumps/globaldump.vim
     source ~/.vim/ftplugin/mumps/mcompile.vim
