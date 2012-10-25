@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.20.5 - 2012 Oct 22
+Version 0.20.6 - 2012 Oct 24
 
 ## Copyright and License ##
 
@@ -193,10 +193,4 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Added a tweak to change to the right directory in install
-* Added more detail to the instructions in README.md
-* Added documentation about the new syntax folding modes in axiom.txt
-* Added an autocmd to handle improper quits of a global buffer in globaldump.vim
-* Fixed a small bug in mtags.vim
-* Changed the CTRL-N keybinding to cycle through folding options in settings.vim
-* Added comment folding, which works with dotted-do block folding, in mumps.vim
+* Fixed a few bugs, which show up in certain OS/app combinations, in mktags

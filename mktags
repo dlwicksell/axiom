@@ -4,7 +4,7 @@
 # File:          mktags
 # Summary:       Builds a tag file for MUMPS/GT.M routines
 # Maintainer:    David Wicksell
-# Last Modified: Oct 20, 2012
+# Last Modified: Oct 24, 2012
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2010-2012 Fourth Watch Software, LC
@@ -72,11 +72,19 @@ function Log
   then
     if [ "$1" == "err" ]
     then
-      if [ "${QUIET}" == "on" ]
+      if [ "${VERBOSE}" == "off" ]
       then
-        logger -i -p user.$1 -t mktags "$2"
+        if [ "${QUIET}" == "on" ]
+        then
+          logger -i -p user.$1 -t mktags "$2" 2>> ${LOGFILE}
+        else
+          logger -is -p user.$1 -t mktags "$2" 2>&1
+        fi
       else
-        logger -is -p user.$1 -t mktags "$2" 2>&1
+        if [ "${QUIET}" == "off" ]
+        then
+          echo "$2"
+        fi
       fi
     fi
 
@@ -157,8 +165,18 @@ function Mtags
 {
   DIRS="$@"
 
+  #Unmap every language already defined with a .m extension
+  LANGMAP=`ctags --list-maps | grep "\.m \|\.m$" | awk '{print $1}'`
+  LANGMAP=`echo ${LANGMAP} | sed "s/ /:,/"`
+
+  #only add the last :, if there are languages to unmap
+  if [ ${LANGMAP} ]
+  then
+    LANGMAP=`echo ${LANGMAP}`:,
+  fi
+
   BUFFER=`ctags ${ARGS} -a --fields=+n --langdef=MUMPS \
-    --langmap=MatLab:,ObjectiveC:,MUMPS:.m --languages=-all,+MUMPS \
+    --langmap=${LANGMAP}MUMPS:.m --languages=-all,+MUMPS \
     --regex-MUMPS="/^([%[:alnum:]]+)/\1\^/l,label,line label entryref/i" \
     ${DIRS} 2>&1`
 
@@ -183,6 +201,9 @@ function Mtags_gtm
     then
       DIR=`echo ${DIR} | cut -d "(" -f 2 | cut -d ")" -f 1`
     elif [ "${DIR: -3}" == ".so" ]
+    then
+      DIR=`dirname ${DIR}`
+    elif ! ls ${DIR}/*.m &> /dev/null
     then
       DIR=`dirname ${DIR}`
     fi
