@@ -130,7 +130,7 @@ then
   clear
 fi
 
-cd `find ~ -type d -name axiom -print` #need to install from the repository
+cd `find ~/ -type d -name axiom -print` #need to install from the repository
 
 OS=`lsb_release -is` #Ubuntu and Red Hat do a few things differently
 

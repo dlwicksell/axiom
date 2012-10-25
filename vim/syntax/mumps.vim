@@ -3,7 +3,7 @@
 " Language:      MUMPS/GT.M
 " Summary:       Syntax file
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Oct 21, 2012
+" Last Modified: Oct 24, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -203,6 +203,10 @@ syntax region mumpsDoBlock keepend transparent fold
   \ start=/^.*\s[Dd][Oo]\?\(\n\|:.*\n\|\s\{2}.*\n\)\ze\z\(\(\s\+\.\)\+\)/
   \ skip=/\n\([%A-Za-z][A-Za-z0-9]*\|[0-9]\+\)\z1/
   \ end=/\n\ze\z1\@!/
+
+"fold entry point blocks
+"syntax region mumpsEntryBlock keepend transparent fold
+"  \ start=/^\S.*$/ end=/^.*\n\ze\S/
 
 "highlight the syntax groups, change colors easily with :colorscheme
 highlight def link mumpsLevelLine Normal
