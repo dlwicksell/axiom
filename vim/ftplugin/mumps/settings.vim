@@ -77,7 +77,12 @@ if !exists("*StartSyntax") "don't define the same function twice
 
     "comment out the next 2 commands to turn off the MStatus Line
     "or leave them uncommented to keep the MStatus Line on
-    set statusline=%!MTagStatusLine() "setlocal doesn't work on 700 or older?
+    if v:version >= 700 "setlocal doesn't work on older than 700?
+      setlocal statusline=%!MTagStatusLine()
+    else
+      set statusline=%!MTagStatusLine()
+    endif
+
     set laststatus=2 "setlocal doesn't work
 
     "uncomment the next 2 commands to turn on the auto-update feature
@@ -116,7 +121,12 @@ if !exists("*EndSyntax") "don't define the same function twice
     endif
 
     "comment out the next command whenever you comment out the MStatus Line
-    set statusline="" "setlocal doesn't work on 700 or older?
+    if v:version >= 700 "setlocal doesn't work on older than 700?
+      setlocal statusline=""
+    else
+      set statusline=""
+    endif
+
     set laststatus=1 "setlocal doesn't work
   endfunction
 endif
