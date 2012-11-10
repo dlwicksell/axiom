@@ -1,4 +1,4 @@
-*axiom.txt*      For Vim version 7.3.  Last change: 2012 Oct 22
+*axiom.txt*      For Vim version 7.3.  Last change: 2012 Nov 10
 
 
           VIM TOOLS FOR M[UMPS]/GT.M    by David Wicksell
@@ -8,7 +8,7 @@ Package:       Axiom
 File:          axiom.txt
 Summary:       Vim help documentation
 Maintainer:    David Wicksell
-Version:       0.20.3
+Version:       0.20.9
 
 Written by David Wicksell <dlw@linux.com>
 Copyright © 2011,2012 Fourth Watch Software, LC
@@ -97,15 +97,6 @@ regular expressions, so there are instances where you will be able to
 write invalid MUMPS code, and the syntax highlighting will not alert you
 to that fact. I will try to continue improving the syntax file, but for
 now, it is what it is.
-
-Known Issues ~
-
-At the present, I know of only one bug in the syntax highlighting. If an
-under-score character '_' comes immediately before or immediately after
-an intrinsic function, then it will not color the intrinsic function
-properly, but will instead color it like it was a variable. This only
-happens with the underscore '_' character, and I have no idea why it is
-happening.
 
 ==============================================================================
 2. Datetime stamp                                             *axiom-datetime*

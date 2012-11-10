@@ -2,7 +2,7 @@
 " File:          settings.vim
 " Summary:       Configuration settings script
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Oct 22, 2012
+" Last Modified: Nov 10, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011,2012 Fourth Watch Software, LC
@@ -39,6 +39,7 @@ if !exists("*StartSyntax") "don't define the same function twice
     setlocal tags+=mtags,~/.mtags "add the tags files for the Axiom package
     "required to define mumps intrinsic functions and special variables
     setlocal iskeyword+=$
+    setlocal iskeyword-=_ "fix for the intrinsic function bug
 
     set foldmethod=syntax
 

@@ -3,7 +3,7 @@
 " Language:      MUMPS/GT.M
 " Summary:       Syntax file
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Oct 24, 2012
+" Last Modified: Nov 10, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -23,10 +23,6 @@
 "
 " This Vim syntax file was created to deal with a GT.M environment.
 " It was inspired by earlier work by Jim Self <jaself@ucdavis.edu>.
-"
-" There is one known bug. If an underscore '_' is present right before or
-" after an intrinsic variable, then it will highlight it as an operator and a
-" regular variable. I have no idea why, but hope to figure it out eventually.
 
 
 if v:version < 600

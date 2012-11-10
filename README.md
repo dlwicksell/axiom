@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.20.8 - 2012 Oct 27
+Version 0.20.9 - 2012 Nov 10
 
 ## Copyright and License ##
 
@@ -193,4 +193,6 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Small change in settings.vim
+* Fixed the intrinsic function, with an underscore '-', bug in settings.vim
+* Updated the documentation to remove the underscore bug fix info in axiom.txt
+* Updated the comments to remove the underscore bug fix info in mumps.vim
