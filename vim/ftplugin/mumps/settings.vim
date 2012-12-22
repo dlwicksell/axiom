@@ -2,7 +2,7 @@
 " File:          settings.vim
 " Summary:       Configuration settings script
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Nov 10, 2012
+" Last Modified: Dec 22, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2011,2012 Fourth Watch Software, LC
@@ -74,7 +74,7 @@ if !exists("*StartSyntax") "don't define the same function twice
     "set this variable to 'horizontal' if you want a horizontal split screen
     "or set it to 'vertical' or comment it out if you want it to be vertical
     "NOTE - This option is ignored if globalsplit mode is turned off
-    let b:splittype = "vertical"
+    let b:splittype = "horizontal"
 
     "comment out the next 2 commands to turn off the MStatus Line
     "or leave them uncommented to keep the MStatus Line on

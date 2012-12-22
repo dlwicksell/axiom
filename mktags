@@ -4,7 +4,7 @@
 # File:          mktags
 # Summary:       Builds a tag file for MUMPS/GT.M routines
 # Maintainer:    David Wicksell
-# Last Modified: Oct 24, 2012
+# Last Modified: Dec 16, 2012
 #
 # Written by David Wicksell <dlw@linux.com>
 # Copyright © 2010-2012 Fourth Watch Software, LC
@@ -103,6 +103,8 @@ function Log
 # Error message and exit status
 function Error
 {
+  local RET
+
   case "$1" in
   ctags)
     Log err "Install ctags in order to continue"
@@ -163,10 +165,10 @@ function Error
 # Build the tags file
 function Mtags
 {
-  DIRS="$@"
+  local DIRS="$@"
 
   #Unmap every language already defined with a .m extension
-  LANGMAP=`ctags --list-maps | grep "\.m \|\.m$" | awk '{print $1}'`
+  local LANGMAP=`ctags --list-maps | grep "\.m \|\.m$" | awk '{print $1}'`
   LANGMAP=`echo ${LANGMAP} | sed "s/ /:,/"`
 
   #only add the last :, if there are languages to unmap
@@ -175,7 +177,7 @@ function Mtags
     LANGMAP=`echo ${LANGMAP}`:,
   fi
 
-  BUFFER=`ctags ${ARGS} -a --fields=+n --langdef=MUMPS \
+  local BUFFER=`ctags ${ARGS} -a --fields=+n --langdef=MUMPS \
     --langmap=${LANGMAP}MUMPS:.m --languages=-all,+MUMPS \
     --regex-MUMPS="/^([%[:alnum:]]+)/\1\^/l,label,line label entryref/i" \
     ${DIRS} 2>&1`
@@ -184,13 +186,13 @@ function Mtags
   then
     Log err "${BUFFER}"
   fi
-
-  unset BUFFER
 } # End of Mtags
 
 # Build a tags file by parsing the $gtmroutines search path
 function Mtags_gtm
 {
+  local DIR DIRS
+
   for DIR in ${gtmroutines}
   do
     #regex syntax (=~) for the following test does not work in Red Hat Bash

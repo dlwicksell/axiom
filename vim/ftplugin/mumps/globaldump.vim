@@ -2,7 +2,7 @@
 " File:          globaldump.vim
 " Summary:       Dumps a global reference while editing
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Oct 21, 2012
+" Last Modified: Dec 22, 2012
 "
 " Written by David Wicksell <dlw@linux.com>
 " Copyright © 2010-2012 Fourth Watch Software, LC
@@ -22,12 +22,12 @@
 "
 " Binds Ctl-K to jump to a MUMPS global in the current buffer.
 " If you define b:globalsplit and set it to 1, then it will
-" display the contents of the global in a vertical split window,
-" to the right of the routine window, otherwise the contents of
-" the global will be displayed in your current buffer, on top of
-" your routine. If you define b:splittype and set it to 'horizontal',
-" then the split window will be horizontal, and underneath the
-" routine window.
+" display the contents of the global in a horizontal split window,
+" underneath the routine window, otherwise the contents of the
+" global will be displayed in your current buffer, on top of your
+" routine. If you define b:splittype and set it to 'vertical', then
+" the split window will be vertical, and to the right of the routine
+" window.
 "
 " Binds Ctl-K, Ctl-], and Ctl-T in the split screen containing the
 " contents of the global, if you set the b:globalsplit variable to
@@ -61,6 +61,8 @@ if !exists("*FileDelete") "don't define the same function twice
     "Need to remap <C-K> and redefine ZWR after deleting the dump buffer
     nnoremap <silent> <buffer> <C-K> "by$:call MGlobal(@b)<CR>
     command! -nargs=1 -buffer ZWR call ZWRArgument(<q-args>, 1)
+
+    call StartSyntax() "going back into the previous mumps buffer
   endfunction
 endif
 
@@ -153,12 +155,12 @@ if !exists("*ZWRArgument") "don't define the same function twice
           "expose the splittype variable to the split screen buffer
           let s:splittype = b:splittype
 
-          if getbufvar("%", "splittype") == "horizontal" "split window mode
-            "open up the split window on the bottom
-            execute "rightbelow split " . l:tempfile
-          else
+          if getbufvar("%", "splittype") == "vertical" "split window mode
             "open up the split window on the right
             execute "rightbelow vsplit " . l:tempfile
+          else
+            "open up the split window on the bottom
+            execute "rightbelow split " . l:tempfile
           endif
 
           setlocal nomodifiable "no reason to allow changing the contents
