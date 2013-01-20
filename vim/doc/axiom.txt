@@ -1,4 +1,4 @@
-*axiom.txt*      For Vim version 7.3.  Last change: 2012 Nov 10
+*axiom.txt*      For Vim version 7.3.  Last change: 2012 Jan 20
 
 
           VIM TOOLS FOR M[UMPS]/GT.M    by David Wicksell
@@ -8,7 +8,7 @@ Package:       Axiom
 File:          axiom.txt
 Summary:       Vim help documentation
 Maintainer:    David Wicksell
-Version:       0.20.9
+Version:       0.20.11
 
 Written by David Wicksell <dlw@linux.com>
 Copyright © 2011,2012 Fourth Watch Software, LC
@@ -123,7 +123,7 @@ It will be installed in the right place automatically by the install script.
 Summary ~
 
 The Axiom package comes with functionality to display, either in the current
-buffer, or in a vertical or horizontal split screen, the contents of a MUMPS
+buffer, or in a horizontal or vertical split screen, the contents of a MUMPS
 global. It will display the data from the exact global reference under the
 cursor, or if there are variables in any of the subscript locations, it will
 display the data from all the possible values for that subscript.
@@ -174,8 +174,8 @@ There is a buffer variable, called {b:globalsplit}, which controls whether
 a global dump is shown in a split screen, or in the current buffer. It
 defaults to a split screen and is defined in settings.vim.
 
-If {b:globalsplit} is set to 1, a global dump will write to a vertical or
-horizontal split screen, and you can navigate between the split screens via
+If {b:globalsplit} is set to 1, a global dump will write to a horizontal or
+vertical split screen, and you can navigate between the split screens via
 CTRL-W CTRL-W. For more information about split screens, see
 |opening-window|. When in this mode, while in a split screen, the key
 mapping for CTRL-K will now close the split screen, and remove the temporary
@@ -186,15 +186,15 @@ the split screen, and remove the temporary file, as will ':quit'.
                                                                  *b:splittype*
 
 There is another buffer variable, called {b:splittype}, which controls
-whether a global dump is shown in a vertical split screen, or in a horizontal
-split screen. It defaults to a vertical split screen and is defined in
+whether a global dump is shown in a horizontal split screen, or in a vertical
+split screen. It defaults to a horizontal split screen and is defined in
 settings.vim.
 
-If {b:splittype} is set to "vertical" or undefined, a global dump will write
-to a vertical split screen. This is the default. If {b:splittype} is set to
-"horizontal", then the split screen will be horizontal. For more information
-about vertical and horizontal split screens, see |new-vertsplit|, |vsplit|,
-and |split|. If {b:globalsplit} is set to 0, then {b:splittype} is ignored.
+If {b:splittype} is set to "horizontal" or undefined, a global dump will write
+to a horizontal split screen. This is the default. If {b:splittype} is set to
+"vertical", then the split screen will be vertical. For more information
+about horizontal and vertical split screens, see |split|, |new-vertsplit|, and
+|vsplit|. If {b:globalsplit} is set to 0, then {b:splittype} is ignored.
 
 There are two more key mappings that make it more convenient to resize the
 split screen containg the contents of the global reference. While in the

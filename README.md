@@ -12,7 +12,7 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.20.10 - 2012 Dec 22
+Version 0.20.11 - 2012 Jan 20
 
 ## Copyright and License ##
 
@@ -193,7 +193,4 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Re-scoped some of the variables in mktags
-* Restructured the logic, to follow the VISTA SAC, in datetime.vim
-* Fixed a bug with syntax when a global dump buffer was :quit in globaldump.vim
-* Changed splittype to default to horizontal in globaldump.vim and settings.vim
+* Fixed some incorrect documentation in axiom.txt.
