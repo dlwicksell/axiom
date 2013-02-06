@@ -12,12 +12,12 @@
 
 ## Developer tools for editing M[UMPS]/GT.M routines in Vim ##
 
-Version 0.20.11 - 2012 Jan 20
+Version 0.20.12 - 2013 Feb 6
 
 ## Copyright and License ##
 
 Package written and maintained by David Wicksell <dlw@linux.com>  
-Copyright © 2011,2012 Fourth Watch Software, LC
+Copyright © 2011-2013 Fourth Watch Software, LC
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License (AGPL)
@@ -193,4 +193,4 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Fixed some incorrect documentation in axiom.txt.
+* Fixed a bug in mumps.vim

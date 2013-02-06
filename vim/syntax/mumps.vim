@@ -3,10 +3,10 @@
 " Language:      MUMPS/GT.M
 " Summary:       Syntax file
 " Maintainer:    David Wicksell <dlw@linux.com>
-" Last Modified: Nov 10, 2012
+" Last Modified: Feb 6, 2013
 "
 " Written by David Wicksell <dlw@linux.com>
-" Copyright © 2010-2012 Fourth Watch Software, LC
+" Copyright © 2010-2013 Fourth Watch Software, LC
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU Affero General Public License (AGPL)
@@ -65,8 +65,8 @@ syntax match mumpsDotLevel /^\s\+[. \t]*/ display contained
 "mumpsDotRegion can follow a label, but not in a formal line or later
 syntax match mumpsDotRegion /\s\+[. \t]*/ display contained
   \ nextgroup=mumpsCommand,mumpsComment
-syntax match mumpsLabel /^[%A-Za-z][A-Za-z0-9]*\|^[0-9]\+/ display contained
-  \ nextgroup=mumpsLabelList,mumpsDotRegion,mumpsComment
+syntax match mumpsLabel /^[%A-Za-z][A-Za-z0-9]*:\?\|^[0-9]\+:\?/
+  \ display contained nextgroup=mumpsLabelList,mumpsDotRegion,mumpsComment
 syntax region mumpsLabelList matchgroup=mumpsComma start=/(/ end=/)/ display
   \ oneline contained contains=mumpsVariable,mumpsComma
   \ nextgroup=mumpsCommand,mumpsComment,mumpsSpace
