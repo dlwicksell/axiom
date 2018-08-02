@@ -45,7 +45,7 @@ if !exists("*DateTime") "don't define the same function twice
     if &modified "only update the datetime stamp if you've modified the buffer
       "if the strftime library function doesn't exist, skip this functionality
       if exists("*strftime")
-        let l:dt = strftime("%F  %-I:%M %p")
+        let l:dt = strftime('%b %d, %Y@%H:%M')
       else
         finish
       endif
