@@ -94,7 +94,7 @@ endif
 
 "define a key mapping, bound to Ctl-H, in order to toggle datetime stamping
 au BufEnter <buffer> nnoremap <silent> <buffer> <C-H> :call DateTimeToggle()<CR>
-"defaults to on, comment the next line if you want it to default to off
-autocmd BufWrite <buffer> call DateTime()
+"defaults to off, comment the next line if you want it to default to on
+"autocmd BufWrite <buffer> call DateTime()
 
 let b:did_dt_ftplugin = 1
