@@ -17,7 +17,7 @@ Version 0.20.13 - 2018 Aug 3
 ## Copyright and License ##
 
 Package written and maintained by David Wicksell <dlw@linux.com>  
-Copyright © 2011-2013 Fourth Watch Software, LC
+Copyright © 2011-2013,2018 Fourth Watch Software, LC
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License (AGPL)
