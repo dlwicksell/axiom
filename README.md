@@ -193,4 +193,4 @@ requests, or bugs to report, please contact David Wicksell <dlw@linux.com>
 * *patterns.pat* - Script to set up key bindings to change patterns in templates
 
 ### Changelog ###
-* Fixed a bug in mumps.vim
+* Add Sam Habiel's change to datetime.vim
